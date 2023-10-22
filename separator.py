@@ -4,9 +4,7 @@ text_extract = {}
 op_lyrics = []
 ed_lyrics = []
 
-
 with open("test.ass", "r") as file:
-#     file.decode("utf-8").encode("windows-1252")
     while True:
         next_line = file.readline()
         print(next_line)
@@ -33,14 +31,11 @@ with open("test.ass", "r") as file:
         
         if "OP LYRICS" in next_line:
             print("OP LYRICS")
-#             print(next_line.split(",")[9])
-            op_lyrics.append(next_line.split(",")[9].strip("\n"))
+            op_lyrics.append(next_line.split(",", 9)[9].strip("\n"))
             
         if "ED LYRICS" in next_line:
             print("ED LYRICS")
-#             print(next_line.split(",")[9])
-            this_line = next_line.split(",")[9].strip("\n")
-            ed_lyrics.append(this_line)
+            ed_lyrics.append(next_line.split(",", 9)[9].strip("\n"))
         
         next_line.strip()
 
