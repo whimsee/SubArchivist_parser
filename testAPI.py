@@ -28,8 +28,8 @@ api_url = books_url_create
 todo = {
 	"book_id": ID,
 	"name": "Episode name",
-	"markdown": "**Third item**<br>\n&nbsp;&nbsp;&nbsp;&nbsp;this is the first line<br>\n &nbsp;&nbsp;&nbsp;&nbsp;this is the second line<br>"
-                "**Fourth item**<br>&nbsp;&nbsp;&nbsp;&nbsp;this is the first line<br>&nbsp;&nbsp;&nbsp;&nbsp;this is the second line<br>"
+	"markdown": "**FRIEREN**<br>&nbsp;&nbsp;&nbsp;&nbsp;The royal capital's in sight.<br>"
+                "**HEITER**<br>&nbsp;&nbsp;&nbsp;&nbsp;The adventurers are making<br>&nbsp;&nbsp;&nbsp;&nbsp;their triumphant return.<br>"
                 "**FRIEREN**<br>&nbsp;&nbsp;&nbsp;&nbsp;Are you trying to put on<br>&nbsp;&nbsp;&nbsp;&nbsp;a brave face again, Heiter?<br>",
 	"priority": 15,
 	"tags": [

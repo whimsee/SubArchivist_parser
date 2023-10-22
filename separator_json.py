@@ -7,7 +7,6 @@ ed_lyrics = []
 dialogue = []
 
 
-
 with open("test.ass", "r", encoding="utf8") as file:
     # Loop for metadata-type data
     while True:
@@ -41,14 +40,21 @@ with open("test.ass", "r", encoding="utf8") as file:
         if "Default" in next_line.split(",")[3]:
 #             print(next_line.split(",")[4])
 #             print(next_line.split(",", 9)[9].rstrip().split(" \\N"))
-            speaker = next_line.split(",")[4]
+
+#             **Fourth item**<br>
+            speaker = "**" + next_line.split(",")[4] + "**<br>"
+            
+#             &nbsp;&nbsp;&nbsp;&nbsp;this is the first line<br>
             if len(next_line.split(",", 9)[9].rstrip().split(" \\N")) >= 2:
-                separate_lines = next_line.split(",", 9)[9].rstrip().split(" \\N")
-                this_line = "\n".join(separate_lines)
-                dialogue.append(speaker + " " + this_line)
+                separate_lines = []
+                for text in next_line.split(",", 9)[9].rstrip().split(" \\N"):
+                    separate_lines.append("&nbsp;&nbsp;&nbsp;&nbsp;" + text + "<br>")
+                this_line = "".join(separate_lines)
+                dialogue.append(speaker + "" + this_line)
             else:
-                this_line = next_line.split(",", 9)[9].rstrip().split(" \\N")
-                dialogue.append(speaker + " " + this_line[0])
+                temp_line = next_line.split(",", 9)[9].rstrip().split(" \\N")[0]
+                this_line = "&nbsp;&nbsp;&nbsp;&nbsp;" + temp_line + "<br>"
+                dialogue.append(speaker + "" + this_line)
         
         if "Flashback" in next_line.split(",")[3]:
             print("FLASHBACK")
@@ -68,10 +74,13 @@ with open("test.ass", "r", encoding="utf8") as file:
             this_line = next_line.split(",",9)[9].split("}")[1].replace("\\N", " ")
 #             print(this_line)
             dialogue.append("S " + str(this_line))
-            
 
-for text in dialogue:
-    print(text)
+dump_dialogue = "\n".join(dialogue)
+# for text in dialogue:
+#     print(text)
+
+with open('dumps/dump.txt', 'w') as f:
+    f.write(dump_dialogue)
 #         next_line.strip()
 
 # print(this_line)
