@@ -39,17 +39,18 @@ with open("test.ass", "r") as file:
             
         if "Default" in next_line.split(",")[3]:
             print("DEFAULT")
-            print(next_line.split(",")[4])
-            print(ftfy.fix_encoding(next_line.split(",", 9)[9]).rstrip())
+#             print(next_line.split(",")[4])
+#             print(ftfy.fix_encoding(next_line.split(",", 9)[9]).rstrip())
         
         if "Flashback" in next_line.split(",")[3]:
             print("FLASHBACK")
-            print(next_line.split(",")[4])
-            print(ftfy.fix_encoding(next_line.split(",", 9)[9].rstrip()))
+#             print(next_line.split(",")[4])
+#             print(ftfy.fix_encoding(next_line.split(",", 9)[9].rstrip()))
             
         if "Signs" in next_line.split(",")[3]:
             print("SIGNS")
             this_line = next_line.split(",",9)[9].split("}")[1].rstrip()
+            print(this_line)
             
         
 #         next_line.strip()
