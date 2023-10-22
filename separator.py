@@ -38,15 +38,15 @@ with open("test.ass", "r", encoding="utf8") as file:
             ed_lyrics.append(next_line.split(",", 9)[9].rstrip())
             
         if "Default" in next_line.split(",")[3]:
-            print("DEFAULT")
-#             print(next_line.split(",")[4])
-            print(next_line.split(",", 9)[9].split("\\N"))
-            print(len(next_line.split(",", 9)[9].rstrip().split("\\N")))
+            print(next_line.split(",")[4])
+            print(next_line.split(",", 9)[9].rstrip().split(" \\N"))
+            if len(next_line.split(",", 9)[9].rstrip().split(" \\N")) >= 2:
+                print(next_line.split(",", 9)[9].rstrip().split(" \\N")[1])
         
         if "Flashback" in next_line.split(",")[3]:
             print("FLASHBACK")
-#             print(next_line.split(",")[4])
-#             print(next_line.split(",", 9)[9].rstrip())
+            print(next_line.split(",")[4])
+            print(next_line.split(",", 9)[9].rstrip().split(" \\N"))
             
         if "Signs" in next_line.split(",")[3]:
             print("SIGNS")
@@ -61,13 +61,14 @@ with open("test.ass", "r", encoding="utf8") as file:
 # print(op_lyrics)
 # print(ed_lyrics)
 
-op_lyrics_full = "\n".join(op_lyrics)
-ed_lyrics_full = "\n".join(ed_lyrics)
+# op_lyrics_full = "\n".join(op_lyrics)
+# ed_lyrics_full = "\n".join(ed_lyrics)
 
 # op_lyrics_full = ftfy.fix_encoding("\n".join(op_lyrics))
 # ed_lyrics_full = ftfy.fix_encoding("\n".join(ed_lyrics))
-print(op_lyrics_full)
-print("---------")
-print(ed_lyrics_full)
-text_extract.update({"ed_lyrics" : ed_lyrics_full})
+
+# print(op_lyrics_full)
+# print("---------")
+# print(ed_lyrics_full)
+# text_extract.update({"ed_lyrics" : ed_lyrics_full})
 # print(text_extract)
