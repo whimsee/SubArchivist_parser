@@ -40,7 +40,7 @@ with open("test.ass", "r") as file:
         if "Default" in next_line.split(",")[3]:
             print("DEFAULT")
 #             print(next_line.split(",")[4])
-#             print(ftfy.fix_encoding(next_line.split(",", 9)[9]).rstrip())
+            print(ftfy.fix_encoding(next_line.split(",", 9)[9]).split("\\N"))
         
         if "Flashback" in next_line.split(",")[3]:
             print("FLASHBACK")
@@ -49,7 +49,7 @@ with open("test.ass", "r") as file:
             
         if "Signs" in next_line.split(",")[3]:
             print("SIGNS")
-            this_line = next_line.split(",",9)[9].split("}")[1].rstrip()
+            this_line = next_line.split(",",9)[9].split("}")[1].replace("\\N", " ")
             print(this_line)
             
         
