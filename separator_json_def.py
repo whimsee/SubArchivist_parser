@@ -3,6 +3,7 @@
 import json
 
 script_info = {}
+style_info = {}
 op_lyrics = []
 ed_lyrics = []
 dialogue = []
@@ -50,48 +51,52 @@ def separator(next_line, type="none", format="none", extra="none"):
     elif type == "SIGNS":
         this_line = next_line.split(",",9)[9].split("}")[1].replace("\\N", " ")
 #             print(this_line)
-        dialogue.append("**SIGN**&nbsp;&nbsp;&nbsp;&nbsp;" + str(this_line) + "<br>")
+        dialogue.append("***SIGN***&nbsp;&nbsp;&nbsp;&nbsp;" + str(this_line) + "<br>")
     
     # If unhandled
     else:
         print("Unhandled line: " + mode + " " + next_line.split(",", 9)[4] + " " + next_line.split(",", 9)[9])
         log.append("Unhandled line: " + mode + " " + next_line.split(",", 9)[4] + " " + next_line.split(",", 9)[9])
 
-## Main Loop
+### Main Loop
 with open("test.ass", "r", encoding="utf8") as file:
-    # Loop for metadata-type data (Script Info)
+    ## Loop for metadata-type data (Script Info)
+    file.readline()
     while True:
         next_line = file.readline()
         
         if not next_line:
             break
+        elif next_line == "[V4+ Styles]\n":
+            print("Styles")
+            break
         
         if "Original Script" in next_line:
             this_line = next_line.split(": ")[1].split("  [")[0]
-            script_info.update({"Original_Script" : this_line})
+            script_info.update({"Original_Script" : this_line + "\n"})
+        elif next_line == "\n":
+            pass
         else:
             this_line = next_line.split(": ")
             try:
                 script_info.update({this_line[0] : this_line[1]})
             except IndexError:
-                script_info.update({this_line[0] : ""})
-        
-        if next_line == "[V4+ Styles]\n":
-            print("Styles")
-            break
+                script_info.update({this_line[0] : "\n"})
     
+    ## Start another loop for Styles
     while True:
         next_line = file.readline()
         
         if not next_line:
             break
+        elif next_line == "Format: Layer,Start,End,Style,Name,MarginL,MarginR,MarginV,Effect,Text\n":
+            print("Events")
+            break
         
         if next_line == "[Events]\n":
             pass
         
-        elif next_line == "Format: Layer,Start,End,Style,Name,MarginL,MarginR,MarginV,Effect,Text\n":
-            print("Events")
-            break
+        
     
     ## Start another loop for dialogue events (Events)
     while True:
@@ -136,7 +141,7 @@ with open("test.ass", "r", encoding="utf8") as file:
 # print("---------")
 # print(ed_lyrics_full)
 # text_extract.update({"ed_lyrics" : ed_lyrics_full})
-print(script_info)
+# print(script_info)
 
 ## Joining arrays for dumps
 
@@ -158,8 +163,14 @@ with open('dumps/ed_dump.txt', 'w', encoding="utf8") as f:
 
 # Handle log
 lines = len(dialogue)
+for x, y in script_info.items():
+    log_text = x + ": " + y
+    log.append(log_text)
+
+log.append("\n")
 log.append(str(lines) + " lines")
 log_full = "".join(log)
+    
 with open('dumps/log.txt', 'w', encoding="utf8") as f:
     f.write(log_full)
 
