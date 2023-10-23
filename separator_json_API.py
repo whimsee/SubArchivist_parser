@@ -2,10 +2,18 @@ import json
 from secrets import secrets
 import requests
 
-book_url = secrets['book_url']
-page_url = secrets['page_url']
 headers = {"Authorization": "Token " + secrets['API_ID_TOKEN']}
 
+##### Episode info #####
+anime_title = ""                       # Book
+season = 0                             # Chapter
+episode_title = ""                     # Page
+
+
+## Settings
+upload_lyrics = False
+
+# Init lists
 script_info = {}
 style_info = []
 op_lyrics = []
@@ -171,41 +179,42 @@ with open("test.ass", "r", encoding="utf8") as file:
 # text_extract.update({"ed_lyrics" : ed_lyrics_full})
 # print(script_info)
 
-## Joining arrays for dumps
+### Joining arrays for dumps ###########################
 
-# Dialogue
-dump_dialogue = "".join(dialogue)
+## Dialogue
+# dump_dialogue = "".join(dialogue)
+# 
+# with open('dumps/dump.txt', 'w', encoding="utf8") as f:
+#     f.write(json.dumps(dump_dialogue))
+# 
+# ## Lyrics
+# op_lyrics_full = "<br>".join(op_lyrics)
+# ed_lyrics_full = "<br>".join(ed_lyrics)
+# 
+# with open('dumps/op_dump.txt', 'w', encoding="utf8") as f:
+#     f.write(json.dumps(op_lyrics_full))
+#     
+# with open('dumps/ed_dump.txt', 'w', encoding="utf8") as f:
+#     f.write(json.dumps(ed_lyrics_full))
+# 
+# ## Handle log
+# lines = len(dialogue)
+# for x, y in script_info.items():
+#     log_text = x + ": " + y
+#     log.append(log_text)
 
-with open('dumps/dump.txt', 'w', encoding="utf8") as f:
-    f.write(json.dumps(dump_dialogue))
-
-# Lyrics
-op_lyrics_full = "<br>".join(op_lyrics)
-ed_lyrics_full = "<br>".join(ed_lyrics)
-
-with open('dumps/op_dump.txt', 'w', encoding="utf8") as f:
-    f.write(json.dumps(op_lyrics_full))
-    
-with open('dumps/ed_dump.txt', 'w', encoding="utf8") as f:
-    f.write(json.dumps(ed_lyrics_full))
-
-# Handle log
-lines = len(dialogue)
-for x, y in script_info.items():
-    log_text = x + ": " + y
-    log.append(log_text)
+# log.append("\n")
+# log.append("\n".join(style_info))
+# log.append("\n")
+# log.append("\n")
+# log.append(str(lines) + " lines")
+# log_full = "".join(log)
+#     
+# with open('dumps/log.txt', 'w', encoding="utf8") as f:
+#     f.write(log_full)
 
 
-log.append("\n")
-log.append("\n".join(style_info))
-log.append("\n")
-log.append("\n")
-log.append(str(lines) + " lines")
-log_full = "".join(log)
-    
-with open('dumps/log.txt', 'w', encoding="utf8") as f:
-    f.write(log_full)
-
+####################################
 ## POST PAGE 2 (Lines)
 # ID = "1"
 # api_url = page_url
