@@ -9,9 +9,10 @@ anime_title = ""                       # Book
 season = 0                             # Chapter
 episode_title = ""                     # Page
 
-
-## Settings
+## lyrics Settings
 upload_lyrics = False
+OP_title = ""
+ED_title = ""
 
 # Init lists
 script_info = {}
@@ -202,7 +203,7 @@ with open("test.ass", "r", encoding="utf8") as file:
 # for x, y in script_info.items():
 #     log_text = x + ": " + y
 #     log.append(log_text)
-
+# 
 # log.append("\n")
 # log.append("\n".join(style_info))
 # log.append("\n")
@@ -212,7 +213,8 @@ with open("test.ass", "r", encoding="utf8") as file:
 #     
 # with open('dumps/log.txt', 'w', encoding="utf8") as f:
 #     f.write(log_full)
-
+# 
+# print("Unhandled line" in log_full)
 
 ####################################
 ## POST PAGE 2 (Lines)
@@ -268,4 +270,4 @@ with open("test.ass", "r", encoding="utf8") as file:
 # except KeyError:
 #     print("nope")
 
-print("DONE " + str(lines))
+# print("DONE " + str(lines))
