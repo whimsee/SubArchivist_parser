@@ -1,16 +1,8 @@
-Unhandled line: FlashbackTop KING Kill them.
-Unhandled line: FlashbackTop FRIEREN We'll give them a talking to.
-Unhandled line: FlashbackTop HEITER Shall we lick your boots?
-Unhandled line: Flashback FRIEREN You're as pallid as an undead. \NAre you all right?
-Unhandled line: Flashback HEITER No.
-Unhandled line: Flashback HIMMEL No, huh?
-Unhandled line: Flashback HIMMEL Seriously? We told her it was a trap.
-Unhandled line: FlashbackTop FRIEREN It's dark and scary in here!
-Unhandled line: Flashback EISEN Why don't we leave the elf behind?
-Unhandled line: Flashback HIMMEL It's exuding some kind of evil aura.
-Unhandled line: Flashback HIMMEL It's not harmful to people, is it?
-Unhandled line: Flashback FRIEREN I don't know.
-Unhandled line: Flashback HIMMEL You don't know, huh?
+Anime not found. Creating This anime 9
+Season not found. Adding Season 2
+200 Episode 1 added
+200 OP_Lyrics added
+200 ED_Lyrics added
 Title: English (US)
 Original_Script: aniplex
 Original Translation: 
@@ -43,4 +35,4 @@ Signs_NextEp
 Songs_OP
 Songs_ED
 
-257 lines
+270 lines
