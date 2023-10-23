@@ -183,55 +183,55 @@ with open("test.ass", "r", encoding="utf8") as file:
 ### Joining arrays for dumps ###########################
 
 ## Dialogue
-# dump_dialogue = "".join(dialogue)
-# 
-# with open('dumps/dump.txt', 'w', encoding="utf8") as f:
-#     f.write(json.dumps(dump_dialogue))
-# 
-# ## Lyrics
-# op_lyrics_full = "<br>".join(op_lyrics)
-# ed_lyrics_full = "<br>".join(ed_lyrics)
-# 
-# with open('dumps/op_dump.txt', 'w', encoding="utf8") as f:
-#     f.write(json.dumps(op_lyrics_full))
-#     
-# with open('dumps/ed_dump.txt', 'w', encoding="utf8") as f:
-#     f.write(json.dumps(ed_lyrics_full))
-# 
-# ## Handle log
-# lines = len(dialogue)
-# for x, y in script_info.items():
-#     log_text = x + ": " + y
-#     log.append(log_text)
-# 
-# log.append("\n")
-# log.append("\n".join(style_info))
-# log.append("\n")
-# log.append("\n")
-# log.append(str(lines) + " lines")
-# log_full = "".join(log)
-#     
-# with open('dumps/log.txt', 'w', encoding="utf8") as f:
-#     f.write(log_full)
-# 
-# print("Unhandled line" in log_full)
+dump_dialogue = "".join(dialogue)
+
+with open('dumps/dump.txt', 'w', encoding="utf8") as f:
+    f.write(json.dumps(dump_dialogue))
+
+## Lyrics
+op_lyrics_full = "<br>".join(op_lyrics)
+ed_lyrics_full = "<br>".join(ed_lyrics)
+
+with open('dumps/op_dump.txt', 'w', encoding="utf8") as f:
+    f.write(json.dumps(op_lyrics_full))
+    
+with open('dumps/ed_dump.txt', 'w', encoding="utf8") as f:
+    f.write(json.dumps(ed_lyrics_full))
+
+## Handle log
+lines = len(dialogue)
+for x, y in script_info.items():
+    log_text = x + ": " + y
+    log.append(log_text)
+
+log.append("\n")
+log.append("\n".join(style_info))
+log.append("\n")
+log.append("\n")
+log.append(str(lines) + " lines")
+log_full = "".join(log)
+    
+with open('dumps/log.txt', 'w', encoding="utf8") as f:
+    f.write(log_full)
+
+print("Unhandled line" in log_full)
 
 ####################################
 ## POST PAGE 2 (Lines)
-# ID = "1"
-# api_url = page_url
-# todo = {
-# 	"book_id": ID,
-# 	"name": "Episode name",
-# 	"markdown": dump_dialogue,
-# 	"priority": 15,
-# 	"tags": [
-# 		{"name": "Category", "value": "Not Bad Content"},
-# 		{"name": "Rating", "value": "Average"}
-# 	]
-# }
-# response = requests.post(api_url, json=todo, headers=headers)
-# print(response.json())
+ID = "1"
+api_url = secrets["page_url"]
+todo = {
+	"book_id": ID,
+	"name": "Episode name",
+	"markdown": dump_dialogue,
+	"priority": 15,
+	"tags": [
+		{"name": "Category", "value": "Not Bad Content"},
+		{"name": "Rating", "value": "Average"}
+	]
+}
+response = requests.post(api_url, json=todo, headers=headers)
+print(response.json())
 
 ## POST PAGE 2 (Lyrics)
 # ID = "1"
