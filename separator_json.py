@@ -1,11 +1,14 @@
 # import ftfy
 # import re
+import json
 
 text_extract = {}
 op_lyrics = []
 ed_lyrics = []
 dialogue = []
 
+def separator(next_line, type="DEFAULT"):
+    pass
 
 with open("test.ass", "r", encoding="utf8") as file:
     # Loop for metadata-type data
@@ -47,7 +50,6 @@ with open("test.ass", "r", encoding="utf8") as file:
 #             &nbsp;&nbsp;&nbsp;&nbsp;this is the first line<br>
             if len(next_line.split(",", 9)[9].rstrip().split(" \\N")) >= 2:
                 separate_lines = []
-                for text in next_line.split(",", 9)[9].rstrip().split(" \\N"):
                     separate_lines.append("&nbsp;&nbsp;&nbsp;&nbsp;" + text + "<br>")
                 this_line = "".join(separate_lines)
                 dialogue.append(speaker + "" + this_line)
@@ -56,31 +58,36 @@ with open("test.ass", "r", encoding="utf8") as file:
                 this_line = "&nbsp;&nbsp;&nbsp;&nbsp;" + temp_line + "<br>"
                 dialogue.append(speaker + "" + this_line)
         
-        if "Flashback" in next_line.split(",")[3]:
-            print("FLASHBACK")
-#             print(next_line.split(",")[4])
-#             print(next_line.split(",", 9)[9].rstrip().split(" \\N"))
-            speaker = next_line.split(",")[4]
-            if len(next_line.split(",", 9)[9].rstrip().split(" \\N")) >= 2:
-                separate_lines = next_line.split(",", 9)[9].rstrip().split(" \\N")
-                this_line = "\n".join(separate_lines)
-                dialogue.append("F " + speaker + " " + this_line)
-            else:
-                this_line = next_line.split(",", 9)[9].rstrip().split(" \\N")
-                dialogue.append("F " + speaker + " " + this_line[0])
-            
-        if "Signs" in next_line.split(",")[3]:
-            print("SIGNS")
-            this_line = next_line.split(",",9)[9].split("}")[1].replace("\\N", " ")
-#             print(this_line)
-            dialogue.append("S " + str(this_line))
+#         if "Flashback" in next_line.split(",")[3]:
+#             print("FLASHBACK")
+# #             print(next_line.split(",")[4])
+# #             print(next_line.split(",", 9)[9].rstrip().split(" \\N"))
+#             speaker = next_line.split(",")[4]
+#             if len(next_line.split(",", 9)[9].rstrip().split(" \\N")) >= 2:
+#                 separate_lines = next_line.split(",", 9)[9].rstrip().split(" \\N")
+#                 this_line = "\n".join(separate_lines)
+#                 dialogue.append("F " + speaker + " " + this_line)
+#             else:
+#                 this_line = next_line.split(",", 9)[9].rstrip().split(" \\N")
+#                 dialogue.append("F " + speaker + " " + this_line[0])
+#             
+#         if "Signs" in next_line.split(",")[3]:
+#             print("SIGNS")
+#             this_line = next_line.split(",",9)[9].split("}")[1].replace("\\N", " ")
+# #             print(this_line)
+#             dialogue.append("S " + str(this_line))
 
-dump_dialogue = "\n".join(dialogue)
+# For debug
+# dump_dialogue = "\n".join(dialogue)
 # for text in dialogue:
 #     print(text)
 
+# For production
+dump_dialogue = "".join(dialogue)
+
+
 with open('dumps/dump.txt', 'w') as f:
-    f.write(dump_dialogue)
+    f.write(json.dumps(dump_dialogue))
 #         next_line.strip()
 
 # print(this_line)
@@ -88,8 +95,15 @@ with open('dumps/dump.txt', 'w') as f:
 # print(op_lyrics)
 # print(ed_lyrics)
 
-# op_lyrics_full = "\n".join(op_lyrics)
-# ed_lyrics_full = "\n".join(ed_lyrics)
+op_lyrics_full = "<br>".join(op_lyrics)
+ed_lyrics_full = "<br>".join(ed_lyrics)
+
+
+with open('dumps/op_dump.txt', 'w') as f:
+    f.write(op_lyrics_full)
+    
+with open('dumps/ed_dump.txt', 'w') as f:
+    f.write(ed_lyrics_full)
 
 # op_lyrics_full = ftfy.fix_encoding("\n".join(op_lyrics))
 # ed_lyrics_full = ftfy.fix_encoding("\n".join(ed_lyrics))
