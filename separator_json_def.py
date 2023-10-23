@@ -2,20 +2,23 @@
 # import re
 import json
 
-text_extract = {}
+script_info = {}
 op_lyrics = []
 ed_lyrics = []
 dialogue = []
+log = []
 
-def separator(next_line, type="DEFAULT", format="none", extra="none"):
-    
+def separator(next_line, type="none", format="none", extra="none"):
+    ## Default setting
     if type == "DEFAULT":
+        # Speaker
         if extra == "flashback":
             speaker = "**(Flashback) " + next_line.split(",")[4] + "**<br>"
         else:
             speaker = "**" + next_line.split(",")[4] + "**<br>"
             
-        # FORMAT: &nbsp;&nbsp;&nbsp;&nbsp;this is the first line<br>
+        ## FORMAT: &nbsp;&nbsp;&nbsp;&nbsp;this is a line<br>
+        ## For multiline
         if len(next_line.split(",", 9)[9].rstrip().split("\\N")) >= 2:
             separate_lines = []
             for text in next_line.split(",", 9)[9].split("\\N"):
@@ -25,21 +28,39 @@ def separator(next_line, type="DEFAULT", format="none", extra="none"):
                 else:
                     separate_lines.append("&nbsp;&nbsp;&nbsp;&nbsp;" + temp_line + "<br>")
             this_line = "".join(separate_lines)
-#             print(this_line)
             dialogue.append(speaker + this_line)
         else:
+        ## For single line
             temp_line = next_line.split(",", 9)[9].rstrip().split("\\N")[0]
             if format == "italics":
                 this_line = "&nbsp;&nbsp;&nbsp;&nbsp;*" + temp_line + "*<br>"
             else:
                 this_line = "&nbsp;&nbsp;&nbsp;&nbsp;" + temp_line + "<br>"
-#             print(this_line)
             dialogue.append(speaker + this_line)
+    
+    ## For song lyrics (present as is with <br> in between)
+    elif type == "LYRICS":
+        if extra == "OP":
+            op_lyrics.append(next_line.split(",", 9)[9].rstrip())
+        if extra == "ED":
+            ed_lyrics.append(next_line.split(",", 9)[9].rstrip())
+        if extra == "EXTRA":
+            pass
+    
+    elif type == "SIGNS":
+        this_line = next_line.split(",",9)[9].split("}")[1].replace("\\N", " ")
+#             print(this_line)
+        dialogue.append("**SIGN**&nbsp;&nbsp;&nbsp;&nbsp;" + str(this_line) + "<br>")
+    
+    # If unhandled
+    else:
+        print("Unhandled line: " + mode + " " + next_line.split(",", 9)[4] + " " + next_line.split(",", 9)[9])
+        log.append("Unhandled line: " + mode + " " + next_line.split(",", 9)[4] + " " + next_line.split(",", 9)[9])
 
+## Main Loop
 with open("test.ass", "r", encoding="utf8") as file:
-    # Loop for metadata-type data
+    # Loop for metadata-type data (Script Info)
     while True:
-        this_line = ""
         next_line = file.readline()
         
         if not next_line:
@@ -47,85 +68,99 @@ with open("test.ass", "r", encoding="utf8") as file:
         
         if "Original Script" in next_line:
             this_line = next_line.split(": ")[1].split("  [")[0]
-            text_extract.update({"Original_Script" : this_line})
+            script_info.update({"Original_Script" : this_line})
+        else:
+            this_line = next_line.split(": ")
+            try:
+                script_info.update({this_line[0] : this_line[1]})
+            except IndexError:
+                script_info.update({this_line[0] : ""})
         
-        if next_line == "Format: Layer,Start,End,Style,Name,MarginL,MarginR,MarginV,Effect,Text\n":
+        if next_line == "[V4+ Styles]\n":
+            print("Styles")
             break
     
-    ## Start another loop for dialogue events
+    while True:
+        next_line = file.readline()
+        
+        if not next_line:
+            break
+        
+        if next_line == "[Events]\n":
+            pass
+        
+        elif next_line == "Format: Layer,Start,End,Style,Name,MarginL,MarginR,MarginV,Effect,Text\n":
+            print("Events")
+            break
+    
+    ## Start another loop for dialogue events (Events)
     while True:
         next_line = file.readline()
         if not next_line:
             break
         
-#         print(next_line.split(",")[3])
+        mode = next_line.split(",")[3]
         
-        if next_line.split(",")[3] == "Songs_OP":
-            op_lyrics.append(next_line.split(",", 9)[9].rstrip())
+        if mode == "Songs_OP":
+            separator(next_line, type="LYRICS", extra="OP")
             
-        if next_line.split(",")[3] == "Songs_ED":
-            ed_lyrics.append(next_line.split(",", 9)[9].rstrip())
+        elif mode == "Songs_ED":
+            separator(next_line, type="LYRICS", extra="ED")
             
-        if "Default" in next_line.split(",")[3]:
-            if next_line.split(",")[3] == "DefaultItalics":
-                separator(next_line, format="italics")
+        elif "Default" in mode:
+            if mode == "DefaultItalics":
+                separator(next_line, type="DEFAULT", format="italics")
             else:
-                separator(next_line)
+                separator(next_line, type="DEFAULT")
         
-        if "Flashback" in next_line.split(",")[3]:
-            separator(next_line, extra="flashback")
-#             print("FLASHBACK")
-# #             print(next_line.split(",")[4])
-# #             print(next_line.split(",", 9)[9].rstrip().split(" \\N"))
-#             speaker = next_line.split(",")[4]
-#             if len(next_line.split(",", 9)[9].rstrip().split(" \\N")) >= 2:
-#                 separate_lines = next_line.split(",", 9)[9].rstrip().split(" \\N")
-#                 this_line = "\n".join(separate_lines)
-#                 dialogue.append("F " + speaker + " " + this_line)
-#             else:
-#                 this_line = next_line.split(",", 9)[9].rstrip().split(" \\N")
-#                 dialogue.append("F " + speaker + " " + this_line[0])
-#             
-#         if "Signs" in next_line.split(",")[3]:
-#             print("SIGNS")
-#             this_line = next_line.split(",",9)[9].split("}")[1].replace("\\N", " ")
-# #             print(this_line)
-#             dialogue.append("S " + str(this_line))
+        elif "Flashback" in mode:
+            separator(next_line, type="DEFAULT", extra="flashback")
+
+        elif "Signs" in mode:
+            separator(next_line, type="SIGNS")
+        
+        # Catches unhandled lines
+        else:
+            separator(next_line)
 
 # For debug
 # dump_dialogue = "\n".join(dialogue)
 # for text in dialogue:
 #     print(text)
 
-# For production
-dump_dialogue = "".join(dialogue)
-
-
-with open('dumps/dump.txt', 'w', encoding="utf8") as f:
-    f.write(json.dumps(dump_dialogue))
-#         next_line.strip()
-
 # print(this_line)
- 
 # print(op_lyrics)
 # print(ed_lyrics)
-
-op_lyrics_full = "<br>".join(op_lyrics)
-ed_lyrics_full = "<br>".join(ed_lyrics)
-
-
-with open('dumps/op_dump.txt', 'w', encoding="utf8") as f:
-    f.write(op_lyrics_full)
-    
-with open('dumps/ed_dump.txt', 'w', encoding="utf8") as f:
-    f.write(ed_lyrics_full)
-
-# op_lyrics_full = ftfy.fix_encoding("\n".join(op_lyrics))
-# ed_lyrics_full = ftfy.fix_encoding("\n".join(ed_lyrics))
 
 # print(op_lyrics_full)
 # print("---------")
 # print(ed_lyrics_full)
 # text_extract.update({"ed_lyrics" : ed_lyrics_full})
-# print(text_extract)
-print("DONE")
+print(script_info)
+
+## Joining arrays for dumps
+
+# Dialogue
+dump_dialogue = "".join(dialogue)
+
+with open('dumps/dump.txt', 'w', encoding="utf8") as f:
+    f.write(json.dumps(dump_dialogue))
+
+# Lyrics
+op_lyrics_full = "<br>".join(op_lyrics)
+ed_lyrics_full = "<br>".join(ed_lyrics)
+
+with open('dumps/op_dump.txt', 'w', encoding="utf8") as f:
+    f.write(json.dumps(op_lyrics_full))
+    
+with open('dumps/ed_dump.txt', 'w', encoding="utf8") as f:
+    f.write(json.dumps(ed_lyrics_full))
+
+# Handle log
+lines = len(dialogue)
+log.append(str(lines) + " lines")
+log_full = "".join(log)
+with open('dumps/log.txt', 'w', encoding="utf8") as f:
+    f.write(log_full)
+
+print("DONE " + str(lines))
