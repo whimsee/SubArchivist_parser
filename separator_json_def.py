@@ -8,7 +8,23 @@ ed_lyrics = []
 dialogue = []
 
 def separator(next_line, type="DEFAULT"):
-    pass
+    
+    if type == "DEFAULT":
+        print(next_line.split(",")[4])
+
+        speaker = "**" + next_line.split(",")[4] + "**<br>"
+        
+        # FORMAT: &nbsp;&nbsp;&nbsp;&nbsp;this is the first line<br>
+        if len(next_line.split(",", 9)[9].rstrip().split(" \\N")) >= 2:
+            separate_lines = []
+            for text in next_line.split(",", 9)[9].rstrip().split(" \\N"):
+                separate_lines.append("&nbsp;&nbsp;&nbsp;&nbsp;" + text + "<br>")
+            this_line = "".join(separate_lines)
+            dialogue.append(speaker + "" + this_line)
+        else:
+            temp_line = next_line.split(",", 9)[9].rstrip().split(" \\N")[0]
+            this_line = "&nbsp;&nbsp;&nbsp;&nbsp;" + temp_line + "<br>"
+            dialogue.append(speaker + "" + this_line)
 
 with open("test.ass", "r", encoding="utf8") as file:
     # Loop for metadata-type data
