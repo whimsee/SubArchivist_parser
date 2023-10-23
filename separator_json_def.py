@@ -7,26 +7,34 @@ op_lyrics = []
 ed_lyrics = []
 dialogue = []
 
-def separator(next_line, type="DEFAULT"):
+def separator(next_line, type="DEFAULT", format="none", extra="none"):
     
     if type == "DEFAULT":
-#         print(next_line.split(",")[4])
-
-        speaker = "**" + next_line.split(",")[4] + "**<br>"
-        
+        if extra == "flashback":
+            speaker = "**(Flashback) " + next_line.split(",")[4] + "**<br>"
+        else:
+            speaker = "**" + next_line.split(",")[4] + "**<br>"
+            
         # FORMAT: &nbsp;&nbsp;&nbsp;&nbsp;this is the first line<br>
         if len(next_line.split(",", 9)[9].rstrip().split("\\N")) >= 2:
             separate_lines = []
-            for text in next_line.split(",", 9)[9].rstrip().split("\\N"):
-                separate_lines.append("&nbsp;&nbsp;&nbsp;&nbsp;" + text + "<br>")
+            for text in next_line.split(",", 9)[9].split("\\N"):
+                temp_line = text.rstrip()
+                if format == "italics":
+                    separate_lines.append("&nbsp;&nbsp;&nbsp;&nbsp;*" + temp_line + "*<br>")
+                else:
+                    separate_lines.append("&nbsp;&nbsp;&nbsp;&nbsp;" + temp_line + "<br>")
             this_line = "".join(separate_lines)
 #             print(this_line)
-            dialogue.append(speaker + "" + this_line)
+            dialogue.append(speaker + this_line)
         else:
             temp_line = next_line.split(",", 9)[9].rstrip().split("\\N")[0]
-            this_line = "&nbsp;&nbsp;&nbsp;&nbsp;" + temp_line + "<br>"
+            if format == "italics":
+                this_line = "&nbsp;&nbsp;&nbsp;&nbsp;*" + temp_line + "*<br>"
+            else:
+                this_line = "&nbsp;&nbsp;&nbsp;&nbsp;" + temp_line + "<br>"
 #             print(this_line)
-            dialogue.append(speaker + "" + this_line)
+            dialogue.append(speaker + this_line)
 
 with open("test.ass", "r", encoding="utf8") as file:
     # Loop for metadata-type data
@@ -59,27 +67,13 @@ with open("test.ass", "r", encoding="utf8") as file:
             ed_lyrics.append(next_line.split(",", 9)[9].rstrip())
             
         if "Default" in next_line.split(",")[3]:
-            separator(next_line)
-# #             print(next_line.split(",")[4])
-# #             print(next_line.split(",", 9)[9].rstrip().split(" \\N"))
-# 
-# #             **Fourth item**<br>
-#             speaker = "**" + next_line.split(",")[4] + "**<br>"
-#             
-# #             &nbsp;&nbsp;&nbsp;&nbsp;this is the first line<br>
-#             if len(next_line.split(",", 9)[9].rstrip().split(" \\N")) >= 2:
-#                 separate_lines = []
-#                 for text in next_line.split(",", 9)[9].rstrip().split(" \\N"):
-#                     separate_lines.append("&nbsp;&nbsp;&nbsp;&nbsp;" + text + "<br>")
-#                 this_line = "".join(separate_lines)
-#                 dialogue.append(speaker + "" + this_line)
-#             else:
-#                 temp_line = next_line.split(",", 9)[9].rstrip().split(" \\N")[0]
-#                 this_line = "&nbsp;&nbsp;&nbsp;&nbsp;" + temp_line + "<br>"
-#                 dialogue.append(speaker + "" + this_line)
+            if next_line.split(",")[3] == "DefaultItalics":
+                separator(next_line, format="italics")
+            else:
+                separator(next_line)
         
         if "Flashback" in next_line.split(",")[3]:
-            separator(next_line)
+            separator(next_line, extra="flashback")
 #             print("FLASHBACK")
 # #             print(next_line.split(",")[4])
 # #             print(next_line.split(",", 9)[9].rstrip().split(" \\N"))
@@ -107,7 +101,7 @@ with open("test.ass", "r", encoding="utf8") as file:
 dump_dialogue = "".join(dialogue)
 
 
-with open('dumps/dump.txt', 'w') as f:
+with open('dumps/dump.txt', 'w', encoding="utf8") as f:
     f.write(json.dumps(dump_dialogue))
 #         next_line.strip()
 
@@ -120,10 +114,10 @@ op_lyrics_full = "<br>".join(op_lyrics)
 ed_lyrics_full = "<br>".join(ed_lyrics)
 
 
-with open('dumps/op_dump.txt', 'w') as f:
+with open('dumps/op_dump.txt', 'w', encoding="utf8") as f:
     f.write(op_lyrics_full)
     
-with open('dumps/ed_dump.txt', 'w') as f:
+with open('dumps/ed_dump.txt', 'w', encoding="utf8") as f:
     f.write(ed_lyrics_full)
 
 # op_lyrics_full = ftfy.fix_encoding("\n".join(op_lyrics))
