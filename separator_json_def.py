@@ -10,20 +10,22 @@ dialogue = []
 def separator(next_line, type="DEFAULT"):
     
     if type == "DEFAULT":
-        print(next_line.split(",")[4])
+#         print(next_line.split(",")[4])
 
         speaker = "**" + next_line.split(",")[4] + "**<br>"
         
         # FORMAT: &nbsp;&nbsp;&nbsp;&nbsp;this is the first line<br>
-        if len(next_line.split(",", 9)[9].rstrip().split(" \\N")) >= 2:
+        if len(next_line.split(",", 9)[9].rstrip().split("\\N")) >= 2:
             separate_lines = []
-            for text in next_line.split(",", 9)[9].rstrip().split(" \\N"):
+            for text in next_line.split(",", 9)[9].rstrip().split("\\N"):
                 separate_lines.append("&nbsp;&nbsp;&nbsp;&nbsp;" + text + "<br>")
             this_line = "".join(separate_lines)
+#             print(this_line)
             dialogue.append(speaker + "" + this_line)
         else:
-            temp_line = next_line.split(",", 9)[9].rstrip().split(" \\N")[0]
+            temp_line = next_line.split(",", 9)[9].rstrip().split("\\N")[0]
             this_line = "&nbsp;&nbsp;&nbsp;&nbsp;" + temp_line + "<br>"
+#             print(this_line)
             dialogue.append(speaker + "" + this_line)
 
 with open("test.ass", "r", encoding="utf8") as file:
@@ -57,25 +59,27 @@ with open("test.ass", "r", encoding="utf8") as file:
             ed_lyrics.append(next_line.split(",", 9)[9].rstrip())
             
         if "Default" in next_line.split(",")[3]:
-#             print(next_line.split(",")[4])
-#             print(next_line.split(",", 9)[9].rstrip().split(" \\N"))
-
-#             **Fourth item**<br>
-            speaker = "**" + next_line.split(",")[4] + "**<br>"
-            
-#             &nbsp;&nbsp;&nbsp;&nbsp;this is the first line<br>
-            if len(next_line.split(",", 9)[9].rstrip().split(" \\N")) >= 2:
-                separate_lines = []
-                for text in next_line.split(",", 9)[9].rstrip().split(" \\N"):
-                    separate_lines.append("&nbsp;&nbsp;&nbsp;&nbsp;" + text + "<br>")
-                this_line = "".join(separate_lines)
-                dialogue.append(speaker + "" + this_line)
-            else:
-                temp_line = next_line.split(",", 9)[9].rstrip().split(" \\N")[0]
-                this_line = "&nbsp;&nbsp;&nbsp;&nbsp;" + temp_line + "<br>"
-                dialogue.append(speaker + "" + this_line)
+            separator(next_line)
+# #             print(next_line.split(",")[4])
+# #             print(next_line.split(",", 9)[9].rstrip().split(" \\N"))
+# 
+# #             **Fourth item**<br>
+#             speaker = "**" + next_line.split(",")[4] + "**<br>"
+#             
+# #             &nbsp;&nbsp;&nbsp;&nbsp;this is the first line<br>
+#             if len(next_line.split(",", 9)[9].rstrip().split(" \\N")) >= 2:
+#                 separate_lines = []
+#                 for text in next_line.split(",", 9)[9].rstrip().split(" \\N"):
+#                     separate_lines.append("&nbsp;&nbsp;&nbsp;&nbsp;" + text + "<br>")
+#                 this_line = "".join(separate_lines)
+#                 dialogue.append(speaker + "" + this_line)
+#             else:
+#                 temp_line = next_line.split(",", 9)[9].rstrip().split(" \\N")[0]
+#                 this_line = "&nbsp;&nbsp;&nbsp;&nbsp;" + temp_line + "<br>"
+#                 dialogue.append(speaker + "" + this_line)
         
-#         if "Flashback" in next_line.split(",")[3]:
+        if "Flashback" in next_line.split(",")[3]:
+            separator(next_line)
 #             print("FLASHBACK")
 # #             print(next_line.split(",")[4])
 # #             print(next_line.split(",", 9)[9].rstrip().split(" \\N"))
@@ -130,3 +134,4 @@ with open('dumps/ed_dump.txt', 'w') as f:
 # print(ed_lyrics_full)
 # text_extract.update({"ed_lyrics" : ed_lyrics_full})
 # print(text_extract)
+print("DONE")
