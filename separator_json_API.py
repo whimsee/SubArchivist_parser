@@ -1,16 +1,10 @@
-# import ftfy
-# import re
 import json
 from secrets import secrets
+import requests
 
-books_url_get = secrets['books_url_get']
-books_url_post = secrets['books_url_post']
-books_url_delete = secrets['books_url_delete']
-books_url_create = secrets['books_url_create']
-API_ID_TOKEN = secrets['API_ID_TOKEN']
-
-api_url = books_url_post
-headers = {"Authorization": "Token " + API_ID_TOKEN}
+book_url = secrets['book_url']
+page_url = secrets['page_url']
+headers = {"Authorization": "Token " + secrets['API_ID_TOKEN']}
 
 script_info = {}
 style_info = []
@@ -19,6 +13,7 @@ ed_lyrics = []
 dialogue = []
 log = []
 
+## Separator function for main body
 def separator(next_line, type="none", format="none", extra="none"):
     ## Default setting
     if type == "DEFAULT":
@@ -67,7 +62,34 @@ def separator(next_line, type="none", format="none", extra="none"):
         print("Unhandled line: " + mode + " " + next_line.split(",", 9)[4] + " " + next_line.split(",", 9)[9])
         log.append("Unhandled line: " + mode + " " + next_line.split(",", 9)[4] + " " + next_line.split(",", 9)[9])
 
-### Main Loop
+
+def API_get(target, type="list", ID=0):
+    
+    if type == "list":
+        if target == "book":
+            response = requests.get(secrets['book_url'], headers=headers)
+        elif target == "chapter":
+            response = requests.get(secrets['chapter_url'], headers=headers)
+        elif target == "page":
+            response = requests.get(secrets['page_url'], headers=headers)
+        
+        return(response.json())
+    
+    if type == "read":
+        if target == "book":
+            response = requests.get(secrets['book_url'] + str(ID), headers=headers)
+        elif target == "chapter":
+            response = requests.get(secrets['chapter_url'] + str(ID), headers=headers)
+        elif target == "page":
+            response = requests.get(secrets['page_url'] + str(ID), headers=headers)
+        
+        return(response.json())
+        
+    # api_url = book_url
+    # response = requests.get(api_url, headers=headers)
+    # print(response.json())
+
+### Main Loop ###############################################################################################
 with open("test.ass", "r", encoding="utf8") as file:
     ## Loop for metadata-type data (Script Info)
     file.readline()
@@ -77,7 +99,7 @@ with open("test.ass", "r", encoding="utf8") as file:
         if not next_line:
             break
         elif next_line == "[V4+ Styles]\n":
-            print("Styles")
+#             print("Styles")
             break
         
         if "Original Script" in next_line:
@@ -99,9 +121,8 @@ with open("test.ass", "r", encoding="utf8") as file:
         if not next_line:
             break
         elif next_line == "Format: Layer,Start,End,Style,Name,MarginL,MarginR,MarginV,Effect,Text\n":
-            print("Events")
+#             print("Events")
             break
-        print(next_line)
         if next_line == "[Events]\n" or next_line == "\n" or next_line == "Format:\n" or next_line == "Format: Name,Fontname,Fontsize,PrimaryColour,SecondaryColour,OutlineColour,BackColour,Bold,Italic,Underline,Strikeout,ScaleX,ScaleY,Spacing,Angle,BorderStyle,Outline,Shadow,Alignment,MarginL,MarginR,MarginV,Encoding\n":
             pass
         else:
@@ -109,7 +130,7 @@ with open("test.ass", "r", encoding="utf8") as file:
         
         
     
-    ## Start another loop for dialogue events (Events)
+    ## Start another loop for dialogue events (Events). Uses separator
     while True:
         next_line = file.readline()
         if not next_line:
@@ -118,20 +139,16 @@ with open("test.ass", "r", encoding="utf8") as file:
         mode = next_line.split(",")[3]
         
         if mode == "Songs_OP":
-            separator(next_line, type="LYRICS", extra="OP")
-            
+            separator(next_line, type="LYRICS", extra="OP")      
         elif mode == "Songs_ED":
-            separator(next_line, type="LYRICS", extra="ED")
-            
+            separator(next_line, type="LYRICS", extra="ED")     
         elif "Default" in mode:
             if mode == "DefaultItalics":
                 separator(next_line, type="DEFAULT", format="italics")
             else:
                 separator(next_line, type="DEFAULT")
-        
         elif "Flashback" in mode:
             separator(next_line, type="DEFAULT", extra="flashback")
-
         elif "Signs" in mode:
             separator(next_line, type="SIGNS")
         
@@ -188,5 +205,58 @@ log_full = "".join(log)
     
 with open('dumps/log.txt', 'w', encoding="utf8") as f:
     f.write(log_full)
+
+## POST PAGE 2 (Lines)
+# ID = "1"
+# api_url = page_url
+# todo = {
+# 	"book_id": ID,
+# 	"name": "Episode name",
+# 	"markdown": dump_dialogue,
+# 	"priority": 15,
+# 	"tags": [
+# 		{"name": "Category", "value": "Not Bad Content"},
+# 		{"name": "Rating", "value": "Average"}
+# 	]
+# }
+# response = requests.post(api_url, json=todo, headers=headers)
+# print(response.json())
+
+## POST PAGE 2 (Lyrics)
+# ID = "1"
+# api_url = page_url
+# todo = {
+# 	"book_id": ID,
+# 	"name": "Lyrics",
+# 	"markdown": op_lyrics_full,
+# 	"priority": 15,
+# 	"tags": [
+# 		{"name": "Category", "value": "Not Bad Content"},
+# 		{"name": "Rating", "value": "Average"}
+# 	]
+# }
+# response = requests.post(api_url, json=todo, headers=headers)
+# print(response.json())
+
+# print(API_get("page", "read", 1))
+# print(API_get("book"))
+# print(API_get("chapter"))
+
+# try:
+#     for list in API_get("page")['data']:
+#         if "Lyrics" in list['name']:
+#             print(list['id'])
+#             break
+# except KeyError:
+#     print("nope")
+    
+# try:
+#     id_temp = []
+#     for list in API_get("book")['data']:
+#         id_temp.append(list['id'])
+#     
+#     print(max(id_temp) + 1)
+# except KeyError:
+#     print("nope")
 
 print("DONE " + str(lines))

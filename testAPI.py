@@ -4,8 +4,7 @@ from secrets import secrets
 books_url_get = secrets['books_url_get']
 books_url_post = secrets['books_url_post']
 books_url_delete = secrets['books_url_delete']
-books_url_create = secrets['books_url_create']
-# API_ID_TOKEN = "7vNfTCteriMBDfUEt6C99Q0qpKwCuSq2:glrRS2kWj0jdhTJ5pBQ4D8Bw0NvEKj2i"
+page_url_create = secrets['page_url_create']
 API_ID_TOKEN = secrets['API_ID_TOKEN']
 
 api_url = books_url_post
@@ -26,7 +25,7 @@ headers = {"Authorization": "Token " + API_ID_TOKEN}
 
 ## POST PAGE
 # ID = "1"
-# api_url = books_url_create
+# api_url = page_url_create
 # todo = {
 # 	"book_id": ID,
 # 	"name": "Episode name",
@@ -44,7 +43,7 @@ headers = {"Authorization": "Token " + API_ID_TOKEN}
 
 ## POST PAGE 2 (Lines)
 ID = "1"
-api_url = books_url_create
+api_url = page_url_create
 todo = {
 	"book_id": ID,
 	"name": "Episode name",
@@ -60,7 +59,7 @@ print(response.json())
 
 ## POST PAGE 2 (Lyrics)
 # ID = "1"
-# api_url = books_url_create
+# api_url = page_url_create
 # todo = {
 # 	"book_id": ID,
 # 	"name": "Lyrics",
