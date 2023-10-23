@@ -3,7 +3,7 @@
 import json
 
 script_info = {}
-style_info = {}
+style_info = []
 op_lyrics = []
 ed_lyrics = []
 dialogue = []
@@ -50,7 +50,6 @@ def separator(next_line, type="none", format="none", extra="none"):
     
     elif type == "SIGNS":
         this_line = next_line.split(",",9)[9].split("}")[1].replace("\\N", " ")
-#             print(this_line)
         dialogue.append("***SIGN***&nbsp;&nbsp;&nbsp;&nbsp;" + str(this_line) + "<br>")
     
     # If unhandled
@@ -92,9 +91,11 @@ with open("test.ass", "r", encoding="utf8") as file:
         elif next_line == "Format: Layer,Start,End,Style,Name,MarginL,MarginR,MarginV,Effect,Text\n":
             print("Events")
             break
-        
-        if next_line == "[Events]\n":
+        print(next_line)
+        if next_line == "[Events]\n" or next_line == "\n" or next_line == "Format:\n" or next_line == "Format: Name,Fontname,Fontsize,PrimaryColour,SecondaryColour,OutlineColour,BackColour,Bold,Italic,Underline,Strikeout,ScaleX,ScaleY,Spacing,Angle,BorderStyle,Outline,Shadow,Alignment,MarginL,MarginR,MarginV,Encoding\n":
             pass
+        else:
+            style_info.append(next_line.split(",")[0].split(": ")[1])
         
         
     
@@ -167,6 +168,10 @@ for x, y in script_info.items():
     log_text = x + ": " + y
     log.append(log_text)
 
+
+log.append("\n")
+log.append("\n".join(style_info))
+log.append("\n")
 log.append("\n")
 log.append(str(lines) + " lines")
 log_full = "".join(log)

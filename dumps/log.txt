@@ -13,4 +13,21 @@ PlayResY: 360
 Timer: 0.0000
 WrapStyle: 0
 
+Default
+DefaultItalics
+DefaultTop
+DefaultItalicsTop
+DefaultOverlap
+Flashback
+FlashbackItalics
+FlashbackTop
+FlashbackItalicsTop
+Narration
+Signs
+Signs_WText
+Signs_EpTitle
+Signs_NextEp
+Songs_OP
+Songs_ED
+
 270 lines
