@@ -39,7 +39,7 @@ def separator(next_line, type="none", format="none", extra="none"):
                 this_line = "&nbsp;&nbsp;&nbsp;&nbsp;" + temp_line + "<br>"
             dialogue.append(speaker + this_line)
     
-    ## For song lyrics (present as is with <br> in between)
+    ## For song lyrics (present as is with <br> between lines)
     elif type == "LYRICS":
         if extra == "OP":
             op_lyrics.append(next_line.split(",", 9)[9].rstrip())

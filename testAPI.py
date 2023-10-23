@@ -1,10 +1,12 @@
 import requests
+from secrets import secrets
 
-books_url_get = "http://192.168.1.140:6875/api/books"
-books_url_post = "http://192.168.1.140:6875/api/books"
-books_url_delete = "http://192.168.1.140:6875/api/books/5"
-books_url_create = "http://192.168.1.140:6875/api/pages"
-API_ID_TOKEN = "7vNfTCteriMBDfUEt6C99Q0qpKwCuSq2:glrRS2kWj0jdhTJ5pBQ4D8Bw0NvEKj2i"
+books_url_get = secrets['books_url_get']
+books_url_post = secrets['books_url_post']
+books_url_delete = secrets['books_url_delete']
+books_url_create = secrets['books_url_create']
+# API_ID_TOKEN = "7vNfTCteriMBDfUEt6C99Q0qpKwCuSq2:glrRS2kWj0jdhTJ5pBQ4D8Bw0NvEKj2i"
+API_ID_TOKEN = secrets['API_ID_TOKEN']
 
 api_url = books_url_post
 headers = {"Authorization": "Token " + API_ID_TOKEN}
