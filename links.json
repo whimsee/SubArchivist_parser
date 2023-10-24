@@ -1,4 +1,8 @@
-{
-    "anime" : "https://www.crunchyroll.com/watch/G6K5K9Z7Y/kotoura-san-and-manabe-kun",
-    "anime2" : "https://www.crunchyroll.com/watch/GR49GVW86/but-youre-not-here"
+{  
+    "title" : "Anime title",
+    "season" : "Season 1",
+    "episodes" : {
+        "anime" : "https://www.crunchyroll.com/watch/G6K5K9Z7Y/kotoura-san-and-manabe-kun",
+        "anime2" : "https://www.crunchyroll.com/watch/GR49GVW86/but-youre-not-here"
+    }
 }
