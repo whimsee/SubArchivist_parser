@@ -12,8 +12,8 @@ import json
 
 with open("links.json", 'r', encoding="utf8") as file:
     data = json.load(file)
-    print(data)
+    print(data['title'], data['season'])
     
-    for x, y in data.items():
+    for x, y in data['episodes'].items():    
         print(x, y)
     
