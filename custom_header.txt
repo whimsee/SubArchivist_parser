@@ -1,4 +1,7 @@
 <style>
+  #bkmrk-page-title {
+    font-size: 35px;
+  }
   body {
     font-size: 17px;
     line-height: 1.8;

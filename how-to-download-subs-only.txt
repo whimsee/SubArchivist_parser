@@ -1,0 +1,11 @@
+Use crunchy-cli (https://github.com/crunchy-labs/crunchy-cli)
+
+You can utilize the search command for this. This might require some additional work as this command isn't as simple as download and archive.
+
+I can give you two examples which works on Linux:
+
+Download english audio of the first episode of darling in the franxx
+$ ffmpeg -i $(crunchy-cli search --audio en-US -o '{{stream.hls_url}}' https://www.crunchyroll.com/watch/GRDKJZ81Y/alone-and-lonesome) test.mp3
+
+Download english subtitles of the first episode of darling in the franxx:
+$ curl -o test.ass $(crunchy-cli search --audio ja-JP -o '{{subtitle.locale}} {{subtitle.url}}' https://www.crunchyroll.com/watch/GRDKJZ81Y/alone-and-lonesome | grep 'en-US' | awk '{print $2}')
