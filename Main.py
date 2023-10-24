@@ -17,15 +17,17 @@ source_links = []
 ### Easy titles from links.json ###
 with open("links.json", 'r', encoding="utf8") as file:
     data = json.load(file)
+    link_title = data['title'].replace(" ","_")
+    link_season = data['season'].replace(" ","_")
     for x, y in data['episodes'].items():    
         episodes.append(x)
         source_links.append(y)
 
 ##### Episode info #####
-index = 7
+index = 11
 # episode_title = "E7 - Shooting Star Moratorium"         # Page
 episode_title = episodes[index]
-sub_file = "subs/DARLING_in_the_FRANXX/Season_1/" + episode_title.replace(" ","_") + ".ass"
+sub_file = "subs/" + link_title + "/" + link_season + "/" + episode_title.replace(" ","_") + ".ass"
 anime_title = "DARLING in the FRANXX"                       # Book
 season = "Season 1"                            # Chapter    
 source = "Crunchyroll"
