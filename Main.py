@@ -17,7 +17,7 @@ source_links = []
 ### Easy titles from links.json ###
 with open("links.json", 'r', encoding="utf8") as file:
     data = json.load(file)
-    link_title = data['title'].replace(" ","_")
+    link_title = data['title'].replace(" ","_").replace("'","\\'")
     link_season = data['season'].replace(" ","_")
     for x, y in data['episodes'].items():    
         episodes.append(x)
@@ -72,6 +72,8 @@ def replace_name(text, dic):
     for i, j in dic.items():
         if text == i:
             text = j
+        else:
+            log.append("Unhandled name: " + text)
     return text
 
 sub_dictionary = {
@@ -253,7 +255,11 @@ for text in log:
         unhandled_lines = True
         print("Upload aborted. Check log for unhandled lines.")
         break
-
+    
+    if "Unhandled name:" in text:
+        unhandled_lines = True
+        print("Upload aborted. Check log for unhandled name.")
+        break
 
 #### For debug
 # unhandled_lines = True
