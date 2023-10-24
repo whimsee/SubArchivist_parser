@@ -105,13 +105,13 @@ ED_name = "ED_Lyrics"
 #     response = requests.post(secrets['page_url'], json=todo, headers=headers)
     
 ## GET
-api_url = secrets['page_url'] + "18"
-todo = {
-        "priority" : 2
-    }
-response = requests.put(api_url, json=todo, headers=headers)
-print(response.json())
-
+# api_url = secrets['page_url'] + "18"
+# todo = {
+#         "priority" : 2
+#     }
+# response = requests.put(api_url, json=todo, headers=headers)
+# print(response.json())
+# 
 
 
 
