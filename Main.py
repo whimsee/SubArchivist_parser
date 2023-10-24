@@ -1,17 +1,57 @@
 import json
-from secrets import secrets
 import requests
+
+development = True
+
+if development:
+    from secrets_dev import secrets
+else:
+    from secrets import secrets
 
 headers = {"Authorization": "Token " + secrets['API_ID_TOKEN']}
 
 ##### Episode info #####
-sub_file = "test.ass"
-anime_title = "This anime 9"                       # Book
-season = "Season 2"                            # Chapter
-episode_title = "Episode 1"                     # Page
+sub_file = "subs/test.ass"
+anime_title = "DARLING in the FRANXX"                       # Book
+season = "Season 1"                            # Chapter
+episode_title = "E1 - Alone and Lonesome"                     # Page
+
+name_replace = True
+name_dict = {
+        "Z2" : "Zero Two (002)",
+        "Zero2" : "Zero Two (002)",
+        "Franxx" : "Dr. Franxx",
+        "Fr" : "Dr. Franxx",
+        "Nana7" : "Nana",
+        "7" : "Nana",
+        "Hiro16" : "Hiro (016)",
+        "16" : "Hiro (016)",
+        "Futoshi214" : "Futoshi (214)",
+        "214" : "Futoshi (214)",
+        "Zorome666" : "Zorome (666)",
+        "666" : "Zorome (666)",
+        "Goro56" : "Goro (056)",
+        "56" : "Goro (056)",
+        "Ichigo15" : "Ichigo (015)",
+        "15" : "Ichigo (015)",
+        "Kokoro556" : "Kokoro (556)",
+        "556" : "Kokoro (556)",
+        "Ikuno196" : "Ikuno (196)",
+        "196" : "Ikuno (196)",
+        "Mitsuru326" : "Mitsuru (326)",
+        "326" : "Mitsuru (326)",
+        "Miku390" : "Miku (390)",
+        "390" : "Miku (390)",
+        "Hachi8" : "Hachi",
+        "8" : "Hachi",
+        "APEHead" : "Papa",
+        "G" : "Guard",
+        "703" : "Naomi (703)",
+        "" : "---"
+    }
 
 # optional for lyrics
-upload_lyrics = True
+upload_lyrics = False
 lyrics_only = False
 OP_name = "OP_Lyrics"
 ED_name = "ED_Lyrics"
@@ -31,6 +71,12 @@ def replace_all(text, dic):
         text = text.replace(i, j)
     return text
 
+def replace_name(text, dic):
+    for i, j in dic.items():
+        if text == i:
+            text = j
+    return text
+
 sub_dictionary = {
     "{\i1}" : "*", "{\i0}" : "*"
     }
@@ -40,10 +86,16 @@ def separator(next_line, type="none", format="none", extra="none"):
     ## Default setting
     if type == "DEFAULT":
         # Speaker
-        if extra == "flashback":
-            speaker = "**(Flashback) " + next_line.split(",")[4] + "**<br>"
+        
+        if name_replace:
+            temp_speaker = replace_name(next_line.split(",")[4], name_dict)
         else:
-            speaker = "**" + next_line.split(",")[4] + "**<br>"
+            temp_speaker = next_line.split(",")[4]
+            
+        if extra == "flashback":
+            speaker = "**(Flashback) " + temp_speaker + "**<br>"
+        else:
+            speaker = "**" + temp_speaker + "**<br>"
             
         ## FORMAT: &nbsp;&nbsp;&nbsp;&nbsp;this is a line<br>
         ## For multiline
@@ -82,7 +134,10 @@ def separator(next_line, type="none", format="none", extra="none"):
             pass
     
     elif type == "SIGNS":
-        this_line = next_line.split(",",9)[9].split("}")[1].replace("\\N", " ")
+        if any(s in next_line.split(",",9)[9] for s in ("{", "}")):
+            this_line = next_line.split(",",9)[9].split("}")[1].replace("\\N", " ")
+        else:
+            this_line = next_line.split(",",9)[9].replace("\\N", " ")
         dialogue.append("***SIGN***&nbsp;&nbsp;&nbsp;&nbsp;" + str(this_line) + "<br>")
     
     # If unhandled
@@ -156,20 +211,22 @@ with open(sub_file, "r", encoding="utf8") as file:
         if not next_line:
             break
         
-        mode = next_line.split(",")[3]
-        
-        if mode == "Songs_OP":
+        mode = next_line.split(",")[3].lower()
+#         print(next_line, mode)
+        if mode == "songs_op":
             separator(next_line, type="LYRICS", extra="OP")      
-        elif mode == "Songs_ED":
+        elif mode == "songs_ed":
             separator(next_line, type="LYRICS", extra="ED")     
-        elif "Default" in mode:
-            if mode == "DefaultItalics":
+        elif any(s in mode for s in ("default", "main", "top")):
+            if "italics" in mode:
                 separator(next_line, type="DEFAULT", format="italics")
             else:
                 separator(next_line, type="DEFAULT")
-        elif "Flashback" in mode:
+        elif "italics" in mode:
+            separator(next_line, type="DEFAULT", format="italics")
+        elif "flashback" in mode:
             separator(next_line, type="DEFAULT", extra="flashback")
-        elif "Signs" in mode:
+        elif "sign" in mode:
             separator(next_line, type="SIGNS")
         
         # Catches unhandled lines
