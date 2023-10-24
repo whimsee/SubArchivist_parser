@@ -11,13 +11,26 @@ else:
 
 headers = {"Authorization": "Token " + secrets['API_ID_TOKEN']}
 
+episodes = []
+source_links = []
+
+### Easy titles from links.json ###
+with open("links.json", 'r', encoding="utf8") as file:
+    data = json.load(file)
+    for x, y in data['episodes'].items():    
+        episodes.append(x)
+        source_links.append(y)
+
 ##### Episode info #####
-episode_title = "E7 - Shooting Star Moratorium"         # Page
+index = 7
+# episode_title = "E7 - Shooting Star Moratorium"         # Page
+episode_title = episodes[index]
 sub_file = "subs/DARLING_in_the_FRANXX/Season_1/" + episode_title.replace(" ","_") + ".ass"
 anime_title = "DARLING in the FRANXX"                       # Book
 season = "Season 1"                            # Chapter    
 source = "Crunchyroll"
-source_link = "https://www.crunchyroll.com/watch/G63K48VZ6/shooting-star-moratorium"
+# source_link = "https://www.crunchyroll.com/watch/G63K48VZ6/shooting-star-moratorium"
+source_link = source_links[index]
 
 name_replace = True
 
