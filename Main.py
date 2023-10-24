@@ -123,8 +123,8 @@ def separator(next_line, type="none", format="none", extra="none"):
     
     # If unhandled
     else:
-        print("Unhandled line: " + mode + " " + next_line.split(",", 9)[4] + " " + next_line.split(",", 9)[9])
-        log.append("Unhandled line: " + mode + " " + next_line.split(",", 9)[4] + " " + next_line.split(",", 9)[9])
+        print("Unhandled line: " + next_line.split(",", 9)[2] + " " + mode + " " + next_line.split(",", 9)[4] + " " + next_line.split(",", 9)[9])
+        log.append("Unhandled line: " + next_line.split(",", 9)[2] + " " + mode + " " + next_line.split(",", 9)[4] + " " + next_line.split(",", 9)[9])
 
 
 def API_get(target, type="list", ID=0):
