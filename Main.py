@@ -24,7 +24,7 @@ with open("links.json", 'r', encoding="utf8") as file:
         source_links.append(y)
 
 ##### Episode info #####
-index = 2	
+index = 4
 # episode_title = "E7 - Shooting Star Moratorium"         # Page
 episode_title = episodes[index]
 sub_file = "subs/" + link_title + "/" + link_season + "/" + episode_title.replace(" ","_") + ".ass"
@@ -78,7 +78,9 @@ def replace_name(text, dic):
     return text
 
 sub_dictionary = {
-    "{\i1}" : "*", "{\i0}" : "*"
+    "{\i1}" : "*",
+    "{\i0}" : "*",
+    "{\\an8}" : ""
     }
 
 ### Separator function for main body
@@ -154,7 +156,7 @@ def separator(next_line, type="none", format="none", extra="none"):
     # If unhandled
     else:
         print("Unhandled line: " + next_line.split(",", 9)[2] + " " + mode + " " + next_line.split(",", 9)[4] + " " + next_line.split(",", 9)[9])
-        log.append("Unhandled line: " + next_line.split(",", 9)[2] + " " + mode + " " + next_line.split(",", 9)[4] + " " + next_line.split(",", 9)[9])
+        log.append("Unhandled line: " + next_line.split(",", 9)[1] + " " + mode + " " + next_line.split(",", 9)[4] + " " + next_line.split(",", 9)[9])
 
 ### API GET
 def API_get(target, type="list", ID=0):
@@ -289,14 +291,15 @@ with open('dumps/' + anime_title + '-' + episode_title + '-dialogue-dump.txt', '
     f.write(json.dumps(full_dialogue))
 
 ## Lyrics
-op_lyrics_full = "<br>".join(op_lyrics)
-ed_lyrics_full = "<br>".join(ed_lyrics)
+if upload_lyrics or lyrics_only:
+    op_lyrics_full = "<br>".join(op_lyrics)
+    ed_lyrics_full = "<br>".join(ed_lyrics)
 
-with open('dumps/' + anime_title + '-' + OP_name + '-lyrics-dump.txt', 'w', encoding="utf8") as f:
-    f.write(json.dumps(op_lyrics_full))
-    
-with open('dumps/' + anime_title + '-' + ED_name + '-lyrics-dump.txt', 'w', encoding="utf8") as f:
-    f.write(json.dumps(ed_lyrics_full))
+    with open('dumps/' + anime_title + '-' + OP_name + '-lyrics-dump.txt', 'w', encoding="utf8") as f:
+        f.write(json.dumps(op_lyrics_full))
+        
+    with open('dumps/' + anime_title + '-' + ED_name + '-lyrics-dump.txt', 'w', encoding="utf8") as f:
+        f.write(json.dumps(ed_lyrics_full))
 
 ####################################
 ## FULL API SEQUENCE
@@ -406,4 +409,4 @@ log_full = "".join(log)
 with open('dumps/' + anime_title + '-' + episode_title + '-log.txt', 'w', encoding="utf8") as f:
     f.write(log_full)
 # 
-print("DONE " + str(lines))
+print("DONE " + str(lines) + " lines")
