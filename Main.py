@@ -24,11 +24,11 @@ with open("links.json", 'r', encoding="utf8") as file:
         source_links.append(y)
 
 ##### Episode info #####
-index = 23
+index = 2	
 # episode_title = "E7 - Shooting Star Moratorium"         # Page
 episode_title = episodes[index]
 sub_file = "subs/" + link_title + "/" + link_season + "/" + episode_title.replace(" ","_") + ".ass"
-anime_title = "DARLING in the FRANXX"                       # Book
+anime_title = "Laid-Back Camp"                       # Book
 season = "Season 1"                            # Chapter    
 source = "Crunchyroll"
 # source_link = "https://www.crunchyroll.com/watch/G63K48VZ6/shooting-star-moratorium"
@@ -37,7 +37,7 @@ source_link = source_links[index]
 name_replace = True
 
 if name_replace:
-    with open("subs/DARLING_in_the_FRANXX/Season_1/name_dict.json") as json_data:
+    with open("subs/" + link_title + "/" + link_season + "/name_dict.json") as json_data:
         name_dict = json.load(json_data)
 
 # optional for lyrics
@@ -72,8 +72,9 @@ def replace_name(text, dic):
     for i, j in dic.items():
         if text == i:
             text = j
-        else:
-            log.append("Unhandled name: " + text)
+            return text
+    print("Unhandled name: " + text + "\n")
+    log.append("Unhandled name: " + text + "\n")
     return text
 
 sub_dictionary = {
@@ -93,6 +94,8 @@ def separator(next_line, type="none", format="none", extra="none"):
             
         if extra == "flashback":
             speaker = "**(Flashback) " + temp_speaker + "**<br>"
+        elif extra == "texting":
+            speaker = "**[Texting] " + temp_speaker + "**<br>"
         else:
             speaker = "**" + temp_speaker + "**<br>"
             
@@ -240,9 +243,11 @@ with open(sub_file, "r", encoding="utf8") as file:
                 separator(next_line, type="DEFAULT")
         elif "italics" in mode:
             separator(next_line, type="DEFAULT", format="italics")
+        elif "texting" in mode:
+            separator(next_line, type="DEFAULT", extra="texting")
         elif "flashback" in mode:
             separator(next_line, type="DEFAULT", extra="flashback")
-        elif "sign" in mode:
+        elif any(s in mode for s in ("sign", "next ep", "ep title")):
             separator(next_line, type="SIGNS")
         
         # Catches unhandled lines
