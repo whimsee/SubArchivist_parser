@@ -1,14 +1,5 @@
 import json
-# with open("links.json", 'r', encoding="utf8") as file:
-#     while True:
-#         next_line = file.readline()
-# 
-#         if not next_line:
-#             break;
-#         links.append(next_line.strip())
-#     
-# for link in links:
-#     print (link)
+import subprocess
 
 with open("links.json", 'r', encoding="utf8") as file:
     data = json.load(file)
@@ -16,4 +7,11 @@ with open("links.json", 'r', encoding="utf8") as file:
     
     for x, y in data['episodes'].items():    
         print(x, y)
-    
+
+
+links = ("https://www.crunchyroll.com/watch/G6K5K9Z7Y/kotoura-san-and-manabe-kun","https://www.crunchyroll.com/watch/GR49GVW86/but-youre-not-here")
+
+for link in links:
+	print (subprocess.check_output("curl $(crunchy-cli search --audio ja-JP -o '{{subtitle.locale}} {{subtitle.url}}' " + link + " | grep 'en-US' | awk '{print $2}')", shell=True, text=True))
+
+
