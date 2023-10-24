@@ -1,11 +1,19 @@
-links = []
-with open("links.txt",'r') as file:
-    while True:
-        next_line = file.readline()
+import json
+# with open("links.json", 'r', encoding="utf8") as file:
+#     while True:
+#         next_line = file.readline()
+# 
+#         if not next_line:
+#             break;
+#         links.append(next_line.strip())
+#     
+# for link in links:
+#     print (link)
 
-        if not next_line:
-            break;
-        links.append(next_line.strip())
+with open("links.json", 'r', encoding="utf8") as file:
+    data = json.load(file)
+    print(data)
     
-for link in links:
-    print (link)
+    for x, y in data.items():
+        print(x, y)
+    
