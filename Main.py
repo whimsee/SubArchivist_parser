@@ -11,50 +11,24 @@ else:
 headers = {"Authorization": "Token " + secrets['API_ID_TOKEN']}
 
 ##### Episode info #####
-sub_file = "subs/test.ass"
+sub_file = "subs/DARLING_in_the_FRANXX/Season_1/E2_-_What_It_Means_to_Connect.ass"
 anime_title = "DARLING in the FRANXX"                       # Book
 season = "Season 1"                            # Chapter
-episode_title = "E1 - Alone and Lonesome"                     # Page
+episode_title = "E2 - What It Means to Connect"                     # Page
+source = "Crunchyroll"
+source_link = "https://www.crunchyroll.com/watch/GR5VW7Z8R/what-it-means-to-connect"
 
 name_replace = True
-name_dict = {
-        "Z2" : "Zero Two (002)",
-        "Zero2" : "Zero Two (002)",
-        "Franxx" : "Dr. Franxx",
-        "Fr" : "Dr. Franxx",
-        "Nana7" : "Nana",
-        "7" : "Nana",
-        "Hiro16" : "Hiro (016)",
-        "16" : "Hiro (016)",
-        "Futoshi214" : "Futoshi (214)",
-        "214" : "Futoshi (214)",
-        "Zorome666" : "Zorome (666)",
-        "666" : "Zorome (666)",
-        "Goro56" : "Goro (056)",
-        "56" : "Goro (056)",
-        "Ichigo15" : "Ichigo (015)",
-        "15" : "Ichigo (015)",
-        "Kokoro556" : "Kokoro (556)",
-        "556" : "Kokoro (556)",
-        "Ikuno196" : "Ikuno (196)",
-        "196" : "Ikuno (196)",
-        "Mitsuru326" : "Mitsuru (326)",
-        "326" : "Mitsuru (326)",
-        "Miku390" : "Miku (390)",
-        "390" : "Miku (390)",
-        "Hachi8" : "Hachi",
-        "8" : "Hachi",
-        "APEHead" : "Papa",
-        "G" : "Guard",
-        "703" : "Naomi (703)",
-        "" : "---"
-    }
+
+if name_replace:
+    with open("subs/DARLING_in_the_FRANXX/Season_1/name_dict.json") as json_data:
+        name_dict = json.load(json_data)
 
 # optional for lyrics
 upload_lyrics = False
 lyrics_only = False
-OP_name = "OP_Lyrics"
-ED_name = "ED_Lyrics"
+OP_name = "OP - Kiss of Death"
+ED_name = "ED - Torikago"
 
 # Init lists
 script_info = {}
@@ -126,10 +100,17 @@ def separator(next_line, type="none", format="none", extra="none"):
     
     ## For song lyrics (present as is with <br> between lines)
     elif type == "LYRICS":
+        if len(next_line.split(",", 9)[9].rstrip().split("\\N")) >= 2:
+            separate_lines = []
+            for text in next_line.split(",", 9)[9].split("\\N"):
+                separate_lines.append(text)
+            this_line = "".join(separate_lines)
+        else:
+            this_line = next_line.split(",", 9)[9].rstrip().split("\\N")[0]
         if extra == "OP":
-            op_lyrics.append(next_line.split(",", 9)[9].rstrip())
+            op_lyrics.append(this_line)
         if extra == "ED":
-            ed_lyrics.append(next_line.split(",", 9)[9].rstrip())
+            ed_lyrics.append(this_line)
         if extra == "EXTRA":
             pass
     
@@ -170,6 +151,14 @@ def API_get(target, type="list", ID=0):
         
 ### Main Loop ###############################################################################################
 with open(sub_file, "r", encoding="utf8") as file:
+    ## Header for source, metadata, etc.
+    dialogue.append("Source: [" + source + "](" + source_link + ")<br>")
+    dialogue.append("\n")
+    op_lyrics.append("Source: [" + source + "](" + source_link + ")<br>")
+    op_lyrics.append("\n")
+    ed_lyrics.append("Source: [" + source + "](" + source_link + ")<br>")
+    ed_lyrics.append("\n")
+    
     ## Loop for metadata-type data (Script Info)
     file.readline()
     while True:
