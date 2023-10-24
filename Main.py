@@ -11,12 +11,12 @@ else:
 headers = {"Authorization": "Token " + secrets['API_ID_TOKEN']}
 
 ##### Episode info #####
-sub_file = "subs/DARLING_in_the_FRANXX/Season_1/E2_-_What_It_Means_to_Connect.ass"
+sub_file = "subs/DARLING_in_the_FRANXX/Season_1/E3_-_Fighting_Puppet.ass"
 anime_title = "DARLING in the FRANXX"                       # Book
 season = "Season 1"                            # Chapter
-episode_title = "E2 - What It Means to Connect"                     # Page
+episode_title = "E3 - Fighting Puppet"                     # Page
 source = "Crunchyroll"
-source_link = "https://www.crunchyroll.com/watch/GR5VW7Z8R/what-it-means-to-connect"
+source_link = "https://www.crunchyroll.com/watch/GYJQ5JWV6/fighting-puppet"
 
 name_replace = True
 
@@ -25,10 +25,17 @@ if name_replace:
         name_dict = json.load(json_data)
 
 # optional for lyrics
-upload_lyrics = False
-lyrics_only = False
+upload_lyrics = True
+lyrics_only = True
 OP_name = "OP - Kiss of Death"
 ED_name = "ED - Torikago"
+
+# ending themes titled
+# "Torikago" (トリカゴ) (ep. 1–6),
+# "Manatsu no Setsuna" (真夏のセツナ) (ep 7),
+# "Beautiful World" (ep 8-12, 14),
+# "Hitori" (ひとり) (ep 13),
+# "Escape" (ep 16-20), and "Darling" (ep. 21–23) 
 
 # Init lists
 script_info = {}
@@ -103,7 +110,8 @@ def separator(next_line, type="none", format="none", extra="none"):
         if len(next_line.split(",", 9)[9].rstrip().split("\\N")) >= 2:
             separate_lines = []
             for text in next_line.split(",", 9)[9].split("\\N"):
-                separate_lines.append(text)
+                temp_line = text.rstrip()
+                separate_lines.append(temp_line + "<br>")
             this_line = "".join(separate_lines)
         else:
             this_line = next_line.split(",", 9)[9].rstrip().split("\\N")[0]
