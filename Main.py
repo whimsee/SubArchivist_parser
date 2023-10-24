@@ -1,5 +1,6 @@
 import json
 import requests
+import re
 
 development = True
 
@@ -11,12 +12,12 @@ else:
 headers = {"Authorization": "Token " + secrets['API_ID_TOKEN']}
 
 ##### Episode info #####
-sub_file = "subs/DARLING_in_the_FRANXX/Season_1/E3_-_Fighting_Puppet.ass"
+episode_title = "E7 - Shooting Star Moratorium"         # Page
+sub_file = "subs/DARLING_in_the_FRANXX/Season_1/" + episode_title.replace(" ","_") + ".ass"
 anime_title = "DARLING in the FRANXX"                       # Book
-season = "Season 1"                            # Chapter
-episode_title = "E3 - Fighting Puppet"                     # Page
+season = "Season 1"                            # Chapter    
 source = "Crunchyroll"
-source_link = "https://www.crunchyroll.com/watch/GYJQ5JWV6/fighting-puppet"
+source_link = "https://www.crunchyroll.com/watch/G63K48VZ6/shooting-star-moratorium"
 
 name_replace = True
 
@@ -25,8 +26,8 @@ if name_replace:
         name_dict = json.load(json_data)
 
 # optional for lyrics
-upload_lyrics = True
-lyrics_only = True
+upload_lyrics = False
+lyrics_only = False
 OP_name = "OP - Kiss of Death"
 ED_name = "ED - Torikago"
 
@@ -62,7 +63,7 @@ sub_dictionary = {
     "{\i1}" : "*", "{\i0}" : "*"
     }
 
-## Separator function for main body
+### Separator function for main body
 def separator(next_line, type="none", format="none", extra="none"):
     ## Default setting
     if type == "DEFAULT":
@@ -124,7 +125,8 @@ def separator(next_line, type="none", format="none", extra="none"):
     
     elif type == "SIGNS":
         if any(s in next_line.split(",",9)[9] for s in ("{", "}")):
-            this_line = next_line.split(",",9)[9].split("}")[1].replace("\\N", " ")
+            temp_text = re.sub("[\{\[].*?[\}\]]", "", next_line.split(",",9)[9])
+            this_line = temp_text.replace("\\N", " ")
         else:
             this_line = next_line.split(",",9)[9].replace("\\N", " ")
         dialogue.append("***SIGN***&nbsp;&nbsp;&nbsp;&nbsp;" + str(this_line) + "<br>")
@@ -134,7 +136,7 @@ def separator(next_line, type="none", format="none", extra="none"):
         print("Unhandled line: " + next_line.split(",", 9)[2] + " " + mode + " " + next_line.split(",", 9)[4] + " " + next_line.split(",", 9)[9])
         log.append("Unhandled line: " + next_line.split(",", 9)[2] + " " + mode + " " + next_line.split(",", 9)[4] + " " + next_line.split(",", 9)[9])
 
-
+### API GET
 def API_get(target, type="list", ID=0):
     
     if type == "list":
