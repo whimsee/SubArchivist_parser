@@ -3,7 +3,7 @@ import requests
 import re
 
 development = True
-force_upload = True
+force_upload = False
 
 if development:
     from secrets_dev import secrets
@@ -25,7 +25,7 @@ with open("links.json", 'r', encoding="utf8") as file:
         source_links.append(y)
 
 ##### Episode info #####
-index = 9
+index = 10
 # episode_title = "E7 - Shooting Star Moratorium"         # Page
 episode_title = episodes[index]
 sub_file = "subs/" + link_title + "/" + link_season + "/" + episode_title.replace(" ","_") + ".ass"
@@ -161,7 +161,7 @@ def separator(next_line, type="none", format="none", extra="none"):
             pass
     
     elif type == "SIGNS":
-        this_line = base_text.replace("\\N", " ").replace("\\n", " ")
+        this_line = base_text.replace("\\N", " ").replace("\\n", " ").replace("\\h", " ")
         dialogue.append("***SIGN***&nbsp;&nbsp;&nbsp;&nbsp;" + this_line + "<br>")
     
     # If unhandled
