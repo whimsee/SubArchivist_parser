@@ -81,7 +81,9 @@ sub_dictionary = {
     "{\i1}" : "*",
     "{\i0}" : "*",
     "{\\an8}" : "",
-    "{\\fad(550,1)}" : ""
+    "{\\fad(550,1)}" : "",
+    "{\\an5}" : "",
+    "{\\fad(1040,1)\\an8}" : ""
     }
 
 ### Separator function for main body
