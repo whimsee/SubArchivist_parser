@@ -2,7 +2,7 @@ import json
 import requests
 import re
 
-development = True
+development = False
 
 if development:
     from secrets_dev import secrets
@@ -24,7 +24,7 @@ with open("links.json", 'r', encoding="utf8") as file:
         source_links.append(y)
 
 ##### Episode info #####
-index = 9
+index = 11
 # episode_title = "E7 - Shooting Star Moratorium"         # Page
 episode_title = episodes[index]
 sub_file = "subs/" + link_title + "/" + link_season + "/" + episode_title.replace(" ","_") + ".ass"
@@ -158,7 +158,7 @@ def separator(next_line, type="none", format="none", extra="none"):
     
     # If unhandled
     else:
-        print("Unhandled line: " + next_line.split(",", 9)[2] + " " + mode + " " + next_line.split(",", 9)[4] + " " + next_line.split(",", 9)[9])
+        print("Unhandled line: " + next_line.split(",", 9)[1] + " " + mode + " " + next_line.split(",", 9)[4] + " " + next_line.split(",", 9)[9])
         log.append("Unhandled line: " + next_line.split(",", 9)[1] + " " + mode + " " + next_line.split(",", 9)[4] + " " + next_line.split(",", 9)[9])
 
 ### API GET
