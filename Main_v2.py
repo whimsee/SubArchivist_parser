@@ -49,13 +49,6 @@ lyrics_only = False
 OP_name = "OP - Kiss of Death"
 ED_name = "ED - Torikago"
 
-# ending themes titled
-# "Torikago" (トリカゴ) (ep. 1–6),
-# "Manatsu no Setsuna" (真夏のセツナ) (ep 7),
-# "Beautiful World" (ep 8-12, 14),
-# "Hitori" (ひとり) (ep 13),
-# "Escape" (ep 16-20), and "Darling" (ep. 21–23) 
-
 # Init lists
 script_info = {}
 style_info = []
@@ -67,6 +60,8 @@ unhandled_lines = False
 
 ### Multiple replace
 def replace_all(text, dic):
+    if "{\i1}" in text and not "{\i0}" in text:
+        print("check italics")
     for i, j in dic.items():
         text = text.replace(i, j)
     return text
@@ -82,18 +77,7 @@ def replace_name(text, dic, tracker):
 
 sub_dictionary = {
     "{\i1}" : "*",
-    "{\i0}" : "*",
-#     "{\\an8}" : "",
-#     "{\\fad(550,1)}" : "",
-#     "{\\an5}" : "",
-#     "{\\fad(1040,1)\\an8}" : "",
-#     "{\\an1}" : "",
-#     "{\\an4}" : "",
-#     "{\\an3}" : "",
-#     "{\\an9}" : "",
-#     "{\\an7}" : "",
-#     "{\\an6}" : "",
-#     "{\\fad(230,1)\pos(349,22)}" : ""
+    "{\i0}" : "*"
     }
 
 def clean_text(text):
@@ -101,64 +85,69 @@ def clean_text(text):
         temp_text = replace_all(text, sub_dictionary)
         sub_text = re.sub("[\{\[].*?[\}\]]", "", temp_text)
         this_line = sub_text.replace("\\N", " ").replace("\\n", " ")
-    return this_line
+        return this_line
+    else:
+        return text
 
 ### Separator function for main body
 def separator(next_line, type="none", format="none", extra="none"):
+    
+    # Speaker
+    if name_replace:
+        temp_speaker = replace_name(next_line.split(",")[4], name_dict, next_line.split(",")[1])
+    else:
+        temp_speaker = next_line.split(",")[4]
+        
+    if extra == "flashback":
+        speaker = "**(Flashback) " + temp_speaker + "**<br>"
+    elif extra == "texting":
+        speaker = "**[Texting] " + temp_speaker + "**<br>"
+    else:
+        speaker = "**" + temp_speaker + "**<br>"
+            
+    # Cleaned text. Only keep inline italics.        
+    base_text = clean_text(next_line.split(",", 9)[9])
+    print(base_text)
+    
     ## Default setting
     if type == "DEFAULT":
-        # Speaker
-        
-        if name_replace:
-            temp_speaker = replace_name(next_line.split(",")[4], name_dict, next_line.split(",")[1])
-        else:
-            temp_speaker = next_line.split(",")[4]
-            
-        if extra == "flashback":
-            speaker = "**(Flashback) " + temp_speaker + "**<br>"
-        elif extra == "texting":
-            speaker = "**[Texting] " + temp_speaker + "**<br>"
-        else:
-            speaker = "**" + temp_speaker + "**<br>"
-        
-        
         ## FORMAT: &nbsp;&nbsp;&nbsp;&nbsp;this is a line<br>
         ## For multiline
-        if len(next_line.split(",", 9)[9].rstrip().split("\\N")) >= 2:
+        if len(base_text.rstrip().split("\\N")) >= 2:
             separate_lines = []
-            for text in next_line.split(",", 9)[9].split("\\N"):
+            for text in base_text.split("\\N"):
                 temp_line = text.rstrip()
                 if format == "italics":
                     separate_lines.append("&nbsp;&nbsp;&nbsp;&nbsp;*" + temp_line.lstrip() + "*<br>")
                 else:
                     separate_lines.append("&nbsp;&nbsp;&nbsp;&nbsp;" + temp_line + "<br>")
             joined_line = "".join(separate_lines)
-            this_line = replace_all(joined_line, sub_dictionary)
+            this_line = joined_line.replace("\\h", " ")
             if "{" in this_line:
                 log.append("Unhandled line: " + this_line + "\n")
             dialogue.append(speaker + this_line)
         else:
         ## For single line
-            temp_line = next_line.split(",", 9)[9].rstrip().split("\\N")[0]
+            temp_line = base_text.rstrip().split("\\N")[0]
             if format == "italics":
-                prep_line = "&nbsp;&nbsp;&nbsp;&nbsp;*" + temp_line + "*<br>"
+                formatted_line = "&nbsp;&nbsp;&nbsp;&nbsp;*" + temp_line + "*<br>"
             else:
-                prep_line = "&nbsp;&nbsp;&nbsp;&nbsp;" + temp_line + "<br>"
-            this_line = replace_all(prep_line, sub_dictionary)
+                formatted_line = "&nbsp;&nbsp;&nbsp;&nbsp;" + temp_line + "<br>"
+            this_line = formatted_line.replace("\\h", " ")
             if "{" in this_line:
                 log.append("Unhandled line: " + this_line + "\n")
             dialogue.append(speaker + this_line)
     
     ## For song lyrics (present as is with <br> between lines)
     elif type == "LYRICS":
-        if len(next_line.split(",", 9)[9].rstrip().split("\\N")) >= 2:
+        if len(base_text.rstrip().split("\\N")) >= 2:
             separate_lines = []
-            for text in next_line.split(",", 9)[9].split("\\N"):
+            for text in base_text.split("\\N"):
                 temp_line = text.rstrip()
                 separate_lines.append(temp_line + "<br>")
             this_line = "".join(separate_lines)
         else:
-            this_line = next_line.split(",", 9)[9].rstrip().split("\\N")[0]
+            this_line = base_text.rstrip().split("\\N")[0]
         if extra == "OP":
             op_lyrics.append(this_line)
         if extra == "ED":
@@ -167,17 +156,13 @@ def separator(next_line, type="none", format="none", extra="none"):
             pass
     
     elif type == "SIGNS":
-        if any(s in next_line.split(",",9)[9] for s in ("{", "}")):
-            temp_text = re.sub("[\{\[].*?[\}\]]", "", next_line.split(",",9)[9])
-            this_line = temp_text.replace("\\N", " ").replace("\\n", " ")
-        else:
-            this_line = next_line.split(",",9)[9].replace("\\N", " ").replace("\\n", " ")
-        dialogue.append("***SIGN***&nbsp;&nbsp;&nbsp;&nbsp;" + str(this_line) + "<br>")
+        this_line = base_text.replace("\\N", " ").replace("\\n", " ")
+        dialogue.append("***SIGN***&nbsp;&nbsp;&nbsp;&nbsp;" + this_line + "<br>")
     
     # If unhandled
     else:
-        print("Unhandled line: " + next_line.split(",", 9)[1] + " " + mode + " " + next_line.split(",", 9)[4] + " " + next_line.split(",", 9)[9])
-        log.append("Unhandled line: " + next_line.split(",", 9)[1] + " " + mode + " " + next_line.split(",", 9)[4] + " " + next_line.split(",", 9)[9])
+        print("Unhandled line: " + next_line.split(",", 9)[1] + " " + mode + " " + next_line.split(",", 9)[4] + " " + base_text)
+        log.append("Unhandled line: " + next_line.split(",", 9)[1] + " " + mode + " " + next_line.split(",", 9)[4] + " " + base_text)
 
 ### API GET
 def API_get(target, type="list", ID=0):
