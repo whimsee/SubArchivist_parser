@@ -24,7 +24,7 @@ with open("links.json", 'r', encoding="utf8") as file:
         source_links.append(y)
 
 ##### Episode info #####
-index = 3
+index = 4
 # episode_title = "E7 - Shooting Star Moratorium"         # Page
 episode_title = episodes[index]
 sub_file = "subs/" + link_title + "/" + link_season + "/" + episode_title.replace(" ","_") + ".ass"
@@ -85,7 +85,14 @@ sub_dictionary = {
     "{\\an8}" : "",
     "{\\fad(550,1)}" : "",
     "{\\an5}" : "",
-    "{\\fad(1040,1)\\an8}" : ""
+    "{\\fad(1040,1)\\an8}" : "",
+    "{\\an1}" : "",
+    "{\\an4}" : "",
+    "{\\an3}" : "",
+    "{\\an9}" : "",
+    "{\\an7}" : "",
+    "{\\an6}" : "",
+    "{\\fad(230,1)\pos(349,22)}" : ""
     }
 
 ### Separator function for main body
