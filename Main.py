@@ -2,7 +2,7 @@ import json
 import requests
 import re
 
-development = False
+development = True
 
 if development:
     from secrets_dev import secrets
@@ -24,12 +24,14 @@ with open("links.json", 'r', encoding="utf8") as file:
         source_links.append(y)
 
 ##### Episode info #####
-index = 11
+index = 1
 # episode_title = "E7 - Shooting Star Moratorium"         # Page
 episode_title = episodes[index]
 sub_file = "subs/" + link_title + "/" + link_season + "/" + episode_title.replace(" ","_") + ".ass"
-anime_title = "Laid-Back Camp"                       # Book
-season = "Season 1"                            # Chapter    
+# anime_title = "Laid-Back Camp"                       # Book
+anime_title = data['title']
+# season = "Season 2"                            # Chapter
+season = data['season']
 source = "Crunchyroll"
 # source_link = "https://www.crunchyroll.com/watch/G63K48VZ6/shooting-star-moratorium"
 source_link = source_links[index]
@@ -151,9 +153,9 @@ def separator(next_line, type="none", format="none", extra="none"):
     elif type == "SIGNS":
         if any(s in next_line.split(",",9)[9] for s in ("{", "}")):
             temp_text = re.sub("[\{\[].*?[\}\]]", "", next_line.split(",",9)[9])
-            this_line = temp_text.replace("\\N", " ")
+            this_line = temp_text.replace("\\N", " ").replace("\\n", " ")
         else:
-            this_line = next_line.split(",",9)[9].replace("\\N", " ")
+            this_line = next_line.split(",",9)[9].replace("\\N", " ").replace("\\n", " ")
         dialogue.append("***SIGN***&nbsp;&nbsp;&nbsp;&nbsp;" + str(this_line) + "<br>")
     
     # If unhandled
