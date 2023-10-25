@@ -107,7 +107,7 @@ def separator(next_line, type="none", format="none", extra="none"):
             
     # Cleaned text. Only keep inline italics.        
     base_text = clean_text(next_line.split(",", 9)[9])
-    print(base_text)
+#     print(base_text)
     
     ## Default setting
     if type == "DEFAULT":
