@@ -25,7 +25,7 @@ with open("links.json", 'r', encoding="utf8") as file:
         source_links.append(y)
 
 ##### Episode info #####
-index = 10
+index = 0
 # episode_title = "E7 - Shooting Star Moratorium"         # Page
 episode_title = episodes[index]
 sub_file = "subs/" + link_title + "/" + link_season + "/" + episode_title.replace(" ","_") + ".ass"
