@@ -24,7 +24,7 @@ with open("links.json", 'r', encoding="utf8") as file:
         source_links.append(y)
 
 ##### Episode info #####
-index = 4
+index = 6
 # episode_title = "E7 - Shooting Star Moratorium"         # Page
 episode_title = episodes[index]
 sub_file = "subs/" + link_title + "/" + link_season + "/" + episode_title.replace(" ","_") + ".ass"
@@ -261,7 +261,7 @@ with open(sub_file, "r", encoding="utf8") as file:
             separator(next_line, type="DEFAULT", extra="texting")
         elif "flashback" in mode:
             separator(next_line, type="DEFAULT", extra="flashback")
-        elif any(s in mode for s in ("sign", "next ep", "ep title")):
+        elif any(s in mode for s in ("sign", "next ep", "ep title", "generic caption")):
             separator(next_line, type="SIGNS")
         
         # Catches unhandled lines
