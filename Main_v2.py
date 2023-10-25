@@ -25,7 +25,7 @@ with open("links.json", 'r', encoding="utf8") as file:
         source_links.append(y)
 
 ##### Episode info #####
-index = 0
+index = 9
 # episode_title = "E7 - Shooting Star Moratorium"         # Page
 episode_title = episodes[index]
 sub_file = "subs/" + link_title + "/" + link_season + "/" + episode_title.replace(" ","_") + ".ass"
@@ -65,6 +65,7 @@ def replace_all(text, dic):
         text = text.rstrip() + "{\i0}"
     if "{\i0}" in text and not "{\i1}" in text:
         text = text.strip("{\i0}")
+#         text = text.replace("{\i0}","")
         
     for i, j in dic.items():
         text = text.replace(i, j)
