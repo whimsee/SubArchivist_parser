@@ -24,7 +24,7 @@ with open("links.json", 'r', encoding="utf8") as file:
         source_links.append(y)
 
 ##### Episode info #####
-index = 1
+index = 3
 # episode_title = "E7 - Shooting Star Moratorium"         # Page
 episode_title = episodes[index]
 sub_file = "subs/" + link_title + "/" + link_season + "/" + episode_title.replace(" ","_") + ".ass"
@@ -70,13 +70,13 @@ def replace_all(text, dic):
         text = text.replace(i, j)
     return text
 
-def replace_name(text, dic):
+def replace_name(text, dic, tracker):
     for i, j in dic.items():
         if text == i:
             text = j
             return text
-    print("Unhandled name: " + text + "\n")
-    log.append("Unhandled name: " + text + "\n")
+    print("Unhandled name: " + tracker + " " + text + "\n")
+    log.append("Unhandled name: " + tracker + " " + text + "\n")
     return text
 
 sub_dictionary = {
@@ -95,7 +95,7 @@ def separator(next_line, type="none", format="none", extra="none"):
         # Speaker
         
         if name_replace:
-            temp_speaker = replace_name(next_line.split(",")[4], name_dict)
+            temp_speaker = replace_name(next_line.split(",")[4], name_dict, next_line.split(",")[1])
         else:
             temp_speaker = next_line.split(",")[4]
             
@@ -113,7 +113,7 @@ def separator(next_line, type="none", format="none", extra="none"):
             for text in next_line.split(",", 9)[9].split("\\N"):
                 temp_line = text.rstrip()
                 if format == "italics":
-                    separate_lines.append("&nbsp;&nbsp;&nbsp;&nbsp;*" + temp_line + "*<br>")
+                    separate_lines.append("&nbsp;&nbsp;&nbsp;&nbsp;*" + temp_line.lstrip() + "*<br>")
                 else:
                     separate_lines.append("&nbsp;&nbsp;&nbsp;&nbsp;" + temp_line + "<br>")
             joined_line = "".join(separate_lines)
