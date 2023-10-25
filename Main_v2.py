@@ -93,17 +93,18 @@ def clean_text(text):
 def separator(next_line, type="none", format="none", extra="none"):
     
     # Speaker
-    if name_replace:
-        temp_speaker = replace_name(next_line.split(",")[4], name_dict, next_line.split(",")[1])
-    else:
-        temp_speaker = next_line.split(",")[4]
-        
-    if extra == "flashback":
-        speaker = "**(Flashback) " + temp_speaker + "**<br>"
-    elif extra == "texting":
-        speaker = "**[Texting] " + temp_speaker + "**<br>"
-    else:
-        speaker = "**" + temp_speaker + "**<br>"
+    if not type == "SIGNS":
+        if name_replace:
+            temp_speaker = replace_name(next_line.split(",")[4], name_dict, next_line.split(",")[1])
+        else:
+            temp_speaker = next_line.split(",")[4]
+            
+        if extra == "flashback":
+            speaker = "**(Flashback) " + temp_speaker + "**<br>"
+        elif extra == "texting":
+            speaker = "**[Texting] " + temp_speaker + "**<br>"
+        else:
+            speaker = "**" + temp_speaker + "**<br>"
             
     # Cleaned text. Only keep inline italics.        
     base_text = clean_text(next_line.split(",", 9)[9])
