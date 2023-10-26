@@ -3,7 +3,7 @@ import requests
 import re
 
 development = True
-force_upload = True
+force_upload = False
 
 if development:
     from secrets_dev import secrets
