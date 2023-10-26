@@ -3,7 +3,7 @@ import requests
 import re
 
 development = True
-force_upload = False
+force_upload = True
 
 if development:
     from secrets_dev import secrets
@@ -25,7 +25,7 @@ with open("links.json", 'r', encoding="utf8") as file:
         source_links.append(y)
 
 ##### Episode info #####
-index = 0
+index = 5
 # episode_title = "E7 - Shooting Star Moratorium"         # Page
 episode_title = episodes[index]
 sub_file = "subs/" + link_title + "/" + link_season + "/" + episode_title.replace(" ","_") + ".ass"
@@ -116,6 +116,8 @@ def separator(next_line, type="none", format="none", extra="none"):
             speaker = "**(Flashback) " + temp_speaker + "**<br>"
         elif extra == "texting":
             speaker = "**[Texting] " + temp_speaker + "**<br>"
+        elif extra == "messenger":
+            speaker = "**[Messenger] " + temp_speaker + "**<br>"
         else:
             speaker = "**" + temp_speaker + "**<br>"
             
@@ -267,6 +269,8 @@ with open(sub_file, "r", encoding="utf8") as file:
             separator(next_line, type="DEFAULT", format="italics")
         elif "texting" in mode:
             separator(next_line, type="DEFAULT", extra="texting")
+        elif "messenger" in mode:
+            separator(next_line, type="DEFAULT", extra="messenger")
         elif "flashback" in mode:
             separator(next_line, type="DEFAULT", extra="flashback")
         elif any(s in mode for s in ("sign", "next ep", "ep title", "generic caption")):
