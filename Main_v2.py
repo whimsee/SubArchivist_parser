@@ -3,7 +3,7 @@ import requests
 import re
 
 development = True
-force_upload = False
+force_upload = True
 
 if development:
     from secrets_dev import secrets
@@ -25,7 +25,7 @@ with open("links.json", 'r', encoding="utf8") as file:
         source_links.append(y)
 
 ##### Episode info #####
-index = 9
+index = 0
 # episode_title = "E7 - Shooting Star Moratorium"         # Page
 episode_title = episodes[index]
 sub_file = "subs/" + link_title + "/" + link_season + "/" + episode_title.replace(" ","_") + ".ass"
@@ -60,13 +60,17 @@ unhandled_lines = False
 
 ### Multiple replace
 def replace_all(text, dic):
+    for i, j in pre_dictionary.items():
+        text = text.replace(i, j)
+        print(i,j)
+
     if "{\i1}" in text and not "{\i0}" in text:
 #         print("check italics")
         text = text.rstrip() + "{\i0}"
-    if "{\i0}" in text and not "{\i1}" in text:
+    elif "{\i0}" in text and not "{\i1}" in text:
         text = text.strip("{\i0}")
 #         text = text.replace("{\i0}","")
-        
+
     for i, j in dic.items():
         text = text.replace(i, j)
     return text
@@ -83,6 +87,11 @@ def replace_name(text, dic, tracker):
 sub_dictionary = {
     "{\i1}" : "*",
     "{\i0}" : "*"
+    }
+
+pre_dictionary = {
+    "{\\an2\i1}" : "{\\i1}",
+    "{\\an8\i1}" : "{\\i1}"
     }
 
 def clean_text(text):

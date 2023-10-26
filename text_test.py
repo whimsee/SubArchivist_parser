@@ -5,7 +5,7 @@ def replace_all(text, dic):
 #         print("check italics")
         text = text.rstrip() + "{\i0}"
     if "{\i0}" in text and not "{\i1}" in text:
-        text = text.strip("{\i0}")
+        text = text.replace("{\i0}","")
     for i, j in dic.items():
         text = text.replace(i, j)
     return text
