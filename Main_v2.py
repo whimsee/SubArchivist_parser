@@ -334,6 +334,7 @@ if upload_lyrics or lyrics_only:
 ####################################
 ## FULL API SEQUENCE
 if not unhandled_lines or force_upload:
+    print("Uploading")
 ## Book search and create
 #     Init vars
     BOOK_ID = 0
