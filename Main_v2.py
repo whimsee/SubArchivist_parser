@@ -3,7 +3,7 @@ import requests
 import re
 
 development = True
-force_upload = True
+force_upload = False
 
 if development:
     from secrets_dev import secrets
@@ -62,7 +62,6 @@ unhandled_lines = False
 def replace_all(text, dic):
     for i, j in pre_dictionary.items():
         text = text.replace(i, j)
-        print(i,j)
 
     if "{\i1}" in text and not "{\i0}" in text:
 #         print("check italics")
