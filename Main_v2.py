@@ -50,8 +50,8 @@ lyrics_only = False
 op_only = False
 ed_only = False
 OP_name = "OP - Kizuato"
-ED_name = "ED - Marutsuke (EP 11 ver.)"
-Insert_name = "Fuyu no hanashi (lit. A Winter Story)" 
+ED_name = "ED - Bokura Dake no Shudaika"
+Insert_name = "Yoru ga Akeru" 
 
 # Init lists
 script_info = {}
@@ -329,14 +329,16 @@ with open('dumps/' + anime_title + '-' + episode_title + '-dialogue-dump.txt', '
 
 ## Lyrics
 if upload_lyrics or lyrics_only:
-    op_lyrics_full = "<br>".join(op_lyrics)
-    ed_lyrics_full = "<br>".join(ed_lyrics)
-
-    with open('dumps/' + anime_title + '-' + OP_name + '-lyrics-dump.txt', 'w', encoding="utf8") as f:
-        f.write(json.dumps(op_lyrics_full))
-        
-    with open('dumps/' + anime_title + '-' + ED_name + '-lyrics-dump.txt', 'w', encoding="utf8") as f:
-        f.write(json.dumps(ed_lyrics_full))
+    
+    if not ed_only:
+        op_lyrics_full = "<br>".join(op_lyrics)
+        with open('dumps/' + anime_title + '-' + OP_name + '-lyrics-dump.txt', 'w', encoding="utf8") as f:
+            f.write(json.dumps(op_lyrics_full))
+    
+    if not op_only:
+        ed_lyrics_full = "<br>".join(ed_lyrics)
+        with open('dumps/' + anime_title + '-' + ED_name + '-lyrics-dump.txt', 'w', encoding="utf8") as f:
+            f.write(json.dumps(ed_lyrics_full))
         
 if insert_song:
     insert_lyrics_full = "<br>".join(insert_lyrics)
