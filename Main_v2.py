@@ -25,7 +25,7 @@ with open("links.json", 'r', encoding="utf8") as file:
         source_links.append(y)
 
 ##### Episode info #####
-index = 5
+index = 8
 # episode_title = "E7 - Shooting Star Moratorium"         # Page
 episode_title = episodes[index]
 sub_file = "subs/" + link_title + "/" + link_season + "/" + episode_title.replace(" ","_") + ".ass"
@@ -39,21 +39,24 @@ source_link = source_links[index]
 
 name_replace = True
 
-if name_replace:
+if name_replace:	
     with open("subs/" + link_title + "/" + link_season + "/name_dict.json") as json_data:
         name_dict = json.load(json_data)
 
 # optional for lyrics
 upload_lyrics = False
 lyrics_only = False
-OP_name = "OP - Kiss of Death"
-ED_name = "ED - Torikago"
+insert_song = False
+OP_name = "OP - Kizuato"
+ED_name = "ED - Marutsuke"
+Insert_name = "Fuyu no hanashi (lit. A Winter Story)" 
 
 # Init lists
 script_info = {}
 style_info = []
 op_lyrics = []
 ed_lyrics = []
+insert_lyrics = []
 dialogue = []
 log = []
 unhandled_lines = False
@@ -169,7 +172,7 @@ def separator(next_line, type="none", format="none", extra="none"):
         if extra == "ED":
             ed_lyrics.append(this_line)
         if extra == "EXTRA":
-            pass
+            insert_lyrics.append(this_line)
     
     elif type == "SIGNS":
         this_line = base_text.replace("\\N", " ").replace("\\n", " ").replace("\\h", " ")
@@ -259,7 +262,9 @@ with open(sub_file, "r", encoding="utf8") as file:
         if mode == "songs_op":
             separator(next_line, type="LYRICS", extra="OP")      
         elif mode == "songs_ed":
-            separator(next_line, type="LYRICS", extra="ED")     
+            separator(next_line, type="LYRICS", extra="ED")
+        elif mode == "songs_insert":
+            separator(next_line, type="LYRICS", extra="EXTRA")
         elif any(s in mode for s in ("default", "main", "top")):
             if "italics" in mode:
                 separator(next_line, type="DEFAULT", format="italics")
@@ -330,6 +335,11 @@ if upload_lyrics or lyrics_only:
         
     with open('dumps/' + anime_title + '-' + ED_name + '-lyrics-dump.txt', 'w', encoding="utf8") as f:
         f.write(json.dumps(ed_lyrics_full))
+        
+if insert_song:
+    insert_lyrics_full = "<br>".join(insert_lyrics)
+    with open('dumps/' + anime_title + '-' + Insert_name + '-lyrics-dump.txt', 'w', encoding="utf8") as f:
+        f.write(json.dumps(insert_lyrics_full))
 
 ####################################
 ## FULL API SEQUENCE
@@ -405,6 +415,7 @@ if not unhandled_lines or force_upload:
 
     if upload_lyrics or lyrics_only:
         # OP
+        print("uploading song", OP_name)
         todo = {
             "book_id": BOOK_ID,
             "chapter_id": CHAPTER_ID,
@@ -415,6 +426,7 @@ if not unhandled_lines or force_upload:
         log.append(str(response.status_code) + " " + OP_name + " added\n")
         
         # ED
+        print("uploading song", ED_name)
         todo = {
             "book_id": BOOK_ID,
             "chapter_id": CHAPTER_ID,
@@ -423,6 +435,19 @@ if not unhandled_lines or force_upload:
             }
         response = requests.post(secrets['page_url'], json=todo, headers=headers)
         log.append(str(response.status_code) + " " + ED_name + " added\n")
+        
+    if insert_song:
+        print("uploading song", Insert_name)
+        # Insert song
+        todo = {
+            "book_id": BOOK_ID,
+            "chapter_id": CHAPTER_ID,
+            "name": Insert_name,
+            "markdown": insert_lyrics_full
+            }
+        response = requests.post(secrets['page_url'], json=todo, headers=headers)
+        log.append(str(response.status_code) + " " + ED_name + " added\n")
+        
 
 ## Handle log
 lines = len(dialogue)
