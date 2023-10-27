@@ -25,7 +25,7 @@ with open("links.json", 'r', encoding="utf8") as file:
         source_links.append(y)
 
 ##### Episode info #####
-index = 8
+index = 0
 # episode_title = "E7 - Shooting Star Moratorium"         # Page
 episode_title = episodes[index]
 sub_file = "subs/" + link_title + "/" + link_season + "/" + episode_title.replace(" ","_") + ".ass"
@@ -45,10 +45,12 @@ if name_replace:
 
 # optional for lyrics
 upload_lyrics = False
-lyrics_only = False
 insert_song = False
+lyrics_only = False
+op_only = False
+ed_only = False
 OP_name = "OP - Kizuato"
-ED_name = "ED - Marutsuke"
+ED_name = "ED - Marutsuke (EP 11 ver.)"
 Insert_name = "Fuyu no hanashi (lit. A Winter Story)" 
 
 # Init lists
@@ -414,27 +416,30 @@ if not unhandled_lines or force_upload:
         log.append(str(response.status_code) + " " + episode_title + " added\n")
 
     if upload_lyrics or lyrics_only:
-        # OP
-        print("uploading song", OP_name)
-        todo = {
-            "book_id": BOOK_ID,
-            "chapter_id": CHAPTER_ID,
-            "name": OP_name,
-            "markdown": op_lyrics_full
-            }
-        response = requests.post(secrets['page_url'], json=todo, headers=headers)
-        log.append(str(response.status_code) + " " + OP_name + " added\n")
         
+        if not ed_only:
+        # OP
+            print("uploading song", OP_name)
+            todo = {
+                "book_id": BOOK_ID,
+                "chapter_id": CHAPTER_ID,
+                "name": OP_name,
+                "markdown": op_lyrics_full
+                }
+            response = requests.post(secrets['page_url'], json=todo, headers=headers)
+            log.append(str(response.status_code) + " " + OP_name + " added\n")
+        
+        if not op_only:
         # ED
-        print("uploading song", ED_name)
-        todo = {
-            "book_id": BOOK_ID,
-            "chapter_id": CHAPTER_ID,
-            "name": ED_name,
-            "markdown": ed_lyrics_full
-            }
-        response = requests.post(secrets['page_url'], json=todo, headers=headers)
-        log.append(str(response.status_code) + " " + ED_name + " added\n")
+            print("uploading song", ED_name)
+            todo = {
+                "book_id": BOOK_ID,
+                "chapter_id": CHAPTER_ID,
+                "name": ED_name,
+                "markdown": ed_lyrics_full
+                }
+            response = requests.post(secrets['page_url'], json=todo, headers=headers)
+            log.append(str(response.status_code) + " " + ED_name + " added\n")
         
     if insert_song:
         print("uploading song", Insert_name)
