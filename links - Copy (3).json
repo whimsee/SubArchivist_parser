@@ -1,0 +1,18 @@
+{  
+    "title" : "Another",
+    "season" : "Season 1",
+    "episodes" : {
+        "E1 - Rough Sketch" : "https://www.crunchyroll.com/watch/GR9PV1Z86/rough-sketch",
+        "E2 - Blueprint" : "https://www.crunchyroll.com/watch/GR49PEDW6/blueprint",
+        "E3 - Bone Work" : "https://www.crunchyroll.com/watch/GRJQ0XJEY/bone-work",
+        "E4 - Put Flesh" : "https://www.crunchyroll.com/watch/GRK5E4246/put-flesh",
+        "E5 - Build Limbs" : "https://www.crunchyroll.com/watch/GYVND5206/build-limbs",
+        "E6 - Face to Face" : "https://www.crunchyroll.com/watch/GRP85M9WR/face-to-face",
+        "E7 - Sphere Joint" : "https://www.crunchyroll.com/watch/G68VD48D6/sphere-joint",
+        "E8 - Hair Stand" : "https://www.crunchyroll.com/watch/GYDQKWZD6/hair-stand",
+        "E9 - Body Paint" : "https://www.crunchyroll.com/watch/GR5VP78ER/body-paint",
+        "E10 - Glass Eye" : "https://www.crunchyroll.com/watch/G6GG5ED26/glass-eye",
+        "E11 - Makeup" : "https://www.crunchyroll.com/watch/G6E5XG38Y/makeup",
+        "E12 - Stand by Oneself" : "https://www.crunchyroll.com/watch/GY9PV188R/stand-by-oneself"
+    }
+}
