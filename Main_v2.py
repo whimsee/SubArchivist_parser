@@ -53,6 +53,7 @@ OP_name = "OP - Kizuato"
 ED_name = "ED - Bokura Dake no Shudaika"
 Insert_name = "Yoru ga Akeru" 
 
+##################
 # Init lists
 script_info = {}
 style_info = []
@@ -63,6 +64,8 @@ dialogue = []
 log = []
 unhandled_lines = False
 
+
+############## Functions #####################
 ### Multiple replace
 def replace_all(text, dic):
     for i, j in pre_dictionary.items():
@@ -139,7 +142,7 @@ def separator(next_line, type="none", format="none", extra="none"):
             for text in base_text.split("\\N"):
                 temp_line = text.rstrip()
                 if format == "italics":
-                    separate_lines.append("&nbsp;&nbsp;&nbsp;&nbsp;*" + temp_line.lstrip() + "*<br>")
+                    separate_lines.append("*&nbsp;&nbsp;&nbsp;&nbsp;" + temp_line.lstrip() + "*<br>")
                 else:
                     separate_lines.append("&nbsp;&nbsp;&nbsp;&nbsp;" + temp_line + "<br>")
             joined_line = "".join(separate_lines)
