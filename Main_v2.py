@@ -4,6 +4,7 @@ import re
 
 development = True
 force_upload = False
+blank_stub = False
 
 if development:
     from secrets_dev import secrets
@@ -220,6 +221,10 @@ with open(sub_file, "r", encoding="utf8") as file:
     op_lyrics.append("\n")
     ed_lyrics.append("Source: [" + source + "](" + source_link + ")<br>")
     ed_lyrics.append("\n")
+    
+    if blank_stub:
+        dialogue.append("(This is incomplete since the names are blank on the source file. Feel free to edit them in.)<br>")
+        dialogue.append("\n")
     
     ## Loop for metadata-type data (Script Info)
     file.readline()
