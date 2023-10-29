@@ -26,7 +26,7 @@ with open("links.json", 'r', encoding="utf8") as file:
         source_links.append(y)
 
 ##### Episode info #####
-index = 0
+index = 6
 # episode_title = "E7 - Shooting Star Moratorium"         # Page
 episode_title = episodes[index]
 file_name = episode_title.replace(" ","_").replace(":","-").replace("?","")
@@ -361,7 +361,7 @@ if insert_song:
 ####################################
 ## FULL API SEQUENCE
 if not unhandled_lines or force_upload:
-    print("Uploading")
+    print("Uploading", episode_title)
 ## Book search and create
 #     Init vars
     BOOK_ID = 0
