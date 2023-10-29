@@ -2,7 +2,7 @@ import json
 import requests
 import re
 
-development = True
+development = False
 force_upload = False
 blank_stub = True
 
@@ -19,14 +19,14 @@ source_links = []
 ### Easy titles from links.json ###
 with open("links.json", 'r', encoding="utf8") as file:
     data = json.load(file)
-    link_title = data['title'].replace(" ","_").replace("'","\\'")
+    link_title = data['title'].replace(" ","_").replace("'","\\'").replace(":","")
     link_season = data['season'].replace(" ","_")
     for x, y in data['episodes'].items():    
         episodes.append(x)
         source_links.append(y)
 
 ##### Episode info #####
-index = 1
+index = 0
 # episode_title = "E7 - Shooting Star Moratorium"         # Page
 episode_title = episodes[index]
 file_name = episode_title.replace(" ","_").replace(":","-").replace("?","")
