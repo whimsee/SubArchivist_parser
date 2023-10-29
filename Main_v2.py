@@ -2,7 +2,7 @@ import json
 import requests
 import re
 
-development = True
+development = False
 force_upload = False
 blank_stub = False
 
@@ -26,7 +26,7 @@ with open("links.json", 'r', encoding="utf8") as file:
         source_links.append(y)
 
 ##### Episode info #####
-index = 0
+index = 11
 # episode_title = "E7 - Shooting Star Moratorium"         # Page
 episode_title = episodes[index]
 sub_file = "subs/" + link_title + "/" + link_season + "/" + episode_title.replace(" ","_") + ".ass"
@@ -276,7 +276,9 @@ with open(sub_file, "r", encoding="utf8") as file:
         elif mode == "songs_insert":
             separator(next_line, type="LYRICS", extra="EXTRA")
         elif any(s in mode for s in ("default", "main", "top")):
-            if "italics" in mode:
+            if any(s in next_line.split(",")[4].lower() for s in ("sign", "board", "desk", "note", "book", "text", "tape",)):
+                separator(next_line, type="SIGNS")
+            elif "italics" in mode:
                 separator(next_line, type="DEFAULT", format="italics")
             else:
                 separator(next_line, type="DEFAULT")
