@@ -4,7 +4,7 @@ import re
 
 development = True
 force_upload = False
-blank_stub = False
+blank_stub = True
 
 if development:
     from secrets_dev import secrets
@@ -28,8 +28,9 @@ with open("links.json", 'r', encoding="utf8") as file:
 ##### Episode info #####
 index = 0
 # episode_title = "E7 - Shooting Star Moratorium"         # Page
-episode_title = episodes[index].replace(" ","_").replace(":","-").replace("?","")
-sub_file = "subs/" + link_title + "/" + link_season + "/" + episode_title + ".ass"
+episode_title = episodes[index]
+file_name = episode_title.replace(" ","_").replace(":","-").replace("?","")
+sub_file = "subs/" + link_title + "/" + link_season + "/" + file_name + ".ass"
 # anime_title = "Laid-Back Camp"                       # Book
 anime_title = data['title']
 # season = "Season 2"                            # Chapter
@@ -334,7 +335,7 @@ for text in log:
 ### Joining arrays for dumps ###########################
 ## Dialogue
 full_dialogue = "".join(dialogue)
-with open('dumps/' + anime_title + '-' + episode_title + '-dialogue-dump.txt', 'w', encoding="utf8") as f:
+with open('dumps/' + anime_title + '-' + file_name + '-dialogue-dump.txt', 'w', encoding="utf8") as f:
     f.write(json.dumps(full_dialogue))
 
 ## Lyrics
@@ -479,7 +480,7 @@ log.append("\n")
 log.append(str(lines) + " lines")
 log_full = "".join(log)
     
-with open('dumps/' + anime_title + '-' + episode_title + '-log.txt', 'w', encoding="utf8") as f:
+with open('dumps/' + anime_title + '-' + file_name + '-log.txt', 'w', encoding="utf8") as f:
     f.write(log_full)
 # 
 print("DONE " + str(lines) + " lines")
