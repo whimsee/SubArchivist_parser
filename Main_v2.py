@@ -2,7 +2,7 @@ import json
 import requests
 import re
 
-development = False
+development = True
 force_upload = False
 blank_stub = False
 
@@ -26,10 +26,10 @@ with open("links.json", 'r', encoding="utf8") as file:
         source_links.append(y)
 
 ##### Episode info #####
-index = 11
+index = 0
 # episode_title = "E7 - Shooting Star Moratorium"         # Page
-episode_title = episodes[index]
-sub_file = "subs/" + link_title + "/" + link_season + "/" + episode_title.replace(" ","_") + ".ass"
+episode_title = episodes[index].replace(" ","_").replace(":","-").replace("?","")
+sub_file = "subs/" + link_title + "/" + link_season + "/" + episode_title + ".ass"
 # anime_title = "Laid-Back Camp"                       # Book
 anime_title = data['title']
 # season = "Season 2"                            # Chapter
