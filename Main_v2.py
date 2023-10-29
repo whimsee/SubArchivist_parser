@@ -26,7 +26,7 @@ with open("links.json", 'r', encoding="utf8") as file:
         source_links.append(y)
 
 ##### Episode info #####
-index = 0
+index = 1
 # episode_title = "E7 - Shooting Star Moratorium"         # Page
 episode_title = episodes[index]
 file_name = episode_title.replace(" ","_").replace(":","-").replace("?","")
@@ -94,6 +94,8 @@ def replace_name(text, dic, tracker):
     return text
 
 sub_dictionary = {
+    "{\i1} " : " *",
+    " {\i0}" : "* ",
     "{\i1}" : "*",
     "{\i0}" : "*"
     }
