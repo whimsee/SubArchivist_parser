@@ -17,7 +17,7 @@ with open("links.json", 'r', encoding="utf8") as file:
 #     subprocess.run("curl -o subs/E9_-_What\\'s_done_is_done.ass $(crunchy-cli search --audio ja-JP -o '{{subtitle.locale}} {{subtitle.url}}' https://www.crunchyroll.com/watch/GD9UVJ9JN/whats-done-is-done | grep 'en-US' | awk '{print $2}')", shell=True)
     try:
         with open("subs/" + title + "/" + season + "/" + "name_dict.json", 'x') as f:
-            f.write('{\n\t"" : "---"\n}')
+            f.write('{\n\t"All" : "All",\n\t"" : "---"\n}')
     except FileExistsError:
         pass
     
