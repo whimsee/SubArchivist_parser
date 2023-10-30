@@ -2,9 +2,9 @@ import json
 import requests
 import re
 
-development = True
+development = False
 force_upload = False
-blank_stub = False
+blank_stub = True
 
 if development:
     from secrets_dev import secrets
@@ -26,7 +26,7 @@ with open("links.json", 'r', encoding="utf8") as file:
         source_links.append(y)
 
 ##### Episode info #####
-index = 0
+index = 23
 # episode_title = "E7 - Shooting Star Moratorium"         # Page
 episode_title = episodes[index]
 file_name = episode_title.replace(" ","_").replace(":","-").replace("?","").replace("("," ").replace(")"," ")
@@ -75,7 +75,9 @@ def replace_all(text, dic):
 
     if "{\i1}" in text and not "{\i0}" in text:
 #         print("check italics")
-        text = text.rstrip() + "{\i0}"
+        if not "{\i}" in text:
+        #         print("check italics")
+            text = text.rstrip() + "{\i0}"
     elif "{\i0}" in text and not "{\i1}" in text:
         text = text.strip("{\i0}")
 #         text = text.replace("{\i0}","")
@@ -95,14 +97,18 @@ def replace_name(text, dic, tracker):
 
 sub_dictionary = {
     "{\i1} " : " *",
+    " {\i}" : "*",
     " {\i0}" : "* ",
     "{\i1}" : "*",
+    "{\i}" : "*",
     "{\i0}" : "*"
     }
 
 pre_dictionary = {
     "{\\an2\i1}" : "{\\i1}",
-    "{\\an8\i1}" : "{\\i1}"
+    "{\\an8\i1}" : "{\\i1}",
+    "{\i}\\N" : "{\i}<br>\n&nbsp;&nbsp;&nbsp;&nbsp;",
+    "\\N": "<br>\n&nbsp;&nbsp;&nbsp;&nbsp;"
     }
 
 def clean_text(text):
@@ -110,6 +116,7 @@ def clean_text(text):
         temp_text = replace_all(text, sub_dictionary)
         sub_text = re.sub("[\{\[].*?[\}\]]", "", temp_text)
         this_line = sub_text.replace("\\N", " ").replace("\\n", " ")
+#         print(this_line)
         return this_line
     else:
         return text
@@ -297,9 +304,11 @@ with open(sub_file, "r", encoding="utf8") as file:
             separator(next_line, type="DEFAULT", extra="texting")
         elif "messenger" in mode:
             separator(next_line, type="DEFAULT", extra="messenger")
+        elif "phone" in mode:
+            separator(next_line, type="DEFAULT", extra="messenger")
         elif "flashback" in mode:
             separator(next_line, type="DEFAULT", extra="flashback")
-        elif any(s in mode for s in ("sign", "next ep", "ep title", "generic caption")):
+        elif any(s in mode for s in ("sign", "next ep", "ep title", "generic caption", "title")):
             separator(next_line, type="SIGNS")
         
         # Catches unhandled lines
