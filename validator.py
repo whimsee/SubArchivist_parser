@@ -1,6 +1,7 @@
 import json
-import requests
 import re
+
+index = 0    # Starts from 0
 
 episodes = []
 source_links = []
@@ -22,7 +23,7 @@ with open("links.json", 'r', encoding="utf8") as file:
 # source_link = "https://www.crunchyroll.com/watch/G63K48VZ6/shooting-star-moratorium"
 
 ### Automatic (based on local links.json) ###
-index = 0    # Starts from 0
+
 episode_title = episodes[index]
 file_name = episode_title.replace(" ","_").replace(":","-").replace("?","").replace("("," ").replace(")"," ")
 sub_file = "subs/" + link_title + "/" + link_season + "/" + file_name + ".ass"
