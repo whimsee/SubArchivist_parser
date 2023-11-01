@@ -5,7 +5,7 @@ import shutil
 
 with open("links.json", 'r', encoding="utf8") as file:
     data = json.load(file)
-    title = data['title'].replace(" ","_").replace("'","\\'").replace("/", "//").replace(";", "_")
+    title = data['title'].replace(" ","_").replace("'","\\'").replace("/", "//").replace(";", "_").replace(":", "")
     season = data['season'].replace(" ","_")
     
     Path("subs/" + title + "/" + season).mkdir(parents=True, exist_ok=True)

@@ -2,7 +2,7 @@ import json
 import requests
 import re
 
-development = True
+development = False
 force_upload = False
 blank_stub = True
 
@@ -21,12 +21,13 @@ with open("links.json", 'r', encoding="utf8") as file:
     data = json.load(file)
     link_title = data['title'].replace(" ","_").replace("'","\'").replace(":","").replace(";", "_")
     link_season = data['season'].replace(" ","_")
+    season_length = len(data['episodes'])
     for x, y in data['episodes'].items():    
         episodes.append(x)
         source_links.append(y)
 
 ##### Episode info #####
-index = 3
+index = 0
 # episode_title = "E7 - Shooting Star Moratorium"         # Page
 episode_title = episodes[index]
 file_name = episode_title.replace(" ","_").replace(":","-").replace("?","").replace("("," ").replace(")"," ")
@@ -376,6 +377,7 @@ if insert_song:
 ####################################
 ## FULL API SEQUENCE
 if not unhandled_lines or force_upload:
+    print("(" + str(index + 1) + "/" + str(season_length) + ")")
     print("Uploading", episode_title)
 ## Book search and create
 #     Init vars
