@@ -4,7 +4,7 @@ import re
 
 development = False
 force_upload = False
-blank_stub = True
+blank_stub = False
 
 if development:
     from secrets_dev import secrets
@@ -27,7 +27,7 @@ with open("links.json", 'r', encoding="utf8") as file:
         source_links.append(y)
 
 ##### Episode info #####
-index = 1
+index = 0
 # episode_title = "E7 - Shooting Star Moratorium"         # Page
 episode_title = episodes[index]
 file_name = episode_title.replace(" ","_").replace(":","-").replace("?","").replace("("," ").replace(")"," ")
@@ -313,7 +313,7 @@ with open(sub_file, "r", encoding="utf8") as file:
             separator(next_line, type="DEFAULT", extra="messenger")
         elif "flashback" in mode:
             separator(next_line, type="DEFAULT", extra="flashback")
-        elif any(s in mode for s in ("sign", "next ep", "os", "ep title", "epnum", "generic caption", "fromhere", "sine", "title", "setting", "disclaimer"	)):
+        elif any(s in mode for s in ("sign", "next ep", "os", "ep title", "epnum", "generic caption", "preview", "fromhere", "sine", "title", "setting", "disclaimer"	)):
             separator(next_line, type="SIGNS")
         
         # Catches unhandled lines
