@@ -2,7 +2,7 @@ import json
 import requests
 import re
 
-development = False
+development = True
 force_upload = False
 blank_stub = False
 
@@ -74,13 +74,13 @@ def replace_all(text, dic):
     for i, j in pre_dictionary.items():
         text = text.replace(i, j)
 
-    if "{\i1}" in text and not "{\i0}" in text:
+    if r"{\i1}" in text and not r"{\i0}" in text:
 #         print("check italics")
-        if not "{\i}" in text:
+        if not r"{\i}" in text:
         #         print("check italics")
             text = text.rstrip() + "{\i0}"
-    elif "{\i0}" in text and not "{\i1}" in text:
-        text = text.strip("{\i0}")
+    elif r"{\i0}" in text and not r"{\i1}" in text:
+        text = text.strip(r"{\i0}")
 #         text = text.replace("{\i0}","")
 
     for i, j in dic.items():
@@ -107,10 +107,10 @@ sub_dictionary = {
 
 pre_dictionary = {
     "*" : "°",
-    "{\\an2\i1}" : "{\\i1}",
-    "{\\an8\i1}" : "{\\i1}",
-    "{\i}\\N" : "{\i}<br>\n&nbsp;&nbsp;&nbsp;&nbsp;",
-    "\\N": "<br>\n&nbsp;&nbsp;&nbsp;&nbsp;"
+    r"{\an2\i1}" : r"{\i1}",
+    r"{\an8\i1}" : r"{\i1}",
+    r"{\i}\N" : "{\i}<br>\n&nbsp;&nbsp;&nbsp;&nbsp;",
+    r"\N": "<br>\n&nbsp;&nbsp;&nbsp;&nbsp;"
     }
 
 def clean_text(text):
@@ -118,7 +118,7 @@ def clean_text(text):
 #         text = text.strip("")
         temp_text = replace_all(text, sub_dictionary)
         sub_text = re.sub("[\{\[].*?[\}\]]", "", temp_text)
-        this_line = sub_text.replace("\\N", " ").replace("\\n", " ")
+        this_line = sub_text.replace(r"\N", " ").replace(r"\n", " ")
 #         print(this_line)
         return this_line
     else:
@@ -151,41 +151,41 @@ def separator(next_line, type="none", format="none", extra="none"):
     if type == "DEFAULT":
         ## FORMAT: &nbsp;&nbsp;&nbsp;&nbsp;this is a line<br>
         ## For multiline
-        if len(base_text.rstrip().split("\\N")) >= 2:
+        if len(base_text.rstrip().split(r"\N")) >= 2:
             separate_lines = []
-            for text in base_text.split("\\N"):
+            for text in base_text.split(r"\N"):
                 temp_line = text.rstrip()
                 if format == "italics":
                     separate_lines.append("*&nbsp;&nbsp;&nbsp;&nbsp;" + temp_line.lstrip() + "*<br>")
                 else:
                     separate_lines.append("&nbsp;&nbsp;&nbsp;&nbsp;" + temp_line + "<br>")
             joined_line = "".join(separate_lines)
-            this_line = joined_line.replace("\\h", " ")
+            this_line = joined_line.replace(r"\h", " ")
             if "{" in this_line:
                 log.append("Unhandled line: " + this_line + "\n")
             dialogue.append(speaker + this_line)
         else:
         ## For single line
-            temp_line = base_text.rstrip().split("\\N")[0]
+            temp_line = base_text.rstrip().split(r"\N")[0]
             if format == "italics":
                 formatted_line = "&nbsp;&nbsp;&nbsp;&nbsp;*" + temp_line + "*<br>"
             else:
                 formatted_line = "&nbsp;&nbsp;&nbsp;&nbsp;" + temp_line + "<br>"
-            this_line = formatted_line.replace("\\h", " ")
+            this_line = formatted_line.replace(r"\h", " ")
             if "{" in this_line:
                 log.append("Unhandled line: " + this_line + "\n")
             dialogue.append(speaker + this_line)
     
     ## For song lyrics (present as is with <br> between lines)
     elif type == "LYRICS":
-        if len(base_text.rstrip().split("\\N")) >= 2:
+        if len(base_text.rstrip().split(r"\N")) >= 2:
             separate_lines = []
-            for text in base_text.split("\\N"):
+            for text in base_text.split(r"\N"):
                 temp_line = text.rstrip()
                 separate_lines.append(temp_line + "<br>")
             this_line = "".join(separate_lines)
         else:
-            this_line = base_text.rstrip().split("\\N")[0]
+            this_line = base_text.rstrip().split(r"\N")[0]
         if extra == "OP":
             op_lyrics.append(this_line)
         if extra == "ED":
@@ -194,7 +194,7 @@ def separator(next_line, type="none", format="none", extra="none"):
             insert_lyrics.append(this_line)
     
     elif type == "SIGNS":
-        this_line = base_text.replace("\\N", " ").replace("\\n", " ").replace("\\h", " ")
+        this_line = base_text.replace(r"\N", " ").replace(r"\n", " ").replace(r"\h", " ")
         dialogue.append("***SIGN***&nbsp;&nbsp;&nbsp;&nbsp;" + this_line + "<br>")
     
     # If unhandled
