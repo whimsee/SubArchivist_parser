@@ -4,7 +4,7 @@ import re
 
 development = False
 force_upload = False
-blank_stub = False
+blank_stub = True
 
 if development:
     from secrets_dev import secrets
@@ -27,7 +27,7 @@ with open("links.json", 'r', encoding="utf8") as file:
         source_links.append(y)
 
 ##### Episode info #####
-index = 2
+index = 12
 # episode_title = "E7 - Shooting Star Moratorium"         # Page
 episode_title = episodes[index]
 file_name = episode_title.replace(" ","_").replace(":","-").replace("?","").replace("("," ").replace(")"," ")
@@ -226,7 +226,7 @@ def API_get(target, type="list", ID=0):
         return(response.json())
         
 ### Main Loop ###############################################################################################
-print("(" + str(index + 1) + "/" + str(season_length) + ")") 
+print("(" + str(index + 1) + "/" + str(season_length) + ") " + episode_title) 
 
 with open(sub_file, "r", encoding="utf8") as file:
     ## Header for source, metadata, etc.
@@ -313,7 +313,7 @@ with open(sub_file, "r", encoding="utf8") as file:
             separator(next_line, type="DEFAULT", extra="messenger")
         elif "flashback" in mode:
             separator(next_line, type="DEFAULT", extra="flashback")
-        elif any(s in mode for s in ("sign", "next ep", "os", "ep title", "generic caption", "fromhere", "sine", "title", "setting", "disclaimer"	)):
+        elif any(s in mode for s in ("sign", "next ep", "os", "ep title", "epnum", "generic caption", "fromhere", "sine", "title", "setting", "disclaimer"	)):
             separator(next_line, type="SIGNS")
         
         # Catches unhandled lines
