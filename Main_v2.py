@@ -4,7 +4,7 @@ import re
 
 development = False
 force_upload = False
-blank_stub = True
+blank_stub = False
 
 if development:
     from secrets_dev import secrets
@@ -27,7 +27,7 @@ with open("links.json", 'r', encoding="utf8") as file:
         source_links.append(y)
 
 ##### Episode info #####
-index = 0
+index = 2
 # episode_title = "E7 - Shooting Star Moratorium"         # Page
 episode_title = episodes[index]
 file_name = episode_title.replace(" ","_").replace(":","-").replace("?","").replace("("," ").replace(")"," ")
@@ -52,8 +52,8 @@ insert_song = False
 lyrics_only = False
 op_only = False
 ed_only = False
-OP_name = "OP - SOUVENIR"
-ED_name = "ED - Bokura Dake no Shudaika"
+OP_name = "OP - Good Morning World!"
+ED_name = "ED - Life"
 Insert_name = "Yoru ga Akeru" 
 
 ##################
@@ -106,6 +106,7 @@ sub_dictionary = {
     }
 
 pre_dictionary = {
+    "*" : "°",
     "{\\an2\i1}" : "{\\i1}",
     "{\\an8\i1}" : "{\\i1}",
     "{\i}\\N" : "{\i}<br>\n&nbsp;&nbsp;&nbsp;&nbsp;",
@@ -114,6 +115,7 @@ pre_dictionary = {
 
 def clean_text(text):
     if any(s in text for s in ("{", "}")):
+#         text = text.strip("")
         temp_text = replace_all(text, sub_dictionary)
         sub_text = re.sub("[\{\[].*?[\}\]]", "", temp_text)
         this_line = sub_text.replace("\\N", " ").replace("\\n", " ")
@@ -224,6 +226,8 @@ def API_get(target, type="list", ID=0):
         return(response.json())
         
 ### Main Loop ###############################################################################################
+print("(" + str(index + 1) + "/" + str(season_length) + ")") 
+
 with open(sub_file, "r", encoding="utf8") as file:
     ## Header for source, metadata, etc.
     dialogue.append("Source: [" + source + "](" + source_link + ")<br>")
@@ -287,7 +291,7 @@ with open(sub_file, "r", encoding="utf8") as file:
             separator(next_line, type="LYRICS", extra="ED")
         elif mode == "songs_insert":
             separator(next_line, type="LYRICS", extra="EXTRA")
-        elif any(s in mode for s in ("default", "main", "top", "bd dx", "dx", "top dx")):
+        elif any(s in mode for s in ("default", "main", "top", "bd dx", "dx", "top dx", "narration")):
             if any(s in agent for s in (
                 "sign", "board", "desk", "note", "book", "text", "paper",
                 "tape", "title", "nameplate", "notice", "sheet", "calendar",
@@ -309,7 +313,7 @@ with open(sub_file, "r", encoding="utf8") as file:
             separator(next_line, type="DEFAULT", extra="messenger")
         elif "flashback" in mode:
             separator(next_line, type="DEFAULT", extra="flashback")
-        elif any(s in mode for s in ("sign", "next ep", "ep title", "generic caption", "fromhere", "sine", "title", "setting")):
+        elif any(s in mode for s in ("sign", "next ep", "os", "ep title", "generic caption", "fromhere", "sine", "title", "setting", "disclaimer"	)):
             separator(next_line, type="SIGNS")
         
         # Catches unhandled lines
@@ -377,7 +381,6 @@ if insert_song:
 ####################################
 ## FULL API SEQUENCE
 if not unhandled_lines or force_upload:
-    print("(" + str(index + 1) + "/" + str(season_length) + ")")
     print("Uploading", episode_title)
 ## Book search and create
 #     Init vars
