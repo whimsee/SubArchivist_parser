@@ -2,7 +2,7 @@ import json
 import requests
 import re
 
-development = True
+development = False
 force_upload = False
 blank_stub = False
 
@@ -27,7 +27,7 @@ with open("links.json", 'r', encoding="utf8") as file:
         source_links.append(y)
 
 ##### Episode info #####
-index = 11
+index = 1
 # episode_title = "E7 - Shooting Star Moratorium"         # Page
 episode_title = episodes[index]
 file_name = episode_title.replace(" ","_").replace(":","-").replace("?","").replace("("," ").replace(")"," ")
@@ -313,7 +313,7 @@ with open(sub_file, "r", encoding="utf8") as file:
             separator(next_line, type="DEFAULT", extra="messenger")
         elif "flashback" in mode:
             separator(next_line, type="DEFAULT", extra="flashback")
-        elif any(s in mode for s in ("sign", "next ep", "os", "ep title", "epnum", "generic caption", "preview", "fromhere", "sine", "title", "setting", "disclaimer"	)):
+        elif any(s in mode for s in ("sign", "eyecatch", "next_chapter", "illustration", "next ep", "os", "ep title", "epnum", "generic caption", "preview", "fromhere", "sine", "title", "setting", "disclaimer"	)):
             separator(next_line, type="SIGNS")
         
         # Catches unhandled lines
