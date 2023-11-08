@@ -4,7 +4,7 @@ import re
 
 development = False
 force_upload = False
-blank_stub = True
+blank_stub = False
 
 if development:
     from secrets_dev import secrets
@@ -27,7 +27,7 @@ with open("links.json", 'r', encoding="utf8") as file:
         source_links.append(y)
 
 ##### Episode info #####
-index = 4
+index = 13
 # episode_title = "E7 - Shooting Star Moratorium"         # Page
 episode_title = episodes[index]
 file_name = episode_title.replace(" ","_").replace(":","-").replace("?","").replace("("," ").replace(")"," ").replace("*","x")
@@ -291,7 +291,7 @@ with open(sub_file, "r", encoding="utf8") as file:
             separator(next_line, type="LYRICS", extra="ED")
         elif mode == "songs_insert":
             separator(next_line, type="LYRICS", extra="EXTRA")
-        elif any(s in mode for s in ("default", "main", "top", "bd dx", "dx", "top dx", "narration")):
+        elif any(s in mode for s in ("default", "main", "top", "bd dx", "dx", "top dx", "narration", "any")):
             if any(s in agent for s in (
                 "sign", "board", "desk", "note", "book", "text", "paper",
                 "tape", "title", "nameplate", "notice", "sheet", "calendar",
@@ -313,12 +313,24 @@ with open(sub_file, "r", encoding="utf8") as file:
             separator(next_line, type="DEFAULT", extra="messenger")
         elif "flashback" in mode:
             separator(next_line, type="DEFAULT", extra="flashback")
-        elif any(s in mode for s in ("sign", "sfx", "eyecatch", "next_chapter", "illustration", "next ep", "os", "ep title", "epnum", "generic caption", "preview", "fromhere", "sine", "title", "setting", "disclaimer"	)):
+        elif any(s in mode for s in (
+            "sign", "sfx", "eyecatch", "next_chapter", "illustration", "next ep",
+            "os", "ep title", "epnum", "generic caption", "preview", "fromhere",
+            "sine", "title", "setting", "disclaimer", "gen_nota", "cart_a_ari",
+            "cart_a_tre", "cart_b_tre", "cart_c_tre", "cart_a_ari", "cart_c_ari",
+            "gen_nextep", "gen_avancet", "cart_a_tim", "cart_b_tim", "cart_trololo",
+            "cart_a_rpg2", "cart_c_tim", "cart_a_rpg1",
+            )):
             separator(next_line, type="SIGNS")
         
         # Catches unhandled lines
         else:
-            separator(next_line)
+            if any(s in agent for s in (
+                "fx", "text"
+                )):
+                separator(next_line, type="SIGNS")
+            else:
+                separator(next_line)
 
 ## Check for unhandled lines and aborts upload
 for text in log: 
