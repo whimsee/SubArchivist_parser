@@ -14,7 +14,7 @@ with open("links.json", 'r', encoding="utf8") as file:
     
     for x, y in data['episodes'].items():    
         print(x, y)
-        x = x.replace(" ","_").replace("'","\\'").replace(":", "-").replace("?","").replace("(", "_").replace(")","_")
+        x = x.replace(" ","_").replace("'","\\'").replace(":", "-").replace("?","").replace("(", "_").replace(")","_").replace("*","x")
         subprocess.run("curl -o subs/" + link_title + "/" + season + "/" + x + ".ass $(crunchy-cli search --audio ja-JP -o '{{subtitle.locale}} {{subtitle.url}}' " + y + " | grep 'en-US' | awk '{print $2}')", shell=True)
 #     subprocess.run("curl -o subs/E9_-_What\\'s_done_is_done.ass $(crunchy-cli search --audio ja-JP -o '{{subtitle.locale}} {{subtitle.url}}' https://www.crunchyroll.com/watch/GD9UVJ9JN/whats-done-is-done | grep 'en-US' | awk '{print $2}')", shell=True)
     try:

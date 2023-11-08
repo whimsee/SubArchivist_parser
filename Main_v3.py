@@ -4,7 +4,7 @@ import re
 
 development = False
 force_upload = False
-blank_stub = False
+blank_stub = True
 
 if development:
     from secrets_dev import secrets
@@ -19,7 +19,7 @@ source_links = []
 ### Easy titles from links.json ###
 with open("links.json", 'r', encoding="utf8") as file:
     data = json.load(file)
-    link_title = data['title'].replace(" ","_").replace("'","\'").replace(":","").replace(";", "_")
+    link_title = data['title'].replace(" ","_").replace(":","").replace(";", "_")
     link_season = data['season'].replace(" ","_")
     season_length = len(data['episodes'])
     for x, y in data['episodes'].items():    
@@ -27,10 +27,10 @@ with open("links.json", 'r', encoding="utf8") as file:
         source_links.append(y)
 
 ##### Episode info #####
-index = 27
+index = 4
 # episode_title = "E7 - Shooting Star Moratorium"         # Page
 episode_title = episodes[index]
-file_name = episode_title.replace(" ","_").replace(":","-").replace("?","").replace("("," ").replace(")"," ")
+file_name = episode_title.replace(" ","_").replace(":","-").replace("?","").replace("("," ").replace(")"," ").replace("*","x")
 sub_file = "subs/" + link_title + "/" + link_season + "/" + file_name + ".ass"
 # anime_title = "Laid-Back Camp"                       # Book
 anime_title = data['title']
@@ -299,11 +299,11 @@ with open(sub_file, "r", encoding="utf8") as file:
                 "wall", "screen", "slate"
                 )):
                 separator(next_line, type="SIGNS")
-            elif "italics" in mode:
+            elif "italic" in mode:
                 separator(next_line, type="DEFAULT", format="italics")
             else:
                 separator(next_line, type="DEFAULT")
-        elif "italics" in mode:
+        elif "italic" in mode:
             separator(next_line, type="DEFAULT", format="italics")
         elif "texting" in mode:
             separator(next_line, type="DEFAULT", extra="texting")
