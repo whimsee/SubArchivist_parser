@@ -4,7 +4,7 @@ import re
 
 development = False
 force_upload = False
-blank_stub = False
+blank_stub = True
 
 if development:
     from secrets_dev import secrets
@@ -22,12 +22,12 @@ with open("links.json", 'r', encoding="utf8") as file:
     link_title = data['title'].replace(" ","_").replace(":","").replace(";", "_")
     link_season = data['season'].replace(" ","_")
     season_length = len(data['episodes'])
-    for x, y in data['episodes'].items():    
+    for x, y in data['episodes'].items():
         episodes.append(x)
         source_links.append(y)
 
 ##### Episode info #####
-index = 13
+index = 14
 # episode_title = "E7 - Shooting Star Moratorium"         # Page
 episode_title = episodes[index]
 file_name = episode_title.replace(" ","_").replace(":","-").replace("?","").replace("("," ").replace(")"," ").replace("*","x")
@@ -319,7 +319,7 @@ with open(sub_file, "r", encoding="utf8") as file:
             "sine", "title", "setting", "disclaimer", "gen_nota", "cart_a_ari",
             "cart_a_tre", "cart_b_tre", "cart_c_tre", "cart_a_ari", "cart_c_ari",
             "gen_nextep", "gen_avancet", "cart_a_tim", "cart_b_tim", "cart_trololo",
-            "cart_a_rpg2", "cart_c_tim", "cart_a_rpg1",
+            "cart_a_rpg2", "cart_c_tim", "cart_a_rpg1", "date"
             )):
             separator(next_line, type="SIGNS")
         
