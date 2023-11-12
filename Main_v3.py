@@ -4,7 +4,7 @@ import re
 
 development = False
 force_upload = False
-blank_stub = True
+blank_stub = False
 
 if development:
     from secrets_dev import secrets
@@ -27,7 +27,7 @@ with open("links.json", 'r', encoding="utf8") as file:
         source_links.append(y)
 
 ##### Episode info #####
-index = 14
+index = 7
 # episode_title = "E7 - Shooting Star Moratorium"         # Page
 episode_title = episodes[index]
 file_name = episode_title.replace(" ","_").replace(":","-").replace("?","").replace("("," ").replace(")"," ").replace("*","x")
@@ -237,8 +237,40 @@ with open(sub_file, "r", encoding="utf8") as file:
     ed_lyrics.append("Source: [" + source + "](" + source_link + ")<br>")
     ed_lyrics.append("\n")
     
+    dialogue.append("Translator:<br>")
+    dialogue.append("\n")
+    op_lyrics.append("Translator:<br>")
+    op_lyrics.append("\n")
+    ed_lyrics.append("Translator:<br>")
+    ed_lyrics.append("\n")
+    
+    dialogue.append("Editor:<br>")
+    dialogue.append("\n")
+    op_lyrics.append("Editor:<br>")
+    op_lyrics.append("\n")
+    ed_lyrics.append("Editor:<br>")
+    ed_lyrics.append("\n")
+    
+    dialogue.append("Timer:<br>")
+    dialogue.append("\n")
+    op_lyrics.append("Timer:<br>")
+    op_lyrics.append("\n")
+    ed_lyrics.append("Timer:<br>")
+    ed_lyrics.append("\n")
+    
+    dialogue.append("QC:<br>")
+    dialogue.append("\n")
+    op_lyrics.append("QC:<br>")
+    op_lyrics.append("\n")
+    ed_lyrics.append("QC:<br>")
+    ed_lyrics.append("\n")
+    
+    
     if blank_stub:
-        dialogue.append("(This is incomplete since the names are blank on the source file. Feel free to edit them in.)<br>")
+        dialogue.append("(This is incomplete since the names are blank on the source file. Feel free to edit them in. Dialogue is left as is.)<br>")
+        dialogue.append("\n")
+    else:
+        dialogue.append("(Please feel free to edit the speaker names. This is handled on a best-effort basis depending on how the subtitle file was created so they may be incomplete or inaccurate. Dialogue is left as is.)<br>")
         dialogue.append("\n")
     
     ## Loop for metadata-type data (Script Info)
@@ -303,7 +335,7 @@ with open(sub_file, "r", encoding="utf8") as file:
                 separator(next_line, type="DEFAULT", format="italics")
             else:
                 separator(next_line, type="DEFAULT")
-        elif "italic" in mode:
+        elif any(s in mode for s in ("italic", "internal")):
             separator(next_line, type="DEFAULT", format="italics")
         elif "texting" in mode:
             separator(next_line, type="DEFAULT", extra="texting")
