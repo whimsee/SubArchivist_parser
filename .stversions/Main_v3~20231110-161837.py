@@ -22,15 +22,15 @@ with open("links.json", 'r', encoding="utf8") as file:
     link_title = data['title'].replace(" ","_").replace(":","").replace(";", "_")
     link_season = data['season'].replace(" ","_")
     season_length = len(data['episodes'])
-    for x, y in data['episodes'].items():
+    for x, y in data['episodes'].items():    
         episodes.append(x)
         source_links.append(y)
 
 ##### Episode info #####
-index = 0
+index = 13
 # episode_title = "E7 - Shooting Star Moratorium"         # Page
 episode_title = episodes[index]
-file_name = episode_title.replace(" ","_").replace(":","-").replace("?","").replace("(","_").replace(")","_").replace("*","x")
+file_name = episode_title.replace(" ","_").replace(":","-").replace("?","").replace("("," ").replace(")"," ").replace("*","x")
 sub_file = "subs/" + link_title + "/" + link_season + "/" + file_name + ".ass"
 # anime_title = "Laid-Back Camp"                       # Book
 anime_title = data['title']
@@ -237,40 +237,8 @@ with open(sub_file, "r", encoding="utf8") as file:
     ed_lyrics.append("Source: [" + source + "](" + source_link + ")<br>")
     ed_lyrics.append("\n")
     
-    dialogue.append("Translator:<br>")
-    dialogue.append("\n")
-    op_lyrics.append("Translator:<br>")
-    op_lyrics.append("\n")
-    ed_lyrics.append("Translator:<br>")
-    ed_lyrics.append("\n")
-    
-    dialogue.append("Editor:<br>")
-    dialogue.append("\n")
-    op_lyrics.append("Editor:<br>")
-    op_lyrics.append("\n")
-    ed_lyrics.append("Editor:<br>")
-    ed_lyrics.append("\n")
-    
-    dialogue.append("Timer:<br>")
-    dialogue.append("\n")
-    op_lyrics.append("Timer:<br>")
-    op_lyrics.append("\n")
-    ed_lyrics.append("Timer:<br>")
-    ed_lyrics.append("\n")
-    
-    dialogue.append("QC:<br>")
-    dialogue.append("\n")
-    op_lyrics.append("QC:<br>")
-    op_lyrics.append("\n")
-    ed_lyrics.append("QC:<br>")
-    ed_lyrics.append("\n")
-    
-    
     if blank_stub:
-        dialogue.append("(This is incomplete since the names are blank on the source file. Feel free to edit them in. Dialogue is left as is.)<br>")
-        dialogue.append("\n")
-    else:
-        dialogue.append("(Please feel free to edit the speaker names. This is handled on a best-effort basis depending on how the subtitle file was created so they may be incomplete or inaccurate. Dialogue is left as is.)<br>")
+        dialogue.append("(This is incomplete since the names are blank on the source file. Feel free to edit them in.)<br>")
         dialogue.append("\n")
     
     ## Loop for metadata-type data (Script Info)
@@ -323,24 +291,19 @@ with open(sub_file, "r", encoding="utf8") as file:
             separator(next_line, type="LYRICS", extra="ED")
         elif mode == "songs_insert":
             separator(next_line, type="LYRICS", extra="EXTRA")
-        elif any(s in mode for s in ("default", "main", "top", "bd dx",
-                                     "dx", "top dx", "narration", "any",
-                                     "whitesmall", "bluesmall", "bluetext", "whitetext",
-                                     "narrator"				
-                                     )):
+        elif any(s in mode for s in ("default", "main", "top", "bd dx", "dx", "top dx", "narration", "any")):
             if any(s in agent for s in (
                 "sign", "board", "desk", "note", "book", "text", "paper",
                 "tape", "title", "nameplate", "notice", "sheet", "calendar",
                 "phone screen", "building", "exhibition", "phone", "leaflet",
-                "wall", "screen", "slate", "next", "alt", "preview", "eyecatch",
-                "caption"
+                "wall", "screen", "slate"
                 )):
                 separator(next_line, type="SIGNS")
             elif "italic" in mode:
                 separator(next_line, type="DEFAULT", format="italics")
             else:
                 separator(next_line, type="DEFAULT")
-        elif any(s in mode for s in ("italic", "internal")):
+        elif "italic" in mode:
             separator(next_line, type="DEFAULT", format="italics")
         elif "texting" in mode:
             separator(next_line, type="DEFAULT", extra="texting")
@@ -356,8 +319,7 @@ with open(sub_file, "r", encoding="utf8") as file:
             "sine", "title", "setting", "disclaimer", "gen_nota", "cart_a_ari",
             "cart_a_tre", "cart_b_tre", "cart_c_tre", "cart_a_ari", "cart_c_ari",
             "gen_nextep", "gen_avancet", "cart_a_tim", "cart_b_tim", "cart_trololo",
-            "cart_a_rpg2", "cart_c_tim", "cart_a_rpg1", "date", "phone", "name", "endro!",
-            "mufu", "doyaya"
+            "cart_a_rpg2", "cart_c_tim", "cart_a_rpg1",
             )):
             separator(next_line, type="SIGNS")
         
