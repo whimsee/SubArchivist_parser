@@ -27,7 +27,7 @@ with open("links.json", 'r', encoding="utf8") as file:
         source_links.append(y)
 
 ##### Episode info #####
-index = 22
+index = 11
 # episode_title = "E7 - Shooting Star Moratorium"         # Page
 episode_title = episodes[index]
 file_name = episode_title.replace(" ","_").replace(":","-").replace("?","").replace("(","_").replace(")","_").replace("*","x")
@@ -323,12 +323,15 @@ with open(sub_file, "r", encoding="utf8") as file:
             separator(next_line, type="LYRICS", extra="ED")
         elif mode == "songs_insert":
             separator(next_line, type="LYRICS", extra="EXTRA")
-        elif any(s in mode for s in ("default", "main", "top", "bd dx", "dx", "top dx", "narration", "any")):
+        elif any(s in mode for s in ("default", "main", "top", "bd dx",
+                                     "dx", "top dx", "narration", "any",
+                                     "whitesmall", "bluesmall", "bluetext", "whitetext"
+                                     )):
             if any(s in agent for s in (
                 "sign", "board", "desk", "note", "book", "text", "paper",
                 "tape", "title", "nameplate", "notice", "sheet", "calendar",
                 "phone screen", "building", "exhibition", "phone", "leaflet",
-                "wall", "screen", "slate"
+                "wall", "screen", "slate", "next", "alt", "preview"
                 )):
                 separator(next_line, type="SIGNS")
             elif "italic" in mode:
@@ -351,7 +354,8 @@ with open(sub_file, "r", encoding="utf8") as file:
             "sine", "title", "setting", "disclaimer", "gen_nota", "cart_a_ari",
             "cart_a_tre", "cart_b_tre", "cart_c_tre", "cart_a_ari", "cart_c_ari",
             "gen_nextep", "gen_avancet", "cart_a_tim", "cart_b_tim", "cart_trololo",
-            "cart_a_rpg2", "cart_c_tim", "cart_a_rpg1", "date"
+            "cart_a_rpg2", "cart_c_tim", "cart_a_rpg1", "date", "phone", "name", "endro!",
+            "mufu", "doyaya"
             )):
             separator(next_line, type="SIGNS")
         
