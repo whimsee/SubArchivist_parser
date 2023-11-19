@@ -34,6 +34,7 @@ file_name = episode_title.replace(" ","_").replace(":","-").replace("?","").repl
 sub_file = "subs/" + link_title + "/" + link_season + "/" + file_name + ".ass"
 # anime_title = "Laid-Back Camp"                       # Book
 anime_title = data['title']
+debug_title = anime_title.replace("/","_")
 # season = "Season 2"                            # Chapter
 season = data['season']
 source = "Crunchyroll"
@@ -412,7 +413,7 @@ for text in log:
 ### Joining arrays for dumps ###########################
 ## Dialogue
 full_dialogue = "".join(dialogue)
-with open('dumps/' + anime_title + '-' + file_name + '-dialogue-dump.txt', 'w', encoding="utf8") as f:
+with open('dumps/' + debug_title + '-' + file_name + '-dialogue-dump.txt', 'w', encoding="utf8") as f:
     f.write(json.dumps(full_dialogue))
 
 ## Lyrics
@@ -420,17 +421,17 @@ if upload_lyrics or lyrics_only:
     
     if not ed_only:
         op_lyrics_full = "<br>".join(op_lyrics)
-        with open('dumps/' + anime_title + '-' + OP_name + '-lyrics-dump.txt', 'w', encoding="utf8") as f:
+        with open('dumps/' + debug_title + '-' + OP_name + '-lyrics-dump.txt', 'w', encoding="utf8") as f:
             f.write(json.dumps(op_lyrics_full))
     
     if not op_only:
         ed_lyrics_full = "<br>".join(ed_lyrics)
-        with open('dumps/' + anime_title + '-' + ED_name + '-lyrics-dump.txt', 'w', encoding="utf8") as f:
+        with open('dumps/' + debug_title + '-' + ED_name + '-lyrics-dump.txt', 'w', encoding="utf8") as f:
             f.write(json.dumps(ed_lyrics_full))
         
 if insert_song:
     insert_lyrics_full = "<br>".join(insert_lyrics)
-    with open('dumps/' + anime_title + '-' + Insert_name + '-lyrics-dump.txt', 'w', encoding="utf8") as f:
+    with open('dumps/' + debug_title + '-' + Insert_name + '-lyrics-dump.txt', 'w', encoding="utf8") as f:
         f.write(json.dumps(insert_lyrics_full))
 
 ####################################
@@ -557,7 +558,7 @@ log.append("\n")
 log.append(str(lines) + " lines")
 log_full = "".join(log)
     
-with open('dumps/' + anime_title + '-' + file_name + '-log.txt', 'w', encoding="utf8") as f:
+with open('dumps/' + debug_title + '-' + file_name + '-log.txt', 'w', encoding="utf8") as f:
     f.write(log_full)
 # 
 print("DONE " + str(lines) + " lines")
