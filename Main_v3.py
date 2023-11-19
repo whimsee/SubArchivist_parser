@@ -27,7 +27,7 @@ with open("links.json", 'r', encoding="utf8") as file:
         source_links.append(y)
 
 ##### Episode info #####
-index = 0
+index = 1
 # episode_title = "E7 - Shooting Star Moratorium"         # Page
 episode_title = episodes[index]
 file_name = episode_title.replace(" ","_").replace(":","-").replace("?","").replace("(","_").replace(")","_").replace("*","x")
@@ -366,7 +366,7 @@ with open(sub_file, "r", encoding="utf8") as file:
         # Catches unhandled lines
         else:
             if any(s in agent for s in (
-                "fx", "text", "sign", "shirt", "eyecatch"
+                "fx", "text", "sign", "shirt", "eyecatch", "label", "title"
                 )):
                 separator(next_line, type="SIGNS")
             elif any(s in agent for s in (
