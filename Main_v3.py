@@ -347,7 +347,7 @@ with open(sub_file, "r", encoding="utf8") as file:
             separator(next_line, type="DEFAULT", extra="texting")
         elif any(s in mode for s in ("messenger", "phone", "tweet"
                                      )):
-            separator(next_line, type="DEFAULT", extra="messenger")
+            separator(next_line, type="DEFAULT", extra="messenger")	
         elif "flashback" in mode:
             separator(next_line, type="DEFAULT", extra="flashback")
         elif any(s in mode for s in (
