@@ -334,7 +334,7 @@ with open(sub_file, "r", encoding="utf8") as file:
                 "tape", "title", "nameplate", "notice", "sheet", "calendar",
                 "phone screen", "building", "exhibition", "phone", "leaflet",
                 "wall", "screen", "slate", "next", "alt", "preview", "eyecatch",
-                "caption"
+                "caption", "card"
                 )):
                 separator(next_line, type="SIGNS")
             elif "italic" in mode:
@@ -358,7 +358,7 @@ with open(sub_file, "r", encoding="utf8") as file:
             "gen_nextep", "gen_avancet", "cart_a_tim", "cart_b_tim", "cart_trololo",
             "cart_a_rpg2", "cart_c_tim", "cart_a_rpg1", "date", "phone", "name", "endro!",
             "mufu", "doyaya", "map", "art", "episode", "director x actress", "rinshi",
-            "next time"
+            "next time", "card", "building", "door"
             )):
             separator(next_line, type="SIGNS")
         
@@ -366,7 +366,7 @@ with open(sub_file, "r", encoding="utf8") as file:
         else:
             if any(s in agent for s in (
                 "fx", "text", "sign", "shirt", "eyecatch", "label", "title", "banner",
-                "stamp"
+                "stamp", "card", "door"
                 )):
                 separator(next_line, type="SIGNS")
             elif any(s in agent for s in (
