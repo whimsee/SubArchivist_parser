@@ -365,7 +365,8 @@ with open(sub_file, "r", encoding="utf8") as file:
         # Catches unhandled lines
         else:
             if any(s in agent for s in (
-                "fx", "text", "sign", "shirt", "eyecatch", "label", "title"
+                "fx", "text", "sign", "shirt", "eyecatch", "label", "title", "banner",
+                "stamp"
                 )):
                 separator(next_line, type="SIGNS")
             elif any(s in agent for s in (
