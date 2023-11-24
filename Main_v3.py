@@ -27,7 +27,7 @@ with open("links.json", 'r', encoding="utf8") as file:
         source_links.append(y)
 
 ##### Episode info #####
-index = 2
+index = 1
 # episode_title = "E7 - Shooting Star Moratorium"         # Page
 episode_title = episodes[index]
 file_name = episode_title.replace(" ","_").replace(":","-").replace("?","").replace("(","_").replace(")","_").replace("*","x")
@@ -55,7 +55,7 @@ op_only = False
 ed_only = False
 OP_name = "OP - Good Morning World!"
 ED_name = "ED - Life"
-Insert_name = "Yoru ga Akeru" 
+Insert_name = "Tachiagare" 
 
 ##################
 # Init lists
@@ -334,7 +334,7 @@ with open(sub_file, "r", encoding="utf8") as file:
                 "tape", "title", "nameplate", "notice", "sheet", "calendar",
                 "phone screen", "building", "exhibition", "phone", "leaflet",
                 "wall", "screen", "slate", "next", "alt", "preview", "eyecatch",
-                "caption", "card"
+                "caption", "card", "form"
                 )):
                 separator(next_line, type="SIGNS")
             elif "italic" in mode:
@@ -358,7 +358,9 @@ with open(sub_file, "r", encoding="utf8") as file:
             "gen_nextep", "gen_avancet", "cart_a_tim", "cart_b_tim", "cart_trololo",
             "cart_a_rpg2", "cart_c_tim", "cart_a_rpg1", "date", "phone", "name", "endro!",
             "mufu", "doyaya", "map", "art", "episode", "director x actress", "rinshi",
-            "next time", "card", "building", "door", "nextep"
+            "next time", "card", "building", "door", "nextep", "tvlogo", "greennote"
+            "rednote", "bluenote", "note", "paper", "script", "green room", "movie",
+            "advert"
             )):
             separator(next_line, type="SIGNS")
         
@@ -366,11 +368,11 @@ with open(sub_file, "r", encoding="utf8") as file:
         else:
             if any(s in agent for s in (
                 "fx", "text", "sign", "shirt", "eyecatch", "label", "title", "banner",
-                "stamp", "card", "door"
+                "stamp", "card", "door", "tv", "envelope", "box"
                 )):
                 separator(next_line, type="SIGNS")
             elif any(s in agent for s in (
-                "phone"
+                "phone", "site"
                 )):
                 separator(next_line, type="DEFAULT", extra="messenger")
             else:
