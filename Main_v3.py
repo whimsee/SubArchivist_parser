@@ -4,7 +4,7 @@ import re
 
 development = False
 force_upload = False
-blank_stub = False
+blank_stub = True
 
 if development:
     from secrets_dev import secrets
@@ -27,7 +27,7 @@ with open("links.json", 'r', encoding="utf8") as file:
         source_links.append(y)
 
 ##### Episode info #####
-index = 1
+index = 0
 # episode_title = "E7 - Shooting Star Moratorium"         # Page
 episode_title = episodes[index]
 file_name = episode_title.replace(" ","_").replace(":","-").replace("?","").replace("(","_").replace(")","_").replace("*","x")
@@ -360,7 +360,7 @@ with open(sub_file, "r", encoding="utf8") as file:
             "mufu", "doyaya", "map", "art", "episode", "director x actress", "rinshi",
             "next time", "card", "building", "door", "nextep", "tvlogo", "greennote"
             "rednote", "bluenote", "note", "paper", "script", "green room", "movie",
-            "advert"
+            "advert", "cd", "banner", "golden", "text", "tracks", "goal", "radio show"
             )):
             separator(next_line, type="SIGNS")
         
