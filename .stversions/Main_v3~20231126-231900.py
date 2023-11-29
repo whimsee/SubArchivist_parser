@@ -27,7 +27,7 @@ with open("links.json", 'r', encoding="utf8") as file:
         source_links.append(y)
 
 ##### Episode info #####
-index = 8
+index = 4
 # episode_title = "E7 - Shooting Star Moratorium"         # Page
 episode_title = episodes[index]
 file_name = episode_title.replace(" ","_").replace(":","-").replace("?","").replace("(","_").replace(")","_").replace("*","x")
@@ -53,9 +53,9 @@ insert_song = False
 lyrics_only = False
 op_only = False
 ed_only = False
-OP_name = "OP - DiSCOVER THE FUTURE"
-ED_name = "ED - Mirai Notes wo Kanadete"
-Insert_name = "MEMORiES MELODiES"
+OP_name = "OP - Good Morning World!"
+ED_name = "ED - Life"
+Insert_name = "Tachiagare" 
 
 ##################
 # Init lists
@@ -360,8 +360,7 @@ with open(sub_file, "r", encoding="utf8") as file:
             "mufu", "doyaya", "map", "art", "episode", "director x actress", "rinshi",
             "next time", "card", "building", "door", "nextep", "tvlogo", "greennote"
             "rednote", "bluenote", "note", "paper", "script", "green room", "movie",
-            "advert", "cd", "banner", "golden", "text", "tracks", "goal", "radio show",
-            "whiteboard", "tv anime"
+            "advert"
             )):
             separator(next_line, type="SIGNS")
         
