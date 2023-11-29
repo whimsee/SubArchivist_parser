@@ -4,7 +4,7 @@ import re
 
 development = False
 force_upload = False
-blank_stub = False
+blank_stub = True
 
 if development:
     from secrets_dev import secrets
@@ -55,7 +55,7 @@ op_only = False
 ed_only = False
 OP_name = "OP - Good Morning World!"
 ED_name = "ED - Life"
-Insert_name = "Yoru ga Akeru" 
+Insert_name = "Tachiagare" 
 
 ##################
 # Init lists
@@ -334,21 +334,20 @@ with open(sub_file, "r", encoding="utf8") as file:
                 "tape", "title", "nameplate", "notice", "sheet", "calendar",
                 "phone screen", "building", "exhibition", "phone", "leaflet",
                 "wall", "screen", "slate", "next", "alt", "preview", "eyecatch",
-                "caption"
+                "caption", "card", "form"
                 )):
                 separator(next_line, type="SIGNS")
             elif "italic" in mode:
                 separator(next_line, type="DEFAULT", format="italics")
             else:
                 separator(next_line, type="DEFAULT")
-        elif any(s in mode for s in ("italic", "internal")):
+        elif any(s in mode for s in ("italic", "internal", "innerthought")):
             separator(next_line, type="DEFAULT", format="italics")
         elif "texting" in mode:
             separator(next_line, type="DEFAULT", extra="texting")
-        elif "messenger" in mode:
-            separator(next_line, type="DEFAULT", extra="messenger")
-        elif "phone" in mode:
-            separator(next_line, type="DEFAULT", extra="messenger")
+        elif any(s in mode for s in ("messenger", "phone", "tweet"
+                                     )):
+            separator(next_line, type="DEFAULT", extra="messenger")	
         elif "flashback" in mode:
             separator(next_line, type="DEFAULT", extra="flashback")
         elif any(s in mode for s in (
@@ -359,18 +358,21 @@ with open(sub_file, "r", encoding="utf8") as file:
             "gen_nextep", "gen_avancet", "cart_a_tim", "cart_b_tim", "cart_trololo",
             "cart_a_rpg2", "cart_c_tim", "cart_a_rpg1", "date", "phone", "name", "endro!",
             "mufu", "doyaya", "map", "art", "episode", "director x actress", "rinshi",
-            "next time"
+            "next time", "card", "building", "door", "nextep", "tvlogo", "greennote"
+            "rednote", "bluenote", "note", "paper", "script", "green room", "movie",
+            "advert", "cd", "banner", "golden", "text", "tracks", "goal", "radio show"
             )):
             separator(next_line, type="SIGNS")
         
         # Catches unhandled lines
         else:
             if any(s in agent for s in (
-                "fx", "text", "sign", "shirt", "eyecatch", "label", "title"
+                "fx", "text", "sign", "shirt", "eyecatch", "label", "title", "banner",
+                "stamp", "card", "door", "tv", "envelope", "box"
                 )):
                 separator(next_line, type="SIGNS")
             elif any(s in agent for s in (
-                "phone"
+                "phone", "site"
                 )):
                 separator(next_line, type="DEFAULT", extra="messenger")
             else:

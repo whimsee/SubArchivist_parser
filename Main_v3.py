@@ -4,7 +4,7 @@ import re
 
 development = False
 force_upload = False
-blank_stub = True
+blank_stub = False
 
 if development:
     from secrets_dev import secrets
@@ -53,9 +53,9 @@ insert_song = False
 lyrics_only = False
 op_only = False
 ed_only = False
-OP_name = "OP - Good Morning World!"
-ED_name = "ED - Life"
-Insert_name = "Tachiagare" 
+OP_name = "Shaking your heart"
+ED_name = "Shaking your heart"
+Insert_name = "MEMORiES MELODiES"
 
 ##################
 # Init lists
@@ -360,7 +360,8 @@ with open(sub_file, "r", encoding="utf8") as file:
             "mufu", "doyaya", "map", "art", "episode", "director x actress", "rinshi",
             "next time", "card", "building", "door", "nextep", "tvlogo", "greennote"
             "rednote", "bluenote", "note", "paper", "script", "green room", "movie",
-            "advert", "cd", "banner", "golden", "text", "tracks", "goal", "radio show"
+            "advert", "cd", "banner", "golden", "text", "tracks", "goal", "radio show",
+            "whiteboard"
             )):
             separator(next_line, type="SIGNS")
         
