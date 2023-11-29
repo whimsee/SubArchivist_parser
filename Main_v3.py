@@ -27,7 +27,7 @@ with open("links.json", 'r', encoding="utf8") as file:
         source_links.append(y)
 
 ##### Episode info #####
-index = 8
+index = 11
 # episode_title = "E7 - Shooting Star Moratorium"         # Page
 episode_title = episodes[index]
 file_name = episode_title.replace(" ","_").replace(":","-").replace("?","").replace("(","_").replace(")","_").replace("*","x")
@@ -49,13 +49,13 @@ if name_replace:
 
 # optional for lyrics
 upload_lyrics = False
-insert_song = False
-lyrics_only = False
+insert_song = True
+lyrics_only = True
 op_only = False
 ed_only = False
 OP_name = "OP - DiSCOVER THE FUTURE"
 ED_name = "ED - Mirai Notes wo Kanadete"
-Insert_name = "MEMORiES MELODiES"
+Insert_name = "Last Dimension"
 
 ##################
 # Init lists
@@ -234,16 +234,14 @@ with open(sub_file, "r", encoding="utf8") as file:
     dialogue.append("Source: [" + source + "](" + source_link + ")<br>")
     dialogue.append("\n")
     op_lyrics.append("Source: [" + source + "](" + source_link + ")<br>")
-    op_lyrics.append("\n")
     ed_lyrics.append("Source: [" + source + "](" + source_link + ")<br>")
-    ed_lyrics.append("\n")
+    insert_lyrics.append("Source: [" + source + "](" + source_link + ")<br>")
     
     dialogue.append("Translator:<br>")
     dialogue.append("\n")
     op_lyrics.append("Translator:<br>")
-    op_lyrics.append("\n")
     ed_lyrics.append("Translator:<br>")
-    ed_lyrics.append("\n")
+    insert_lyrics.append("Translator:<br>")
     
     dialogue.append("Editor:<br>")
     dialogue.append("\n")
@@ -251,20 +249,14 @@ with open(sub_file, "r", encoding="utf8") as file:
     op_lyrics.append("\n")
     ed_lyrics.append("Editor:<br>")
     ed_lyrics.append("\n")
+    insert_lyrics.append("Editor:<br>")
+    insert_lyrics.append("\n")
     
     dialogue.append("Timer:<br>")
     dialogue.append("\n")
-    op_lyrics.append("Timer:<br>")
-    op_lyrics.append("\n")
-    ed_lyrics.append("Timer:<br>")
-    ed_lyrics.append("\n")
     
     dialogue.append("QC:<br>")
     dialogue.append("\n")
-    op_lyrics.append("QC:<br>")
-    op_lyrics.append("\n")
-    ed_lyrics.append("QC:<br>")
-    ed_lyrics.append("\n")
     
     
     if blank_stub:
