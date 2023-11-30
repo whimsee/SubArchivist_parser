@@ -27,7 +27,7 @@ with open("links.json", 'r', encoding="utf8") as file:
         source_links.append(y)
 
 ##### Episode info #####
-index = 11
+index = 0
 # episode_title = "E7 - Shooting Star Moratorium"         # Page
 episode_title = episodes[index]
 file_name = episode_title.replace(" ","_").replace(":","-").replace("?","").replace("(","_").replace(")","_").replace("*","x")
@@ -49,8 +49,8 @@ if name_replace:
 
 # optional for lyrics
 upload_lyrics = False
-insert_song = True
-lyrics_only = True
+insert_song = False
+lyrics_only = False
 op_only = False
 ed_only = False
 OP_name = "OP - DiSCOVER THE FUTURE"
@@ -353,7 +353,7 @@ with open(sub_file, "r", encoding="utf8") as file:
             "next time", "card", "building", "door", "nextep", "tvlogo", "greennote"
             "rednote", "bluenote", "note", "paper", "script", "green room", "movie",
             "advert", "cd", "banner", "golden", "text", "tracks", "goal", "radio show",
-            "whiteboard", "tv anime"
+            "whiteboard", "tv anime", "next_time"
             )):
             separator(next_line, type="SIGNS")
         
