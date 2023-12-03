@@ -9,7 +9,7 @@ blank_stub = False
 if development:
     from secrets_dev import secrets
 else:
-    from secrets import secrets
+    from secrets_prod import secrets
 
 headers = {"Authorization": "Token " + secrets['API_ID_TOKEN']}
 
@@ -27,7 +27,7 @@ with open("links.json", 'r', encoding="utf8") as file:
         source_links.append(y)
 
 ##### Episode info #####
-index = 0
+index = 29
 # episode_title = "E7 - Shooting Star Moratorium"         # Page
 episode_title = episodes[index]
 file_name = episode_title.replace(" ","_").replace(":","-").replace("?","").replace("(","_").replace(")","_").replace("*","x")
@@ -53,9 +53,9 @@ insert_song = False
 lyrics_only = False
 op_only = False
 ed_only = False
-OP_name = "OP - DiSCOVER THE FUTURE"
-ED_name = "ED - Mirai Notes wo Kanadete"
-Insert_name = "Last Dimension"
+OP_name = "OP - Taiyou no Esperanza"
+ED_name = "ED - Colorful"
+Insert_name = "Happy Days Creation!"
 
 ##################
 # Init lists
