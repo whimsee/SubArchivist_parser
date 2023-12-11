@@ -4,7 +4,7 @@ import re
 
 development = False
 force_upload = False
-blank_stub = False
+blank_stub = True
 
 if development:
     from secrets_dev import secrets
@@ -19,7 +19,7 @@ source_links = []
 ### Easy titles from links.json ###
 with open("links.json", 'r', encoding="utf8") as file:
     data = json.load(file)
-    link_title = data['title'].replace(" ","_").replace(":","").replace(";", "_").replace("/", "_").replace(",","")
+    link_title = data['title'].replace(" ","_").replace(":","").replace(";", "_").replace("/", "_").replace(",","").replace("?","")
     link_season = data['season'].replace(" ","_")
     season_length = len(data['episodes'])
     for x, y in data['episodes'].items():
@@ -27,14 +27,14 @@ with open("links.json", 'r', encoding="utf8") as file:
         source_links.append(y)
 
 ##### Episode info #####
-index = 29
+index = 0
 # episode_title = "E7 - Shooting Star Moratorium"         # Page
 episode_title = episodes[index]
 file_name = episode_title.replace(" ","_").replace(":","-").replace("?","").replace("(","_").replace(")","_").replace("*","x")
 sub_file = "subs/" + link_title + "/" + link_season + "/" + file_name + ".ass"
 # anime_title = "Laid-Back Camp"                       # Book
 anime_title = data['title']
-debug_title = anime_title.replace("/","_")
+debug_title = anime_title.replace("/","_").replace("?","")
 # season = "Season 2"                            # Chapter
 season = data['season']
 source = "Crunchyroll"
@@ -55,7 +55,7 @@ op_only = False
 ed_only = False
 OP_name = "OP - Taiyou no Esperanza"
 ED_name = "ED - Colorful"
-Insert_name = "Happy Days Creation!"
+Insert_name = "Yume o Kakeru"
 
 ##################
 # Init lists
