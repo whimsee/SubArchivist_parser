@@ -6,7 +6,7 @@ import shutil
 with open("links.json", 'r', encoding="utf8") as file:
     data = json.load(file)
 #     title = data['title'].replace(" ","_").replace("'","\\'").replace("/", "//").replace(";", "_").replace(":", "")
-    title = data['title'].replace(" ","_").replace("/", "_").replace(";", "_").replace(":", "").replace(",","")
+    title = data['title'].replace(" ","_").replace("/", "_").replace(";", "_").replace(":", "").replace(",","").replace("?","")
     link_title = data['title'].replace(" ","_").replace("'","\\'").replace("/", "_").replace(";", "_").replace(":", "").replace("&", "\&").replace(",","").replace("?","")
     season = data['season'].replace(" ","_")
     
