@@ -19,7 +19,7 @@ source_links = []
 ### Easy titles from links.json ###
 with open("links.json", 'r', encoding="utf8") as file:
     data = json.load(file)
-    link_title = data['title'].replace(" ","_").replace(":","").replace(";", "_").replace("/", "_").replace(",","").replace("?","")
+    link_title = data['title'].replace(" ","_").replace(":","").replace(";", "_").replace("/", "_").replace(",","")
     link_season = data['season'].replace(" ","_")
     season_length = len(data['episodes'])
     for x, y in data['episodes'].items():
@@ -27,14 +27,14 @@ with open("links.json", 'r', encoding="utf8") as file:
         source_links.append(y)
 
 ##### Episode info #####
-index = 2
+index = 0
 # episode_title = "E7 - Shooting Star Moratorium"         # Page
 episode_title = episodes[index]
 file_name = episode_title.replace(" ","_").replace(":","-").replace("?","").replace("(","_").replace(")","_").replace("*","x")
 sub_file = "subs/" + link_title + "/" + link_season + "/" + file_name + ".ass"
 # anime_title = "Laid-Back Camp"                       # Book
 anime_title = data['title']
-debug_title = anime_title.replace("/","_").replace("?","")
+debug_title = anime_title.replace("/","_")
 # season = "Season 2"                            # Chapter
 season = data['season']
 source = "Crunchyroll"
@@ -55,7 +55,7 @@ op_only = False
 ed_only = False
 OP_name = "OP - Taiyou no Esperanza"
 ED_name = "ED - Colorful"
-Insert_name = "Yume o Kakeru"
+Insert_name = "Happy Days Creation!"
 
 ##################
 # Init lists
@@ -353,7 +353,7 @@ with open(sub_file, "r", encoding="utf8") as file:
             "next time", "card", "building", "door", "nextep", "tvlogo", "greennote"
             "rednote", "bluenote", "note", "paper", "script", "green room", "movie",
             "advert", "cd", "banner", "golden", "text", "tracks", "goal", "radio show",
-            "whiteboard", "tv anime", "next_time", "midlow", "next-time"
+            "whiteboard", "tv anime", "next_time"
             )):
             separator(next_line, type="SIGNS")
         
