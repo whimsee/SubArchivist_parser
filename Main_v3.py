@@ -27,7 +27,7 @@ with open("links.json", 'r', encoding="utf8") as file:
         source_links.append(y)
 
 ##### Episode info #####
-index = 2
+index = 0
 # episode_title = "E7 - Shooting Star Moratorium"         # Page
 episode_title = episodes[index]
 file_name = episode_title.replace(" ","_").replace(":","-").replace("?","").replace("(","_").replace(")","_").replace("*","x")
@@ -435,11 +435,12 @@ if not unhandled_lines or force_upload:
     print("Uploading", episode_title)
 ## Book search and create
 #     Init vars
+    todo = ""
     BOOK_ID = 0
     found = False
-    todo = ""
+    
 
-    response = requests.get(secrets['book_url'], headers=headers)
+    response = requests.get(secrets['book_url']+"?sort=-created_at", headers=headers)
     list = response.json()
 
     for data in list['data']:
@@ -448,6 +449,7 @@ if not unhandled_lines or force_upload:
             found = True
             log.append("Anime: " + data['name'] + "\n")
             break
+        
     if not found:
         # add to log
         log.append("Anime not found. Creating " + anime_title + "\n")
@@ -462,10 +464,13 @@ if not unhandled_lines or force_upload:
     ## Chapter search and create
     todo = ""
     CHAPTER_ID = 0
+    count = 0
+    offset = 0
     found = False
 
-    response = requests.get(secrets['chapter_url'], headers=headers)
+    response = requests.get(secrets['chapter_url']+"?sort=-created_at", headers=headers)
     list = response.json()
+    print(len(list['data']))
     for data in list['data']:
         if str(BOOK_ID) in str(data['book_id']):
             if data['name'] == season:

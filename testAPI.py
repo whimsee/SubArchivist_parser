@@ -1,5 +1,5 @@
 import requests
-from secrets import secrets
+from secrets_prod import secrets
 
 books_url_get = secrets['book_url']
 books_url_post = secrets['book_url']
@@ -15,8 +15,8 @@ headers = {"Authorization": "Token " + API_ID_TOKEN}
 ## GET (Value)
 ## Book search and create
 # Edit these info
-book_name = "Bookish!"
-chapter_name = "Season 5"
+book_name = "Isekai Cheat Magician"
+chapter_name = "Season 1 and OVA"
 episode_name = "episode 3"
 
 # optional for lyrics
@@ -54,7 +54,10 @@ ED_name = "ED_Lyrics"
 # CHAPTER_ID = 0
 # found = False
 # response = requests.get(secrets['chapter_url'], headers=headers)
-# list = response.json()
+
+response = requests.get("http://192.168.1.142:6875/api/chapters/?sort=-created_at", headers=headers)
+list = response.json()
+print(list)
 # for data in list['data']:
 #     if str(BOOK_ID) in str(data['book_id']):
 #         if data['name'] == chapter_name:
