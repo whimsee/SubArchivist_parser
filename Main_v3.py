@@ -27,7 +27,7 @@ with open("links.json", 'r', encoding="utf8") as file:
         source_links.append(y)
 
 ##### Episode info #####
-index = 1
+index = 11
 # episode_title = "E7 - Shooting Star Moratorium"         # Page
 episode_title = episodes[index]
 file_name = episode_title.replace(" ","_").replace(":","-").replace("?","").replace("(","_").replace(")","_").replace("*","x")
@@ -353,7 +353,7 @@ with open(sub_file, "r", encoding="utf8") as file:
             "next time", "card", "building", "door", "nextep", "tvlogo", "greennote"
             "rednote", "bluenote", "note", "paper", "script", "green room", "movie",
             "advert", "cd", "banner", "golden", "text", "tracks", "goal", "radio show",
-            "whiteboard", "tv anime", "next_time", "midlow", "next-time"
+            "whiteboard", "tv anime", "next_time", "midlow", "next-time", "game"
             )):
             separator(next_line, type="SIGNS")
         
@@ -470,7 +470,6 @@ if not unhandled_lines or force_upload:
 
     response = requests.get(secrets['chapter_url']+"?sort=-created_at", headers=headers)
     list = response.json()
-    print(len(list['data']))
     for data in list['data']:
         if str(BOOK_ID) in str(data['book_id']):
             if data['name'] == season:
