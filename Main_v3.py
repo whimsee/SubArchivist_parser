@@ -27,7 +27,7 @@ with open("links.json", 'r', encoding="utf8") as file:
         source_links.append(y)
 
 ##### Episode info #####
-index = 3
+index = 0
 # episode_title = "E7 - Shooting Star Moratorium"         # Page
 episode_title = episodes[index]
 file_name = episode_title.replace(" ","_").replace(":","-").replace("?","").replace("(","_").replace(")","_").replace("*","x")
@@ -41,7 +41,7 @@ source = "Crunchyroll"
 # source_link = "https://www.crunchyroll.com/watch/G63K48VZ6/shooting-star-moratorium"
 source_link = source_links[index]
 
-name_replace = True
+name_replace = False
 
 if name_replace:	
     with open("subs/" + link_title + "/" + link_season + "/name_dict.json") as json_data:
@@ -133,7 +133,10 @@ def separator(next_line, type="none", format="none", extra="none"):
         if name_replace:
             temp_speaker = replace_name(next_line.split(",")[4], name_dict, next_line.split(",")[1])
         else:
-            temp_speaker = next_line.split(",")[4]
+            if next_line.split(",")[4] == "":
+                temp_speaker = "---"
+            else:
+                temp_speaker = next_line.split(",")[4]
             
         if extra == "flashback":
             speaker = "**(Flashback) " + temp_speaker + "**<br>"
