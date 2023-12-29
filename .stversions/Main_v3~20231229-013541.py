@@ -27,7 +27,7 @@ with open("links.json", 'r', encoding="utf8") as file:
         source_links.append(y)
 
 ##### Episode info #####
-index = 4
+index = 11
 # episode_title = "E7 - Shooting Star Moratorium"         # Page
 episode_title = episodes[index]
 file_name = episode_title.replace(" ","_").replace(":","-").replace("?","").replace("(","_").replace(")","_").replace("*","x")
@@ -53,9 +53,9 @@ insert_song = False
 lyrics_only = False
 op_only = False
 ed_only = False
-OP_name = "OP - Colorful Dreams! Colorful Smiles!"
-ED_name = "ED - Yume ga Bokura no Taiyou sa"
-Insert_name = "Future Parade"
+OP_name = "OP - Taiyou no Esperanza"
+ED_name = "ED - Colorful"
+Insert_name = "Yume o Kakeru"
 
 ##################
 # Init lists
@@ -340,7 +340,7 @@ with open(sub_file, "r", encoding="utf8") as file:
             separator(next_line, type="DEFAULT", format="italics")
         elif "texting" in mode:
             separator(next_line, type="DEFAULT", extra="texting")
-        elif any(s in mode for s in ("messenger", "phone", "tweet", "cell"
+        elif any(s in mode for s in ("messenger", "phone", "tweet"
                                      )):
             separator(next_line, type="DEFAULT", extra="messenger")	
         elif "flashback" in mode:

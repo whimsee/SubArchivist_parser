@@ -20,14 +20,14 @@ source_links = []
 with open("links.json", 'r', encoding="utf8") as file:
     data = json.load(file)
     link_title = data['title'].replace(" ","_").replace(":","").replace(";", "_").replace("/", "_").replace(",","").replace("?","")
-    link_season = data['season'].replace(" ","_").replace(":", "")
+    link_season = data['season'].replace(" ","_")
     season_length = len(data['episodes'])
     for x, y in data['episodes'].items():
         episodes.append(x)
         source_links.append(y)
 
 ##### Episode info #####
-index = 4
+index = 8
 # episode_title = "E7 - Shooting Star Moratorium"         # Page
 episode_title = episodes[index]
 file_name = episode_title.replace(" ","_").replace(":","-").replace("?","").replace("(","_").replace(")","_").replace("*","x")
@@ -41,7 +41,7 @@ source = "Crunchyroll"
 # source_link = "https://www.crunchyroll.com/watch/G63K48VZ6/shooting-star-moratorium"
 source_link = source_links[index]
 
-name_replace = True
+name_replace = False
 
 if name_replace:	
     with open("subs/" + link_title + "/" + link_season + "/name_dict.json") as json_data:
@@ -53,9 +53,9 @@ insert_song = False
 lyrics_only = False
 op_only = False
 ed_only = False
-OP_name = "OP - Colorful Dreams! Colorful Smiles!"
-ED_name = "ED - Yume ga Bokura no Taiyou sa"
-Insert_name = "Future Parade"
+OP_name = "OP - Taiyou no Esperanza"
+ED_name = "ED - Colorful"
+Insert_name = "Yume o Kakeru"
 
 ##################
 # Init lists
@@ -133,10 +133,7 @@ def separator(next_line, type="none", format="none", extra="none"):
         if name_replace:
             temp_speaker = replace_name(next_line.split(",")[4], name_dict, next_line.split(",")[1])
         else:
-            if next_line.split(",")[4] == "":
-                temp_speaker = "---"
-            else:
-                temp_speaker = next_line.split(",")[4]
+            temp_speaker = next_line.split(",")[4]
             
         if extra == "flashback":
             speaker = "**(Flashback) " + temp_speaker + "**<br>"
@@ -336,11 +333,11 @@ with open(sub_file, "r", encoding="utf8") as file:
                 separator(next_line, type="DEFAULT", format="italics")
             else:
                 separator(next_line, type="DEFAULT")
-        elif any(s in mode for s in ("italic", "internal", "innerthought", "thought")):
+        elif any(s in mode for s in ("italic", "internal", "innerthought")):
             separator(next_line, type="DEFAULT", format="italics")
         elif "texting" in mode:
             separator(next_line, type="DEFAULT", extra="texting")
-        elif any(s in mode for s in ("messenger", "phone", "tweet", "cell"
+        elif any(s in mode for s in ("messenger", "phone", "tweet"
                                      )):
             separator(next_line, type="DEFAULT", extra="messenger")	
         elif "flashback" in mode:
@@ -356,7 +353,7 @@ with open(sub_file, "r", encoding="utf8") as file:
             "next time", "card", "building", "door", "nextep", "tvlogo", "greennote"
             "rednote", "bluenote", "note", "paper", "script", "green room", "movie",
             "advert", "cd", "banner", "golden", "text", "tracks", "goal", "radio show",
-            "whiteboard", "tv anime", "next_time", "midlow", "next-time", "game"
+            "whiteboard", "tv anime", "next_time", "midlow", "next-time"
             )):
             separator(next_line, type="SIGNS")
         
