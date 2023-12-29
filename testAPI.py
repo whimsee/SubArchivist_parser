@@ -9,7 +9,8 @@ page_url_create = secrets['page_url']
 API_ID_TOKEN = secrets['API_ID_TOKEN']
 
 api_url = books_url_post
-headers = {"Authorization": "Token " + API_ID_TOKEN}
+# headers = {"Authorization": "Token " + API_ID_TOKEN}
+headers = {"Authorization": "Token " + "UulsEJ0ij9f7QhHlO2Y0gcHEey67Zbym:YwflRr3E3zQAfmArg2ZRzmFhCpaA4g5m"}
 
 ## FULL API SEQUENCE
 ## GET (Value)
@@ -55,7 +56,8 @@ ED_name = "ED_Lyrics"
 # found = False
 # response = requests.get(secrets['chapter_url'], headers=headers)
 
-response = requests.get("http://192.168.1.142:6875/api/chapters/?sort=-created_at", headers=headers)
+# response = requests.get("http://192.168.1.142:6875/api/chapters/?sort=-created_at", headers=headers)
+response = requests.get("https://test.yakuaru.com/api/books", headers=headers)
 list = response.json()
 print(list)
 # for data in list['data']:
