@@ -27,7 +27,7 @@ with open("links.json", 'r', encoding="utf8") as file:
         source_links.append(y)
 
 ##### Episode info #####
-index = 0
+index = 11
 # episode_title = "E7 - Shooting Star Moratorium"         # Page
 episode_title = episodes[index]
 file_name = episode_title.replace(" ","_").replace(":","-").replace("?","").replace("(","_").replace(")","_").replace("*","x")
@@ -452,7 +452,7 @@ if not unhandled_lines or force_upload:
     found = False
     
 
-    response = requests.get(secrets['book_url']+"?sort=-created_at", headers=headers)
+    response = requests.get(secrets['book_url']+"?sort=-created_at&count=300", headers=headers)
     list = response.json()
 
     for data in list['data']:
@@ -480,7 +480,7 @@ if not unhandled_lines or force_upload:
     offset = 0
     found = False
 
-    response = requests.get(secrets['chapter_url']+"?sort=-created_at", headers=headers)
+    response = requests.get(secrets['chapter_url']+"?sort=-created_at&count=300", headers=headers)
     list = response.json()
     for data in list['data']:
         if str(BOOK_ID) in str(data['book_id']):
