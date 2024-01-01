@@ -41,7 +41,7 @@ source = "Crunchyroll"
 # source_link = "https://www.crunchyroll.com/watch/G63K48VZ6/shooting-star-moratorium"
 source_link = source_links[index]
 
-name_replace = True
+name_replace = False
 
 if name_replace:	
     with open("subs/" + link_title + "/" + link_season + "/name_dict.json") as json_data:
@@ -270,13 +270,8 @@ with open(sub_file, "r", encoding="utf8") as file:
     dialogue.append("QC:<br>")
     dialogue.append("\n")
     
-    
-    if blank_stub:
-        dialogue.append("(This is incomplete since the names are blank on the source file. Feel free to edit them in. Dialogue is left as is.)<br>")
-        dialogue.append("\n")
-    else:
-        dialogue.append("(Please feel free to edit the speaker names. This is handled on a best-effort basis depending on how the subtitle file was created so they may be incomplete or inaccurate. Dialogue is left as is.)<br>")
-        dialogue.append("\n")
+    dialogue.append("(Please feel free to edit the speaker names if incomplete or inaccurate. Names are handled on a best-effort basis depending on the info on the source file. Dialogue is left as is.)<br>")
+    dialogue.append("\n")
     
     ## Loop for metadata-type data (Script Info)
     file.readline()
