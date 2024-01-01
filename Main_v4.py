@@ -26,7 +26,7 @@ with open("links.json", 'r', encoding="utf8") as file:
         source_links.append(y)
 
 ##### Episode info #####
-index = 0
+index = 19
 # episode_title = "E7 - Shooting Star Moratorium"         # Page
 episode_title = episodes[index]
 file_name = episode_title.replace(" ","_").replace(":","-").replace("?","").replace("(","_").replace(")","_").replace("*","x")
@@ -40,7 +40,7 @@ source = "Crunchyroll"
 # source_link = "https://www.crunchyroll.com/watch/G63K48VZ6/shooting-star-moratorium"
 source_link = source_links[index]
 
-name_replace = False
+name_replace = True
 
 if name_replace:	
     with open("subs/" + link_title + "/" + link_season + "/name_dict.json") as json_data:
