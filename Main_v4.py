@@ -27,7 +27,7 @@ with open("links.json", 'r', encoding="utf8") as file:
         source_links.append(y)
 
 ##### Episode info #####
-index = 11
+index = 0
 # episode_title = "E7 - Shooting Star Moratorium"         # Page
 episode_title = episodes[index]
 file_name = episode_title.replace(" ","_").replace(":","-").replace("?","").replace("(","_").replace(")","_").replace("*","x")
@@ -140,21 +140,21 @@ def separator(next_line, type="none", format="none", extra="none"):
     # Speaker
     if not type == "SIGNS":
         if name_replace:
-            temp_speaker = "[" + time + "] " + replace_name(next_line.split(",")[4], name_dict, next_line.split(",")[1])
+            temp_speaker = replace_name(next_line.split(",")[4], name_dict, next_line.split(",")[1])
         else:
             if next_line.split(",")[4] == "":
-                temp_speaker = "[" + time + "] " + "---"
+                temp_speaker = "---"
             else:
-                temp_speaker = "[" + time + "] " + next_line.split(",")[4]
+                temp_speaker = next_line.split(",")[4]
             
         if extra == "flashback":
-            speaker = "**(Flashback) " + temp_speaker + "**<br>"
+            speaker = "**" + "[" + time + "] " + "(Flashback) " + temp_speaker + "**<br>"
         elif extra == "texting":
-            speaker = "**[Texting] " + temp_speaker + "**<br>"
+            speaker = "**" + "[" + time + "] " + "[Texting] " + temp_speaker + "**<br>"
         elif extra == "messenger":
-            speaker = "**[Messenger] " + temp_speaker + "**<br>"
+            speaker = "**" + "[" + time + "] " + "[Messenger] " + temp_speaker + "**<br>"
         else:
-            speaker = "**" + temp_speaker + "**<br>"
+            speaker = "**" + "[" + time + "] " + temp_speaker + "**<br>"
             
     # Cleaned text. Only keep inline italics.        
     base_text = clean_text(next_line.split(",", 9)[9])
