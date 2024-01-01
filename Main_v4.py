@@ -4,7 +4,6 @@ import re
 
 development = False
 force_upload = False
-blank_stub = False
 
 if development:
     from secrets_dev import secrets
