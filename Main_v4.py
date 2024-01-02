@@ -27,7 +27,7 @@ with open("links.json", 'r', encoding="utf8") as file:
         source_links.append(y)
 
 ##### Episode info #####
-index = 11
+index = 22
 # episode_title = "E7 - Shooting Star Moratorium"         # Page
 episode_title = episodes[index]
 file_name = episode_title.replace(" ","_").replace(":","-").replace("?","").replace("(","_").replace(")","_").replace("*","x")
@@ -51,8 +51,8 @@ insert_song = False
 lyrics_only = False
 op_only = False
 ed_only = False
-OP_name = "OP - Colorful Dreams! Colorful Smiles!"
-ED_name = "ED - Yume ga Bokura no Taiyou sa"
+OP_name = "OP - 99.9"
+ED_name = "ED - Memosepia"
 Insert_name = "Future Parade"
 
 ##################
@@ -362,7 +362,8 @@ with open(sub_file, "r", encoding="utf8") as file:
             "next time", "card", "building", "door", "nextep", "tvlogo", "greennote"
             "rednote", "bluenote", "note", "paper", "script", "green room", "movie",
             "advert", "cd", "banner", "golden", "text", "tracks", "goal", "radio show",
-            "whiteboard", "tv anime", "next_time", "midlow", "next-time", "game"
+            "whiteboard", "tv anime", "next_time", "midlow", "next-time", "game", "naked chat",
+            "censor bar"
             )):
             separator(next_line, type="SIGNS")
         
@@ -449,7 +450,7 @@ if not unhandled_lines or force_upload:
     found = False
     
 
-    response = requests.get(secrets['book_url']+"?sort=-created_at&count=300", headers=headers)
+    response = requests.get(secrets['book_url']+"?count=300&sort=-created_at", headers=headers)
     list = response.json()
 
     for data in list['data']:
@@ -477,7 +478,7 @@ if not unhandled_lines or force_upload:
     offset = 0
     found = False
 
-    response = requests.get(secrets['chapter_url']+"?sort=-created_at&count=300", headers=headers)
+    response = requests.get(secrets['chapter_url']+"?count=300&sort=-created_at", headers=headers)
     list = response.json()
     for data in list['data']:
         if str(BOOK_ID) in str(data['book_id']):
