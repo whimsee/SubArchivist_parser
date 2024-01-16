@@ -344,7 +344,8 @@ with open(sub_file, "r", encoding="utf8") as file:
             separator(next_line, type="DEFAULT", format="italics")
         elif "texting" in mode:
             separator(next_line, type="DEFAULT", extra="texting")
-        elif "song_lyrics" in mode:
+        elif any(s in mode for s in ("song", "song_lyrics"
+                                     )):
             separator(next_line, type="DEFAULT", extra="song")
         elif any(s in mode for s in ("messenger", "phone", "tweet", "cell"
                                      )):
