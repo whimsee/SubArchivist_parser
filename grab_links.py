@@ -2,6 +2,7 @@ import json
 from pathlib import Path
 import subprocess
 import shutil
+import re
 
 title = ""
 season = ""
@@ -17,9 +18,9 @@ with open("grab.txt", 'r', encoding="utf8") as file:
     print("Title: ", title)
     print("Season :", season)
     
-    folder_title = title.replace(" ","_").replace("/", "_").replace(";", "_").replace(":", "").replace(",","").replace("?","")
-    link_title = title.replace(" ","_").replace("'","\\'").replace("/", "_").replace(";", "_").replace(":", "").replace("&", "\&").replace(",","").replace("?","")
-    folder_season = season.replace(" ","_").replace(":", "").replace("?","")
+    folder_title = re.sub("[/;:,?]", "", title).replace(" ", "_")
+    link_title = re.sub("['/;:&,?]", "", title).replace(" ", "_")
+    folder_season = re.sub("[:?]", "", season).replace(" ", "_")
     
     print(folder_title, link_title, folder_season)
     
@@ -36,9 +37,9 @@ with open("grab.txt", 'r', encoding="utf8") as file:
         
         print(episode_name, link)
         
-        file_name = episode_name.replace(" ","_").replace("'","\\'").replace(":", "-").replace("?","").replace("(", "_").replace(")","_").replace("*","x").replace("&", "")
+        file_name = re.sub("[':?()*&]", "", episode_name).replace(" ", "_")
         
-        subprocess.run("curl -o subs/" + folder_title + "/" + folder_season + "/" + file_name + ".ass $(crunchy-cli search --audio ja-JP -o '{{subtitle.locale}} {{subtitle.url}}' " + link + " | grep 'en-US' | awk '{print $2}')", shell=True)
+        subprocess.run("curl -o subs/" + link_title + "/" + folder_season + "/" + file_name + ".ass $(crunchy-cli search --audio ja-JP -o '{{subtitle.locale}} {{subtitle.url}}' " + link + " | grep 'en-US' | awk '{print $2}')", shell=True)
         
         episodes.update({episode_name : link})
     
