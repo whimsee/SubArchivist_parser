@@ -4,7 +4,8 @@ import re
 
 development = False
 force_upload = False
-name_replace = True
+name_replace = False
+title_case = False
 
 if development:
     from secrets_dev import secrets
@@ -27,7 +28,7 @@ with open("links.json", 'r', encoding="utf8") as file:
         source_links.append(y)
 
 ##### Episode info #####
-index = 0
+index = 10
 # episode_title = "E7 - Shooting Star Moratorium"         # Page
 episode_title = episodes[index]
 file_name = re.sub("[':?()*&]", "", episode_title).replace(" ", "_")
@@ -143,7 +144,10 @@ def separator(next_line, type="none", format="none", extra="none"):
             if next_line.split(",")[4] == "":
                 temp_speaker = "---"
             else:
-                temp_speaker = next_line.split(",")[4]
+                if title_case:
+                    temp_speaker = next_line.split(",")[4].title()
+                else:
+                    temp_speaker = next_line.split(",")[4]
             
         if extra == "flashback":
             speaker = "**" + "[" + time + "] " + "(Flashback) " + temp_speaker + "**<br>"
@@ -344,7 +348,7 @@ with open(sub_file, "r", encoding="utf8") as file:
             separator(next_line, type="DEFAULT", format="italics")
         elif "texting" in mode:
             separator(next_line, type="DEFAULT", extra="texting")
-        elif any(s in mode for s in ("song", "song_lyrics"
+        elif any(s in mode for s in ("song", "song_lyrics", "lyricsromajibd"
                                      )):
             separator(next_line, type="DEFAULT", extra="song")
         elif any(s in mode for s in ("messenger", "phone", "tweet", "cell"
