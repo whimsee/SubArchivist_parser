@@ -326,7 +326,7 @@ with open(sub_file, "r", encoding="utf8") as file:
         elif any(s in mode for s in ("default", "main", "top", "bd dx",
                                      "dx", "top dx", "narration", "any",
                                      "whitesmall", "bluesmall", "bluetext", "whitetext",
-                                     "narrator", "question", "4-koma"
+                                     "narrator", "question", "4-koma", "s01"
                                      )):
             if any(s in agent for s in (
                 "sign", "board", "desk", "note", "book", "text", "paper",
@@ -364,7 +364,7 @@ with open(sub_file, "r", encoding="utf8") as file:
             "rednote", "bluenote", "note", "paper", "script", "green room", "movie",
             "advert", "cd", "banner", "golden", "text", "tracks", "goal", "radio show",
             "whiteboard", "tv anime", "next_time", "midlow", "next-time", "game", "naked chat",
-            "censor bar"
+            "censor bar", "captions"
             )):
             separator(next_line, type="SIGNS")
         
