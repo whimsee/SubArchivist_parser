@@ -28,7 +28,7 @@ with open("links.json", 'r', encoding="utf8") as file:
         source_links.append(y)
 
 ##### Episode info #####
-index = 9
+index = 10
 # episode_title = "E7 - Shooting Star Moratorium"         # Page
 episode_title = episodes[index]
 file_name = re.sub("[':?()*&]", "", episode_title).replace(" ", "_")
@@ -353,7 +353,8 @@ with open(sub_file, "r", encoding="utf8") as file:
         elif any(s in mode for s in ("song", "song_lyrics", "lyricsromajibd"
                                      )):
             separator(next_line, type="DEFAULT", extra="song")
-        elif any(s in mode for s in ("messenger", "phone", "tweet", "cell"
+        elif any(s in mode for s in ("messenger", "phone", "tweet", "cell", "messages2",
+                                     "messages"
                                      )):
             separator(next_line, type="DEFAULT", extra="messenger")	
         elif "flashback" in mode:
@@ -374,7 +375,7 @@ with open(sub_file, "r", encoding="utf8") as file:
             "whiteboard", "tv anime", "next_time", "midlow", "next-time", "game", "naked chat",
             "censor bar", "captions", "study", "study1", "cert", "glasses", "club", "shirt",
             "shirt2", "jam bread", "chiha-traditional2-oe", "chiha-traditional", "chalkboard",
-            "chalkboard2", "gloom"
+            "chalkboard2", "gloom", "master"
             )):
             separator(next_line, type="SIGNS")
         
