@@ -4,8 +4,7 @@ import re
 
 development = False
 force_upload = False
-name_replace = True
-title_case = False
+blank_stub = False
 
 if development:
     from secrets_dev import secrets
@@ -20,18 +19,18 @@ source_links = []
 ### Easy titles from links.json ###
 with open("links.json", 'r', encoding="utf8") as file:
     data = json.load(file)
-    link_title = re.sub("['/;:&,?]", "", data['title']).replace(" ", "_")
-    link_season = re.sub("[:?]", "", data['season']).replace(" ", "_")
+    link_title = data['title'].replace(" ","_").replace(":","").replace(";", "_").replace("/", "_").replace(",","").replace("?","")
+    link_season = data['season'].replace(" ","_").replace(":", "")
     season_length = len(data['episodes'])
     for x, y in data['episodes'].items():
         episodes.append(x)
         source_links.append(y)
 
 ##### Episode info #####
-index = 0
+index = 11
 # episode_title = "E7 - Shooting Star Moratorium"         # Page
 episode_title = episodes[index]
-file_name = re.sub("[':?()*&]", "", episode_title).replace(" ", "_")
+file_name = episode_title.replace(" ","_").replace(":","-").replace("?","").replace("(","_").replace(")","_").replace("*","x")
 sub_file = "subs/" + link_title + "/" + link_season + "/" + file_name + ".ass"
 # anime_title = "Laid-Back Camp"                       # Book
 anime_title = data['title']
@@ -41,6 +40,8 @@ season = data['season']
 source = "Crunchyroll"
 # source_link = "https://www.crunchyroll.com/watch/G63K48VZ6/shooting-star-moratorium"
 source_link = source_links[index]
+
+name_replace = True
 
 if name_replace:	
     with open("subs/" + link_title + "/" + link_season + "/name_dict.json") as json_data:
@@ -52,9 +53,9 @@ insert_song = False
 lyrics_only = False
 op_only = False
 ed_only = False
-OP_name = "OP - Massara"
-ED_name = "ED - Stand by Me"
-Insert_name = "Future Parade"
+OP_name = "OP - Taiyou no Esperanza"
+ED_name = "ED - Colorful"
+Insert_name = "Yume o Kakeru"
 
 ##################
 # Init lists
@@ -127,15 +128,6 @@ def clean_text(text):
 ### Separator function for main body
 def separator(next_line, type="none", format="none", extra="none"):
     
-    time_in = next_line.split(",", 9)[1]
-    time_hour = time_in.split(":")[0]
-    time_min = time_in.split(":")[1]
-    time_sec = time_in.split(":")[2].split(".")[0]
-    if time_hour == "0":
-        time = time_min + ":" + time_sec
-    else:
-        time = time_hour + ":" + time_min + ":" + time_sec
-    
     # Speaker
     if not type == "SIGNS":
         if name_replace:
@@ -144,23 +136,16 @@ def separator(next_line, type="none", format="none", extra="none"):
             if next_line.split(",")[4] == "":
                 temp_speaker = "---"
             else:
-                if title_case:
-                    temp_speaker = next_line.split(",")[4].title()
-                else:
-                    temp_speaker = next_line.split(",")[4]
+                temp_speaker = next_line.split(",")[4]
             
         if extra == "flashback":
-            speaker = "**" + "[" + time + "] " + "(Flashback) " + temp_speaker + "**<br>"
+            speaker = "**(Flashback) " + temp_speaker + "**<br>"
         elif extra == "texting":
-            speaker = "**" + "[" + time + "] " + "[Texting] " + temp_speaker + "**<br>"
+            speaker = "**[Texting] " + temp_speaker + "**<br>"
         elif extra == "messenger":
-            speaker = "**" + "[" + time + "] " + "[Messenger] " + temp_speaker + "**<br>"
-        elif extra == "song":
-            speaker = "**" + "[" + time + "] " + "[SONG] " + temp_speaker + "**<br>"
-        elif extra == "poem":
-            speaker = "**" + "[" + time + "] " + "[POEM] " + temp_speaker + "**<br>"
+            speaker = "**[Messenger] " + temp_speaker + "**<br>"
         else:
-            speaker = "**" + "[" + time + "] " + temp_speaker + "**<br>"
+            speaker = "**" + temp_speaker + "**<br>"
             
     # Cleaned text. Only keep inline italics.        
     base_text = clean_text(next_line.split(",", 9)[9])
@@ -218,8 +203,8 @@ def separator(next_line, type="none", format="none", extra="none"):
     
     # If unhandled
     else:
-        print("Unhandled line: " + time_in + " " + mode + " " + next_line.split(",", 9)[4] + " " + base_text)
-        log.append("Unhandled line: " + time_in + " " + mode + " " + next_line.split(",", 9)[4] + " " + base_text)
+        print("Unhandled line: " + next_line.split(",", 9)[1] + " " + mode + " " + next_line.split(",", 9)[4] + " " + base_text)
+        log.append("Unhandled line: " + next_line.split(",", 9)[1] + " " + mode + " " + next_line.split(",", 9)[4] + " " + base_text)
 
 ### API GET
 def API_get(target, type="list", ID=0):
@@ -276,8 +261,13 @@ with open(sub_file, "r", encoding="utf8") as file:
     dialogue.append("QC:<br>")
     dialogue.append("\n")
     
-    dialogue.append("(Please feel free to edit the speaker names if incomplete or inaccurate. Names are handled on a best-effort basis depending on the info on the source file. Dialogue is left as is.)<br>")
-    dialogue.append("\n")
+    
+    if blank_stub:
+        dialogue.append("(This is incomplete since the names are blank on the source file. Feel free to edit them in. Dialogue is left as is.)<br>")
+        dialogue.append("\n")
+    else:
+        dialogue.append("(Please feel free to edit the speaker names. This is handled on a best-effort basis depending on how the subtitle file was created so they may be incomplete or inaccurate. Dialogue is left as is.)<br>")
+        dialogue.append("\n")
     
     ## Loop for metadata-type data (Script Info)
     file.readline()
@@ -332,7 +322,7 @@ with open(sub_file, "r", encoding="utf8") as file:
         elif any(s in mode for s in ("default", "main", "top", "bd dx",
                                      "dx", "top dx", "narration", "any",
                                      "whitesmall", "bluesmall", "bluetext", "whitetext",
-                                     "narrator", "question", "4-koma", "s01", "chiha-overlap"
+                                     "narrator", "question", "4-koma"
                                      )):
             if any(s in agent for s in (
                 "sign", "board", "desk", "note", "book", "text", "paper",
@@ -350,16 +340,11 @@ with open(sub_file, "r", encoding="utf8") as file:
             separator(next_line, type="DEFAULT", format="italics")
         elif "texting" in mode:
             separator(next_line, type="DEFAULT", extra="texting")
-        elif any(s in mode for s in ("song", "song_lyrics", "lyricsromajibd"
-                                     )):
-            separator(next_line, type="DEFAULT", extra="song")
-        elif any(s in mode for s in ("messenger", "phone", "tweet", "cell"
+        elif any(s in mode for s in ("messenger", "phone", "tweet"
                                      )):
             separator(next_line, type="DEFAULT", extra="messenger")	
         elif "flashback" in mode:
             separator(next_line, type="DEFAULT", extra="flashback")
-        elif "chiha-poem" in mode:
-            separator(next_line, type="DEFAULT", extra="poem")
         elif any(s in mode for s in (
             "sign", "sfx", "eyecatch", "next_chapter", "illustration", "next ep",
             "os", "ep title", "epnum", "generic caption", "preview", "fromhere",
@@ -371,8 +356,7 @@ with open(sub_file, "r", encoding="utf8") as file:
             "next time", "card", "building", "door", "nextep", "tvlogo", "greennote"
             "rednote", "bluenote", "note", "paper", "script", "green room", "movie",
             "advert", "cd", "banner", "golden", "text", "tracks", "goal", "radio show",
-            "whiteboard", "tv anime", "next_time", "midlow", "next-time", "game", "naked chat",
-            "censor bar", "captions"
+            "whiteboard", "tv anime", "next_time", "midlow", "next-time", "game"
             )):
             separator(next_line, type="SIGNS")
         
@@ -459,7 +443,7 @@ if not unhandled_lines or force_upload:
     found = False
     
 
-    response = requests.get(secrets['book_url']+"?count=300&sort=-created_at", headers=headers)
+    response = requests.get(secrets['book_url']+"?sort=-created_at", headers=headers)
     list = response.json()
 
     for data in list['data']:
@@ -487,7 +471,7 @@ if not unhandled_lines or force_upload:
     offset = 0
     found = False
 
-    response = requests.get(secrets['chapter_url']+"?count=300&sort=-created_at", headers=headers)
+    response = requests.get(secrets['chapter_url']+"?sort=-created_at", headers=headers)
     list = response.json()
     for data in list['data']:
         if str(BOOK_ID) in str(data['book_id']):

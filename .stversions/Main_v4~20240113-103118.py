@@ -5,7 +5,6 @@ import re
 development = False
 force_upload = False
 name_replace = True
-title_case = False
 
 if development:
     from secrets_dev import secrets
@@ -20,8 +19,8 @@ source_links = []
 ### Easy titles from links.json ###
 with open("links.json", 'r', encoding="utf8") as file:
     data = json.load(file)
-    link_title = re.sub("['/;:&,?]", "", data['title']).replace(" ", "_")
-    link_season = re.sub("[:?]", "", data['season']).replace(" ", "_")
+    link_title = data['title'].replace(" ","_").replace(":","").replace(";", "_").replace("/", "_").replace(",","").replace("?","")
+    link_season = data['season'].replace(" ","_").replace(":", "").replace("?","")
     season_length = len(data['episodes'])
     for x, y in data['episodes'].items():
         episodes.append(x)
@@ -31,7 +30,7 @@ with open("links.json", 'r', encoding="utf8") as file:
 index = 0
 # episode_title = "E7 - Shooting Star Moratorium"         # Page
 episode_title = episodes[index]
-file_name = re.sub("[':?()*&]", "", episode_title).replace(" ", "_")
+file_name = episode_title.replace(" ","_").replace(":","-").replace("?","").replace("(","_").replace(")","_").replace("*","x")
 sub_file = "subs/" + link_title + "/" + link_season + "/" + file_name + ".ass"
 # anime_title = "Laid-Back Camp"                       # Book
 anime_title = data['title']
@@ -144,10 +143,7 @@ def separator(next_line, type="none", format="none", extra="none"):
             if next_line.split(",")[4] == "":
                 temp_speaker = "---"
             else:
-                if title_case:
-                    temp_speaker = next_line.split(",")[4].title()
-                else:
-                    temp_speaker = next_line.split(",")[4]
+                temp_speaker = next_line.split(",")[4]
             
         if extra == "flashback":
             speaker = "**" + "[" + time + "] " + "(Flashback) " + temp_speaker + "**<br>"
@@ -157,8 +153,6 @@ def separator(next_line, type="none", format="none", extra="none"):
             speaker = "**" + "[" + time + "] " + "[Messenger] " + temp_speaker + "**<br>"
         elif extra == "song":
             speaker = "**" + "[" + time + "] " + "[SONG] " + temp_speaker + "**<br>"
-        elif extra == "poem":
-            speaker = "**" + "[" + time + "] " + "[POEM] " + temp_speaker + "**<br>"
         else:
             speaker = "**" + "[" + time + "] " + temp_speaker + "**<br>"
             
@@ -332,7 +326,7 @@ with open(sub_file, "r", encoding="utf8") as file:
         elif any(s in mode for s in ("default", "main", "top", "bd dx",
                                      "dx", "top dx", "narration", "any",
                                      "whitesmall", "bluesmall", "bluetext", "whitetext",
-                                     "narrator", "question", "4-koma", "s01", "chiha-overlap"
+                                     "narrator", "question", "4-koma"
                                      )):
             if any(s in agent for s in (
                 "sign", "board", "desk", "note", "book", "text", "paper",
@@ -350,16 +344,13 @@ with open(sub_file, "r", encoding="utf8") as file:
             separator(next_line, type="DEFAULT", format="italics")
         elif "texting" in mode:
             separator(next_line, type="DEFAULT", extra="texting")
-        elif any(s in mode for s in ("song", "song_lyrics", "lyricsromajibd"
-                                     )):
+        elif "song_lyrics" in mode:
             separator(next_line, type="DEFAULT", extra="song")
         elif any(s in mode for s in ("messenger", "phone", "tweet", "cell"
                                      )):
             separator(next_line, type="DEFAULT", extra="messenger")	
         elif "flashback" in mode:
             separator(next_line, type="DEFAULT", extra="flashback")
-        elif "chiha-poem" in mode:
-            separator(next_line, type="DEFAULT", extra="poem")
         elif any(s in mode for s in (
             "sign", "sfx", "eyecatch", "next_chapter", "illustration", "next ep",
             "os", "ep title", "epnum", "generic caption", "preview", "fromhere",
@@ -372,7 +363,7 @@ with open(sub_file, "r", encoding="utf8") as file:
             "rednote", "bluenote", "note", "paper", "script", "green room", "movie",
             "advert", "cd", "banner", "golden", "text", "tracks", "goal", "radio show",
             "whiteboard", "tv anime", "next_time", "midlow", "next-time", "game", "naked chat",
-            "censor bar", "captions"
+            "censor bar"
             )):
             separator(next_line, type="SIGNS")
         
