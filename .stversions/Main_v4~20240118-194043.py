@@ -4,7 +4,7 @@ import re
 
 development = False
 force_upload = False
-name_replace = False
+name_replace = True
 title_case = False
 
 if development:
@@ -28,7 +28,7 @@ with open("links.json", 'r', encoding="utf8") as file:
         source_links.append(y)
 
 ##### Episode info #####
-index = 6
+index = 11
 # episode_title = "E7 - Shooting Star Moratorium"         # Page
 episode_title = episodes[index]
 file_name = re.sub("[':?()*&]", "", episode_title).replace(" ", "_")
@@ -42,13 +42,9 @@ source = "Crunchyroll"
 # source_link = "https://www.crunchyroll.com/watch/G63K48VZ6/shooting-star-moratorium"
 source_link = source_links[index]
 
-
-with open("subs/" + link_title + "/" + link_season + "/name_dict.json") as json_data:
-    name_dict = json.load(json_data)
-
-for i, j in name_dict.items():
-    if "SIGN" in i:
-        sign_replace = j.split(",")
+if name_replace:	
+    with open("subs/" + link_title + "/" + link_season + "/name_dict.json") as json_data:
+        name_dict = json.load(json_data)
 
 # optional for lyrics
 upload_lyrics = False
@@ -320,7 +316,6 @@ with open(sub_file, "r", encoding="utf8") as file:
         
     ## Start another loop for dialogue events (Events). Uses separator
     while True:
-        sign_found = False
         next_line = file.readline()
         if not next_line:
             break
@@ -337,8 +332,7 @@ with open(sub_file, "r", encoding="utf8") as file:
         elif any(s in mode for s in ("default", "main", "top", "bd dx",
                                      "dx", "top dx", "narration", "any",
                                      "whitesmall", "bluesmall", "bluetext", "whitetext",
-                                     "narrator", "question", "4-koma", "s01", "chiha-overlap",
-                                     "left", "right"
+                                     "narrator", "question", "4-koma", "s01", "chiha-overlap"
                                      )):
             if any(s in agent for s in (
                 "sign", "board", "desk", "note", "book", "text", "paper",
@@ -360,7 +354,7 @@ with open(sub_file, "r", encoding="utf8") as file:
                                      )):
             separator(next_line, type="DEFAULT", extra="song")
         elif any(s in mode for s in ("messenger", "phone", "tweet", "cell", "messages2",
-                                     "messages", "bbs1", "bbs2"
+                                     "messages"
                                      )):
             separator(next_line, type="DEFAULT", extra="messenger")	
         elif "flashback" in mode:
@@ -381,28 +375,15 @@ with open(sub_file, "r", encoding="utf8") as file:
             "whiteboard", "tv anime", "next_time", "midlow", "next-time", "game", "naked chat",
             "censor bar", "captions", "study", "study1", "cert", "glasses", "club", "shirt",
             "shirt2", "jam bread", "chiha-traditional2-oe", "chiha-traditional", "chalkboard",
-            "chalkboard2", "gloom", "master", "list", "people", "turkey", "scary", "grunt",
-            "tv-overlay", "yumitv", "digest", "digest2", "cheese", "suotv", "over", "42",
-            "queen", "aster", "tv2", "handwriting", "miya", "dude", "fluttery", "strategy2",
-            "green", "liver", "creepy2", "creepy3", "33rd", "prelims-3", "prelims-1", "got it",
-            "student", "inthe", "sleepy", "inorder", "torestore"
+            "chalkboard2", "gloom", "master"
             )):
             separator(next_line, type="SIGNS")
         
         # Catches unhandled lines
         else:
-            try:
-                for word in sign_replace:
-                    if re.search(r'^' + mode + r'$', word):
-                        sign_found = True
-            except NameError:
-                pass
-            
-            if sign_found:
-                separator(next_line, type="SIGNS")
-            elif any(s in agent for s in (
+            if any(s in agent for s in (
                 "fx", "text", "sign", "shirt", "eyecatch", "label", "title", "banner",
-                "stamp", "card", "door", "tv", "envelope", "box", "caption"
+                "stamp", "card", "door", "tv", "envelope", "box"
                 )):
                 separator(next_line, type="SIGNS")
             elif any(s in agent for s in (
