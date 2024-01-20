@@ -21,7 +21,7 @@ source_links = []
 with open("links.json", 'r', encoding="utf8") as file:
     data = json.load(file)
     link_title = re.sub("['/;:&,?]", "", data['title']).replace(" ", "_")
-    link_season = re.sub("[:?]", "", data['season']).replace(" ", "_")
+    link_season = re.sub("['/;:&,?]", "", data['season']).replace(" ", "_")
     season_length = len(data['episodes'])
     for x, y in data['episodes'].items():
         episodes.append(x)
@@ -31,7 +31,7 @@ with open("links.json", 'r', encoding="utf8") as file:
 index = 0
 # episode_title = "E7 - Shooting Star Moratorium"         # Page
 episode_title = episodes[index]
-file_name = re.sub("[':?()*&]", "", episode_title).replace(" ", "_")
+file_name = re.sub("[/':?()*&]", "", episode_title).replace(" ", "_")
 sub_file = "subs/" + link_title + "/" + link_season + "/" + file_name + ".ass"
 # anime_title = "Laid-Back Camp"                       # Book
 anime_title = data['title']
