@@ -33,7 +33,7 @@ with open("grab.txt", 'r', encoding="utf8") as file:
         if not link:
             break
         
-        episode_name = subprocess.getoutput('crunchy-cli search "' +  link + '" --audio ja-JP -o "E{{episode.number}} - {{episode.title}}"')
+        episode_name = subprocess.getoutput('crunchy-cli search "' +  link + '" --audio ja-JP -o "E{{episode.sequence_number}} - {{episode.title}}"')
         
         print(episode_name, link)
         
@@ -58,7 +58,7 @@ except FileExistsError:
 
 # Generate links.json for processing
 with open("subs/" + folder_title + "/" + folder_season + "/" + "links.json", "w", encoding="utf8") as file:
-    json.dump(data, file,  ensure_ascii=False, indent=4)
+    json.dump(data, file,  ensure_ascii=False, indent="\t", separators=(',', ' : '))
     
     
     

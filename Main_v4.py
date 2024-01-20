@@ -4,7 +4,7 @@ import re
 
 development = False
 force_upload = False
-name_replace = False
+name_replace = True
 title_case = False
 
 if development:
