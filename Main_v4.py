@@ -338,7 +338,7 @@ with open(sub_file, "r", encoding="utf8") as file:
                                      "dx", "top dx", "narration", "any",
                                      "whitesmall", "bluesmall", "bluetext", "whitetext",
                                      "narrator", "question", "4-koma", "s01", "chiha-overlap",
-                                     "left", "right"
+                                     "left", "right", "volley-overlap"
                                      )):
             if any(s in agent for s in (
                 "sign", "board", "desk", "note", "book", "text", "paper",
