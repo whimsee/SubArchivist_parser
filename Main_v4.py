@@ -1,6 +1,7 @@
 import json
 import requests
 import re
+import sys
 
 development = False
 force_upload = False
@@ -28,7 +29,11 @@ with open("links.json", 'r', encoding="utf8") as file:
         source_links.append(y)
 
 ##### Episode info #####
-index = 1
+try:
+    index = int(sys.argv[1])
+except IndexError:
+    index = 0
+
 # episode_title = "E7 - Shooting Star Moratorium"         # Page
 episode_title = episodes[index]
 file_name = re.sub("[/':?()*&\"]", "", episode_title).replace(" ", "_")
