@@ -4,8 +4,8 @@ import re
 
 development = False
 force_upload = False
-name_replace = True
-title_case = False
+name_replace = False
+title_case = True
 
 if development:
     from secrets_dev import secrets
@@ -28,10 +28,10 @@ with open("links.json", 'r', encoding="utf8") as file:
         source_links.append(y)
 
 ##### Episode info #####
-index = 0
+index = 7
 # episode_title = "E7 - Shooting Star Moratorium"         # Page
 episode_title = episodes[index]
-file_name = re.sub("[/':?()*&]", "", episode_title).replace(" ", "_")
+file_name = re.sub("[/':?()*&]", "", episode_title).replace(" ", "_").replace(r'"',"")
 sub_file = "subs/" + link_title + "/" + link_season + "/" + file_name + ".ass"
 # anime_title = "Laid-Back Camp"                       # Book
 anime_title = data['title']
