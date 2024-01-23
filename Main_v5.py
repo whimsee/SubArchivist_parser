@@ -5,7 +5,7 @@ import sys
 
 development = False
 force_upload = False
-name_replace = True
+name_replace = False
 title_case = False
 
 
@@ -21,7 +21,7 @@ try:
     end = int(sys.argv[2])
     multiple = True
 except IndexError:
-    index = 11
+    index = 1
     multiple = False
 
 episodes = []
@@ -122,6 +122,7 @@ def separator(next_line, type="none", format="none", extra="none"):
     time_hour = time_in.split(":")[0]
     time_min = time_in.split(":")[1]
     time_sec = time_in.split(":")[2].split(".")[0]
+    mode = next_line.split(",")[3].lower()
     if time_hour == "0":
         time = time_min + ":" + time_sec
     else:
@@ -620,16 +621,15 @@ try:
             
             parse_subs(i)
             lines = len(dialogue)
-            print("DONE " + str(lines) + " lines")
-            
+            print("DONE " + str(lines) + " lines")     
+
         except AbortUpload:
             print("Unhandled lines. start from index " + str(i))
             lines = len(dialogue)
             print("DONE " + str(lines) + " lines")
-            break
-                
+            break          
+
 except NameError:
-    
     ##################
     # Init lists
     script_info = {}
