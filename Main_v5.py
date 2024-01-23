@@ -436,6 +436,7 @@ def upload_api():
     ## FULL API SEQUENCE
             
     if unhandled_lines and multiple:
+        log_handler()
         raise AbortUpload
     
     if not unhandled_lines or force_upload:
