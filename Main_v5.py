@@ -555,7 +555,7 @@ def upload_api():
 
 def log_handler():
     ## Handle log
-    lines = len(dialogue)
+    
     for x, y in script_info.items():
         log_text = x + ": " + y
         log.append(log_text)
@@ -570,7 +570,7 @@ def log_handler():
     with open('dumps/' + debug_title + '-' + file_name + '-log.txt', 'w', encoding="utf8") as f:
         f.write(log_full)
     
-    print("DONE " + str(lines) + " lines")
+    
     
 
 ################ MAIN LOOP ###############
@@ -618,10 +618,14 @@ try:
             source_link = source_links[i]    
             
             parse_subs(i)
+            lines = len(dialogue)
+            print("DONE " + str(lines) + " lines")
         except AbortUpload:
             print("Unhandled lines. start from index " + str(i))
+            lines = len(dialogue)
+            print("DONE " + str(lines) + " lines")
             break
-        
+                
 except NameError:
     multiple = False
     ##################
@@ -646,6 +650,9 @@ except NameError:
     source_link = source_links[index]    
     
     parse_subs(index)
+    
+    lines = len(dialogue)
+    print("DONE " + str(lines) + " lines")
     
     
     
