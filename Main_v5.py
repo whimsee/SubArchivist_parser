@@ -19,8 +19,10 @@ headers = {"Authorization": "Token " + secrets['API_ID_TOKEN']}
 try:
     start = int(sys.argv[1])
     end = int(sys.argv[2])
+    multiple = True
 except IndexError:
-    index = 0
+    index = 11
+    multiple = False
 
 episodes = []
 source_links = []
@@ -64,13 +66,13 @@ def replace_all(text, dic):
         text = text.replace(i, j)
 
     if r"{\i1}" in text and not r"{\i0}" in text:
-#         print("check italics")
+        # print("check italics")
         if not r"{\i}" in text:
-        #         print("check italics")
+            # print("check italics")
             text = text.rstrip() + "{\i0}"
     elif r"{\i0}" in text and not r"{\i1}" in text:
         text = text.strip(r"{\i0}")
-#         text = text.replace("{\i0}","")
+        # text = text.replace("{\i0}","")
 
     for i, j in dic.items():
         text = text.replace(i, j)
@@ -104,11 +106,11 @@ pre_dictionary = {
 
 def clean_text(text):
     if any(s in text for s in ("{", "}")):
-#         text = text.strip("")
+        # text = text.strip("")
         temp_text = replace_all(text, sub_dictionary)
         sub_text = re.sub("[\{\[].*?[\}\]]", "", temp_text)
         this_line = sub_text.replace(r"\N", " ").replace(r"\n", " ")
-#         print(this_line)
+        # print(this_line)
         return this_line
     else:
         return text
@@ -153,7 +155,7 @@ def separator(next_line, type="none", format="none", extra="none"):
             
     # Cleaned text. Only keep inline italics.        
     base_text = clean_text(next_line.split(",", 9)[9])
-#     print(base_text)
+    # print(base_text)
     
     ## Default setting
     if type == "DEFAULT":
@@ -595,7 +597,6 @@ def log_handler():
 try:
     for i in range(start, end):
         try:
-            multiple = True
             ##################
             # Init lists
             script_info = {}
@@ -620,6 +621,7 @@ try:
             parse_subs(i)
             lines = len(dialogue)
             print("DONE " + str(lines) + " lines")
+            
         except AbortUpload:
             print("Unhandled lines. start from index " + str(i))
             lines = len(dialogue)
@@ -627,7 +629,7 @@ try:
             break
                 
 except NameError:
-    multiple = False
+    
     ##################
     # Init lists
     script_info = {}
