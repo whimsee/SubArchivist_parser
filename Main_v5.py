@@ -5,7 +5,7 @@ import sys
 
 development = False
 force_upload = False
-name_replace = False
+name_replace = True
 title_case = False
 
 
@@ -21,7 +21,7 @@ try:
     end = int(sys.argv[2])
     multiple = True
 except IndexError:
-    index = 1
+    index = 0
     multiple = False
 
 episodes = []
@@ -37,7 +37,7 @@ with open("links.json", 'r', encoding="utf8") as file:
         episodes.append(x)
         source_links.append(y)
 
-with open("subs/" + link_title + "/" + link_season + "/name_dict.json") as json_data:
+with open("subs/" + link_title + "/" + link_season + "/name_dict.json", encoding="utf8") as json_data:
     name_dict = json.load(json_data)
 
 for i, j in name_dict.items():
@@ -69,7 +69,7 @@ def replace_all(text, dic):
         # print("check italics")
         if not r"{\i}" in text:
             # print("check italics")
-            text = text.rstrip() + "{\i0}"
+            text = text.rstrip() + r"{\i0}"
     elif r"{\i0}" in text and not r"{\i1}" in text:
         text = text.strip(r"{\i0}")
         # text = text.replace("{\i0}","")
@@ -88,19 +88,19 @@ def replace_name(text, dic, tracker):
     return text
 
 sub_dictionary = {
-    "{\i1} " : " *",
-    " {\i}" : "*",
-    " {\i0}" : "* ",
-    "{\i1}" : "*",
-    "{\i}" : "*",
-    "{\i0}" : "*"
+    r"{\i1} " : " *",r"{\i}\N" : r"{\i}<br>\n&nbsp;&nbsp;&nbsp;&nbsp;",
+    r" {\i}" : "*",
+    r" {\i0}" : "* ",
+    r"{\i1}" : "*",
+    r"{\i}" : "*",
+    r"{\i0}" : "*"
     }
 
 pre_dictionary = {
     "*" : "°",
     r"{\an2\i1}" : r"{\i1}",
     r"{\an8\i1}" : r"{\i1}",
-    r"{\i}\N" : "{\i}<br>\n&nbsp;&nbsp;&nbsp;&nbsp;",
+    r"{\i}\N" : r"{\i}<br>\n&nbsp;&nbsp;&nbsp;&nbsp;",
     r"\N": "<br>\n&nbsp;&nbsp;&nbsp;&nbsp;"
     }
 
@@ -108,7 +108,7 @@ def clean_text(text):
     if any(s in text for s in ("{", "}")):
         # text = text.strip("")
         temp_text = replace_all(text, sub_dictionary)
-        sub_text = re.sub("[\{\[].*?[\}\]]", "", temp_text)
+        sub_text = re.sub(r"[\{\[].*?[\}\]]", "", temp_text)
         this_line = sub_text.replace(r"\N", " ").replace(r"\n", " ")
         # print(this_line)
         return this_line
@@ -475,8 +475,6 @@ def upload_api():
         ## Chapter search and create
         todo = ""
         CHAPTER_ID = 0
-        count = 0
-        offset = 0
         found = False
 
         response = requests.get(secrets['chapter_url']+"?count=300&sort=-created_at", headers=headers)
