@@ -5,8 +5,8 @@ import sys
 
 development = False
 force_upload = False
-name_replace = True
-title_case = False
+name_replace = False
+title_case = True
 
 
 if development:
@@ -609,7 +609,7 @@ try:
             
             ##### Episode info #####
             episode_title = episodes[i]
-            file_name = re.sub("[/':?()*&\"]", "", episode_title).replace(" ", "_")
+            file_name = re.sub(r"[/':?()*&;\\]", "", episode_title).replace(" ", "_")
             sub_file = "subs/" + link_title + "/" + link_season + "/" + file_name + ".ass"
             anime_title = data['title']
             debug_title = anime_title.replace("/","_").replace("?","")
@@ -641,7 +641,7 @@ except NameError:
     
     ##### Episode info #####
     episode_title = episodes[index]
-    file_name = re.sub("[/':?()*&\"]", "", episode_title).replace(" ", "_")
+    file_name = re.sub(r"[/':?()*&;\\]", "", episode_title).replace(" ", "_")
     sub_file = "subs/" + link_title + "/" + link_season + "/" + file_name + ".ass"
     anime_title = data['title']
     debug_title = anime_title.replace("/","_").replace("?","")
