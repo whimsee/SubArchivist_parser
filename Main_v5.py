@@ -5,9 +5,8 @@ import sys
 
 development = False
 force_upload = False
-name_replace = False
-title_case = True
-
+name_replace = True
+title_case = False
 
 if development:
     from secrets_dev import secrets
@@ -331,7 +330,7 @@ def parse_subs(index):
                                          "left", "right", "volley-overlap"
                                          )):
                 if any(s in agent for s in (
-                    "sign", "board", "desk", "note", "book", "text", "paper",
+                    "board", "desk", "note", "book", "text", "paper",
                     "tape", "title", "nameplate", "notice", "sheet", "calendar",
                     "phone screen", "building", "exhibition", "phone", "leaflet",
                     "wall", "screen", "slate", "next", "alt", "preview", "eyecatch",
