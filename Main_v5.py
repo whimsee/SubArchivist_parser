@@ -5,7 +5,7 @@ import sys
 
 development = False
 force_upload = False
-name_replace = True
+name_replace = False
 title_case = False
 
 if development:
@@ -592,7 +592,7 @@ def log_handler():
 # print(script_info)
 
 
-try:
+if multiple:
     for i in range(start, end):
         try:
             ##################
@@ -626,7 +626,7 @@ try:
             print("DONE " + str(lines) + " lines")
             break          
 
-except NameError:
+else:
     ##################
     # Init lists
     script_info = {}
