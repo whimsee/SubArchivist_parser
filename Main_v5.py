@@ -6,7 +6,7 @@ import sys
 development = False
 force_upload = False
 name_replace = False
-title_case = False
+title_case = True
 
 if development:
     from secrets_dev import secrets
@@ -82,8 +82,8 @@ def replace_name(text, dic, tracker):
         if text == i:
             text = j
             return text
-    print("Unhandled name: " + tracker + " " + text + "\n")
-    log.append("Unhandled name: " + tracker + " " + text + "\n")
+    print("Unhandled name: " + tracker + " | " + text + "\n")
+    log.append("Unhandled name: " + tracker + " | " + text + "\n")
     return text
 
 sub_dictionary = {
@@ -209,8 +209,8 @@ def separator(next_line, type="none", format="none", extra="none"):
     
     # If unhandled
     else:
-        print("Unhandled line: " + time_in + " " + mode + " " + next_line.split(",", 9)[4] + " " + base_text)
-        log.append("Unhandled line: " + time_in + " " + mode + " " + next_line.split(",", 9)[4] + " " + base_text)
+        print("Unhandled line: " + time_in + " | " + mode + " | " + next_line.split(",", 9)[4] + " " + base_text)
+        log.append("Unhandled line: " + time_in + " | " + mode + " | " + next_line.split(",", 9)[4] + " " + base_text)
 
 ### API GET
 def API_get(target, type="list", ID=0):
