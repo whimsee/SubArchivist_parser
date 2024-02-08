@@ -1,0 +1,112 @@
+Prerequisites:
+crunchy-cli (https://github.com/crunchy-labs/crunchy-cli)
+Python 3
+Python IDE like Thonny or VSCodium (for the validator)
+Text editor (for the .ass and .json files)
+
+===========================
+Starter kit:
+aggregate_links.py
+links.json
+name_dict.json (sample)
+validator.py
+/subs (sample)
+==========================
+
+.ass dialogue lines at a glance:
+(comma-separated, except for the dialogue)
+0, 0:06:03.70 , 0:06:06.30 , Default , Yukari , 0000 , 0000 , 0000 , , You moved here from Tokyo, right?
+X, time-in , time-out , "mode" , "speaker" , X , X , X , X , dialogue.
+
+X - Not needed.
+
+time-in/out- the line is present during this. Useful when finding a specific line.
+
+"mode" - Denotes formatting style, but has unconventional uses too. The parser uses this to determine the type of dialogue and how it gets formatted on the page. Regular dialogue is usually marked "Default" or "Main" with special additions like "italics". Signs are different; I've given them a blanket handling of "sign" for convenience as they can be all over the place.
+
+"speaker" - The speaker. On pages, this is shown for regular dialogue, not signs. There's an extra handling for flashbacks and messenger-style dialogue for text or BBS messages. You don't usually have to bother with them since it's handled automatically or ambiguous enough that it can be handled either as dialogue or a sign with no issue.
+
+===================================
+
+Setup:
+1. In a Linux distro (I'm using Arch but Ubuntu should be fine), install cruncy-cli (https://github.com/crunchy-labs/crunchy-cli) and login with [crunchy-cli login --credentials "user:password"] via terminal. It's persistent so it only has to be done once. Most of the code is in Python and an IDE is technically optional but convenient to use for the validator.
+
+2. Fill in the metadata info and links in links.json. One per season. Can be as many episodes as necessary. Multiple chapters can fall under the a series with the same "title".
+
+Bookstack, the wiki backend, organizes pages by shelf (unused) --> book (title) --> chapter (season) --> page (episode). Make sure to get this right with no blanks entries since all the info here is used to automate the rest of the process. Watch out for special characters. I've set a handling for most of them but if a step in the process fails, it's usually because of that so change those characters if needed.
+
+Sample: "key" : "value"
+
+{  
+    "title" : "Anime title",
+    "season" : "Season 1",
+    "episodes" : {
+        "EP 1 - The first episode" : "https://some-crunchyroll.link",
+        "EP 2 - The second episode" : "https://use-the-link-you-use-to-watch-the-episode.link"
+    }
+}
+
+Leave "title" "season" "episodes" keys as is. The rest can be changed. Only episodes (EP 1 and 2, etc) can be added. There's no strict convention for naming or series organzation, so an OVA can be added to the same season or an episode can be numbered 5.5. Or be organized by cour, though it is handled as a season internally.
+
+3. aggregate_links.py - When done with links.json, execute this program in the terminal, not in the IDE. Should be something like "python3 aggregate_links.py". It'll take what's in links.json, create the ./subs/"title"/"season"/ subdirectories and dump the .ass subs there (named based on the EP title). Then it'll copy links.json into that folder (for convenience) and generate a name_dict.json file which you'll need later. This part is Linux-only because it uses Linux commands along with crunchy-cli.
+
+4. validator.py - Only the "index" variable at line 5 needs to be changed. It's mapped to the local links.json file and it'll pull everything from there. EP 1 is index = 0, EP 2 is index = 1 and so on. Run it in the IDE (terminal is fine as well) and it'll go through each line and print out what needs to be handled. It also generates a log dump at ./dumps with the same info.
+
+"Unhandled line" mean the parser is expecting a different "mode" (check .ass dialogue lines at a glance above); you can leave as is or edit the .ass file. "Unhandled name" means the "speaker" isn't assigned on the name_dict.json file.
+
+Functionally, this is just a stripped-down parser/API uploader so if it passes here, it's good to go... until I add more handlings for edge cases but it's no big deal.
+
+5. name_dict.json - Each season folder contains a name substitution dictionary (use the one in their respective folder instead of the one that came with this) and this is what the validator uses to check if a "speaker" is accounted for.
+
+Sample:
+
+{
+    "Yukari" : "Yukari",
+    "Kouichi" : "Kouichi",
+    "Kouchi" : "Kouichi",
+    "Taka" : "Taka",
+    "Teshy" : "Teshy",
+    "Teshigawara" : "Teshigawara",
+    "Saruta" : "Saruta",
+    "Tamie" : "Tamie",
+    "Doctor" : "Doctor",
+    "Sugiura" : "Sugiura",
+    "Boy1" : " Boy 1",
+    "Boy2" : "Boy 2"
+}
+
+The left side are the input names from the .ass file. The right side is what is shown on the pages. The left side needs to be unique, while the right side can have duplicates since typos and weird namings can happen. If the validator prints out "Unhandled name", a name from the .ass file is missing on the left side. Yup, it's a hassle but every name has to be accounted for. Most errors happen here because they probably didn't expect anyone to poke into these files. lol.
+
+=========================================
+Workflow:
+1. Fill in links.json
+2. Run aggregate_links.py in terminal
+3. Run validator.py (note the index) and check what needs handling.
+4. Fill in name_dict.json and/or edit the .ass file as needed.
+5. Run validator until it PASSES. Or not for Unhandled lines.
+6. Zip up title/season/ folders (ie. Another\Season_1) and send to me. I'm using the same tools and directories to parse and upload it. This means the links.json, name_dict.json and all the .ass files in the folder.
+7. Start over with a new links.json file.
+
+Basically, load the subs, check the names, turn them in. Rinse, repeat.
+
+==============================================
+Tips:
+Best-effort basis. Doesn't have to be perfect or pass completely. Everything can and have gone wrong with these subs. lol. Feel free to handle each situation as needed, as long as the name tags and attribution are accurate and consistent. That means, except for the dialogue and the ordering, the metadata in the .ass files can be changed so parser can process it properly. Don't worry too much about Unhandled Lines. Unhandled names take priority.
+
+If you're unsure, just ask or pass it along to me when you're done with a series. I'll go over them anyway to check for formatting shenanigans (usually related to unhandled lines) and edge cases and/or fill in the blanks.
+
+JSON values are separated by commas. Make sure the final entry doesn't end in one. A cause of many odd errors.
+
+===============================================
+Cases to look out for:
+1. Blank names. It takes quite a while to label everything so I recommend just assigning a name (it's usually blank or "NTP") in the name_dict and passing it through. It's incomplete but at the least the dialogue is archived and anyone can come back to it later.
+
+2. Wildcards and blanket names. Some names are just letters like "A" that may refer to a mob character in one scene or a named character in the next. Sometimes it can happen mid-scene for the same character. I recommend not assigning them in the name_dict so it gets caught, then just changing it directly on the sub file to one you've already assigned. Same thing when "Mom" refers to any mom even though they have a name. Find+Replace helps a lot.
+
+3. Abbreviations and alternate names. A name like "Takeda" can show up as "TK" or "That guy with the glasses" later. Tedious but the name_dict allows you to assign the same output name to different input names so it stays consistent once it's processed. There are instances where it's valid for nicknames (ie. Teshigawara for Teshy because it's consistent with the dialogue)
+
+4. Names meant to be obscure for effect. Up to your discretion as I've left some names obscure (A generalized name on a flashback, even though we know who it actually is) if the labels explicitly did so.
+
+5. Ambiguous "modes". Some dialogue could be a sign or vice versa. Usually happens in text messages. Up to your discretion since it can be fuzzy. Or leave as is for me to handle.
+
+6. OP and ED. You don't have to worry about this but you might see this often since songs are sometimes subbed. For those I've assigned the modes "songs_op", "songs_ed", and "songs_insert" so it gets passed to their own pages instead of the epsiode's.
