@@ -18,9 +18,9 @@ with open("grab.txt", 'r', encoding="utf8") as file:
     print("Title: ", title)
     print("Season :", season)
     
-    folder_title = re.sub(r"['\"/;:&,?()<>]", "", title).replace(" ", "_")
+    folder_title = re.sub(r"['\"/;:&,?()<>.]", "", title).replace(" ", "_")
     link_title = re.sub(r"['\"/;:&,?()<>]", "", title).replace(" ", "_")
-    folder_season = re.sub(r"['\"/;:&,?()<>]", "", season).replace(" ", "_")
+    folder_season = re.sub(r"['\"/;:&,?()<>.]", "", season).replace(" ", "_")
     
     print(folder_title, link_title, folder_season)
     
