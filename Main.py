@@ -327,7 +327,8 @@ def parse_subs(index):
                                          "dx", "top dx", "narration", "any",
                                          "whitesmall", "bluesmall", "bluetext", "whitetext",
                                          "narrator", "question", "4-koma", "s01", "chiha-overlap",
-                                         "left", "right", "volley-overlap", "doge"
+                                         "left", "right", "volley-overlap", "doge", "funi1",
+                                         "fus", "funipop", "titan", "human"
                                          )):
                 if any(s in agent for s in (
                     "board", "desk", "note", "book", "text", "paper",
