@@ -6,7 +6,7 @@ import sys
 development = False
 force_upload = False
 name_replace = False
-title_case = True
+title_case = False
 
 if development:
     from secrets_dev import secrets
@@ -327,7 +327,7 @@ def parse_subs(index):
                                          "dx", "top dx", "narration", "any",
                                          "whitesmall", "bluesmall", "bluetext", "whitetext",
                                          "narrator", "question", "4-koma", "s01", "chiha-overlap",
-                                         "left", "right", "volley-overlap"
+                                         "left", "right", "volley-overlap", "doge"
                                          )):
                 if any(s in agent for s in (
                     "board", "desk", "note", "book", "text", "paper",
