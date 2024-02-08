@@ -29,8 +29,8 @@ source_links = []
 ### Easy titles from links.json ###
 with open("links.json", 'r', encoding="utf8") as file:
     data = json.load(file)
-    link_title = re.sub(r"['\"/;:&,?()]", "", data['title']).replace(" ", "_")
-    link_season = re.sub(r"['\"/;:&,?()]", "", data['season']).replace(" ", "_")
+    link_title = re.sub(r"['\"/;:&,?()<>]", "", data['title']).replace(" ", "_")
+    link_season = re.sub(r"['\"/;:&,?()<>]", "", data['season']).replace(" ", "_")
     season_length = len(data['episodes'])
     for x, y in data['episodes'].items():
         episodes.append(x)
@@ -608,7 +608,7 @@ if multiple:
             
             ##### Episode info #####
             episode_title = episodes[i]
-            file_name = re.sub(r"[/\"':?()*&;\\]", "", episode_title).replace(" ", "_")
+            file_name = re.sub(r"[/\"':?()*&;\\<>]", "", episode_title).replace(" ", "_")
             sub_file = "subs/" + link_title + "/" + link_season + "/" + file_name + ".ass"
             anime_title = data['title']
             debug_title = anime_title.replace("/","_").replace("?","")
@@ -640,7 +640,7 @@ else:
     
     ##### Episode info #####
     episode_title = episodes[index]
-    file_name = re.sub(r"[/\"':?()*&;\\]", "", episode_title).replace(" ", "_")
+    file_name = re.sub(r"[/\"':?()*&;\\<>]", "", episode_title).replace(" ", "_")
     sub_file = "subs/" + link_title + "/" + link_season + "/" + file_name + ".ass"
     anime_title = data['title']
     debug_title = anime_title.replace("/","_").replace("?","")

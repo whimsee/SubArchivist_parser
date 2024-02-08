@@ -18,9 +18,9 @@ with open("grab.txt", 'r', encoding="utf8") as file:
     print("Title: ", title)
     print("Season :", season)
     
-    folder_title = re.sub(r"['\"/;:&,?()]", "", title).replace(" ", "_")
-    link_title = re.sub(r"['\"/;:&,?()]", "", title).replace(" ", "_")
-    folder_season = re.sub(r"['\"/;:&,?()]", "", season).replace(" ", "_")
+    folder_title = re.sub(r"['\"/;:&,?()<>]", "", title).replace(" ", "_")
+    link_title = re.sub(r"['\"/;:&,?()<>]", "", title).replace(" ", "_")
+    folder_season = re.sub(r"['\"/;:&,?()<>]", "", season).replace(" ", "_")
     
     print(folder_title, link_title, folder_season)
     
@@ -37,7 +37,7 @@ with open("grab.txt", 'r', encoding="utf8") as file:
         
         print(episode_name, link)
         
-        file_name = re.sub(r"[/\"':?()*&;]", "", episode_name).replace(" ", "_")
+        file_name = re.sub(r"[/\"':?()*&;<>]", "", episode_name).replace(" ", "_")
         
         subprocess.run("curl -o subs/" + link_title + "/" + folder_season + "/" + file_name + ".ass $(crunchy-cli search --audio ja-JP -o '{{subtitle.locale}} {{subtitle.url}}' " + link + " | grep 'en-US' | awk '{print $2}')", shell=True)
         
