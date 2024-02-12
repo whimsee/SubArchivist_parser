@@ -50,15 +50,19 @@ data = {
     }
 
 # Generate name dictionary
+print("Generating name_dict.json")
 try:
     with open("subs/" + folder_title + "/" + folder_season + "/" + "name_dict.json", 'x') as file:
         file.write('{\n\t"All" : "All",\n\t"" : "---"\n}')
 except FileExistsError:
     pass
 
+print("Generating links.json")
 # Generate links.json for processing
 with open("subs/" + folder_title + "/" + folder_season + "/" + "links.json", "w", encoding="utf8") as file:
     json.dump(data, file,  ensure_ascii=False, indent="\t", separators=(',', ' : '))
+    
+print("DONE")
     
     
     
