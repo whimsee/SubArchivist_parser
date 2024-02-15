@@ -323,7 +323,7 @@ def parse_subs(index):
                 separator(next_line, type="LYRICS", extra="ED")
             elif mode == "songs_insert":
                 separator(next_line, type="LYRICS", extra="EXTRA")
-            elif any(s in mode for s in ("default", "main", "top", "bd dx",
+            elif any(s in mode for s in ("default", "main", "top", "bottom", "bd dx",
                                          "dx", "top dx", "narration", "any",
                                          "whitesmall", "bluesmall", "bluetext", "whitetext",
                                          "narrator", "question", "4-koma", "s01", "chiha-overlap",
