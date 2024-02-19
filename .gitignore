@@ -7,3 +7,6 @@ subs/
 dumps/
 @eadir/
 .stversions/
+.gitignore
+testing/
+Starter kit/
