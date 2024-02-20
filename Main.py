@@ -132,7 +132,7 @@ def separator(next_line, type="none", format="none", extra="none"):
         if name_replace:
             temp_speaker = replace_name(next_line.split(",")[4], name_dict, next_line.split(",")[1])
         else:
-            if next_line.split(",")[4] == "":
+            if next_line.split(",")[4] == "" or next_line.split(",")[4] == "NTP":
                 temp_speaker = "---"
             else:
                 if title_case:
