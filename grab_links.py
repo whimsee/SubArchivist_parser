@@ -53,7 +53,12 @@ data = {
 print("Generating name_dict.json")
 try:
     with open("subs/" + folder_title + "/" + folder_season + "/" + "name_dict.json", 'x') as file:
-        file.write('{\n\t"All" : "All",\n\t"" : "---"\n}')
+        names = {}
+        names.update({"All" : "All"})
+        names.update({"NTP" : "---"})
+        names.update({"" : "---"})
+        json.dump(names, file,  ensure_ascii=False, indent="\t", separators=(',', ' : '))
+#         file.write('{\n\t"All" : "All",\n\t"" : "---"\n}')
 except FileExistsError:
     pass
 
