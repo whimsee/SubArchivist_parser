@@ -16,6 +16,14 @@ else:
 headers = {"Authorization": "Token " + secrets['API_ID_TOKEN']}
 
 try:
+    if "--title-case" in sys.argv:
+        title_case = True
+    if "--name-replace" in sys.argv:
+        name_replace = True
+except IndexError:
+    pass
+
+try:
     start = int(sys.argv[1])
     end = int(sys.argv[2])
     multiple = True
