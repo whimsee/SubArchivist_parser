@@ -7,6 +7,7 @@ development = False
 force_upload = False
 name_replace = False
 title_case = False
+index = 0
 
 if development:
     from secrets_dev import secrets
@@ -15,6 +16,7 @@ else:
 
 headers = {"Authorization": "Token " + secrets['API_ID_TOKEN']}
 
+### command line handling (Defaults above)
 try:
     if "--title-case" in sys.argv:
         title_case = True
@@ -28,8 +30,9 @@ try:
     end = int(sys.argv[2])
     multiple = True
 except IndexError:
-    index = 0
     multiple = False
+
+##############################
 
 episodes = []
 source_links = []
@@ -51,7 +54,7 @@ for i, j in name_dict.items():
     if "SIGN" in i:
         sign_replace = j.split(",")
 
-# optional for lyrics
+### optional for lyrics
 upload_lyrics = False
 insert_song = False
 lyrics_only = False
