@@ -27,7 +27,10 @@ except IndexError:
 
 try:
     start = int(sys.argv[1])
-    end = int(sys.argv[2])
+    if sys.argv[2] == "end":
+        end = "end"
+    else:
+        end = int(sys.argv[2])
     multiple = True
 except IndexError:
     multiple = False
@@ -53,6 +56,9 @@ with open("subs/" + link_title + "/" + link_season + "/name_dict.json", encoding
 for i, j in name_dict.items():
     if "SIGN" in i:
         sign_replace = j.split(",")
+
+if end == "end":
+    end = season_length
 
 ### optional for lyrics
 upload_lyrics = False
