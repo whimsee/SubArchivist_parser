@@ -345,7 +345,7 @@ def parse_subs(index):
                                          "whitesmall", "bluesmall", "bluetext", "whitetext",
                                          "narrator", "question", "4-koma", "s01", "chiha-overlap",
                                          "left", "right", "volley-overlap", "doge", "funi1",
-                                         "fus", "funipop", "titan", "human"
+                                         "fus", "funipop", "titan", "human", "pv"
                                          )):
                 if any(s in agent for s in (
                     "board", "desk", "note", "book", "text", "paper",
@@ -363,7 +363,8 @@ def parse_subs(index):
                 separator(next_line, type="DEFAULT", format="italics")
             elif "texting" in mode:
                 separator(next_line, type="DEFAULT", extra="texting")
-            elif any(s in mode for s in ("song", "song_lyrics", "lyricsromajibd", "lyrics", "op_ed"
+            elif any(s in mode for s in ("song", "song_lyrics", "lyricsromajibd", "lyrics", "op_ed",
+                                        "e", "j"
                                          )):
                 separator(next_line, type="DEFAULT", extra="song")
             elif any(s in mode for s in ("messenger", "phone", "tweet", "cell", "messages2",
