@@ -360,7 +360,7 @@ def parse_subs(index):
                     separator(next_line, type="DEFAULT", format="italics")
                 else:
                     separator(next_line, type="DEFAULT")
-            elif any(s in mode for s in ("italic", "internal", "innerthought", "thought")):
+            elif any(s in mode for s in ("italic", "internal", "innerthought", "thought", "italique")):
                 separator(next_line, type="DEFAULT", format="italics")
             elif "texting" in mode:
                 separator(next_line, type="DEFAULT", extra="texting")
