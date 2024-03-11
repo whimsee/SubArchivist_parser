@@ -37,7 +37,8 @@ with open("grab.txt", 'r', encoding="utf8") as file:
         
         print(episode_name, link)
         
-        file_name = re.sub(r"[/\"':?()*&;<>]", "", episode_name).replace(" ", "_")
+        file_name_temp = re.sub(r"[/\"':?()*&;<>]", "", episode_name).replace(" ", "_")
+        file_name = file_name_temp[:75]
         
         subprocess.run("curl -o subs/" + link_title + "/" + folder_season + "/" + file_name + ".ass $(crunchy-cli search --audio ja-JP -o '{{subtitle.locale}} {{subtitle.url}}' " + link + " | grep 'en-US' | awk '{print $2}')", shell=True)
         

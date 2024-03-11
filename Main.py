@@ -627,7 +627,8 @@ if multiple:
             
             ##### Episode info #####
             episode_title = episodes[i]
-            file_name = re.sub(r"[/\"':?()*&;\\<>]", "", episode_title).replace(" ", "_")
+            file_name_temp = re.sub(r"[/\"':?()*&;\\<>]", "", episode_title).replace(" ", "_")
+            file_name = file_name_temp[:75]
             sub_file = "subs/" + link_title + "/" + link_season + "/" + file_name + ".ass"
             anime_title = data['title']
             debug_title = anime_title.replace("/","_").replace("?","")
@@ -659,7 +660,8 @@ else:
     
     ##### Episode info #####
     episode_title = episodes[index]
-    file_name = re.sub(r"[/\"':?()*&;\\<>]", "", episode_title).replace(" ", "_")
+    file_name_temp = re.sub(r"[/\"':?()*&;\\<>]", "", episode_title).replace(" ", "_")
+    file_name = file_name_temp[:75]
     sub_file = "subs/" + link_title + "/" + link_season + "/" + file_name + ".ass"
     anime_title = data['title']
     debug_title = anime_title.replace("/","_").replace("?","")
