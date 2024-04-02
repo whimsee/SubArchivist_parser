@@ -11,18 +11,27 @@ def sort_key(title_temp):
     if len(number_temp) < 2:
         number_temp.insert(0,"0")
     number = "".join(number_temp)
-    print(number)
+    # print(number)
     return int(number)
 
 mypath = "."
 
 f = []
 for (dirpath, dirnames, filenames) in walk(mypath):
+    for t in filenames:
+        if any(s in t for s in ("links.json", "name_dict.json")):
+            print("found")
+            print(t)
+            filenames.remove(t)
     f.extend(filenames)
     break
 
+print("=====")
+
 f.sort(key=sort_key)
-print(f)
+for i in f:
+    print(i)
+
 
 # for title in f:
 #     number_temp = []
