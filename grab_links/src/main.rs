@@ -15,13 +15,9 @@ async fn main() -> Result<()> {
 
     let pass = fs::read_to_string(file_path2)
         .expect("Should have been able to read the file");
-    let email = user;
-    let password = pass;
-    // let email = env::var("EMAIL").expect("'EMAIL' environment variable not found");
-    // let password = env::var("PASSWORD").expect("'PASSWORD' environment variable not found");
 
     let crunchyroll = Crunchyroll::builder()
-        .login_with_credentials(email, password)
+        .login_with_credentials(user, pass)
         .await?;
 
     let mut query_result = crunchyroll.query("darling");
