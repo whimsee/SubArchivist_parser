@@ -368,7 +368,7 @@ def parse_subs(index):
                                          )):
                 separator(next_line, type="DEFAULT", extra="song")
             elif any(s in mode for s in ("messenger", "phone", "tweet", "cell", "messages2",
-                                         "messages", "bbs1", "bbs2"
+                                         "messages", "bbs1", "bbs2", "darkchat"
                                          )):
                 separator(next_line, type="DEFAULT", extra="messenger")	
             elif "flashback" in mode:
