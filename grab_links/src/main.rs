@@ -6,6 +6,8 @@ use std::fmt;
 // use crunchyroll_rs::media::Subtitle;
 // use crunchyroll::Locale;
 
+#[allow(non_camel_case_types)]
+
 pub enum Locale {
     ar_ME,
     ar_SA,
