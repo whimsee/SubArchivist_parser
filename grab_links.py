@@ -3,7 +3,14 @@ from pathlib import Path
 import subprocess
 import shutil
 import re
+import sys
 
+try:
+    audio = str(sys.argv[1])
+except IndexError:
+    audio = "ja-JP"
+
+print(audio)
 title = ""
 season = ""
 link = ""
@@ -33,14 +40,14 @@ with open("grab.txt", 'r', encoding="utf8") as file:
         if not link:
             break
         
-        episode_name = subprocess.getoutput('crunchy-cli search "' +  link + '" --audio ja-JP -o "E{{episode.sequence_number}} - {{episode.title}}"').replace(r"\N","")
+        episode_name = subprocess.getoutput('crunchy-cli search "' +  link + '" --audio ' + audio + ' -o "E{{episode.sequence_number}} - {{episode.title}}"').replace(r"\N","")
         
         print(episode_name, link)
         
         file_name_temp = re.sub(r"[/\"':?()*&;<>|]", "", episode_name).replace(" ", "_")
         file_name = file_name_temp[:75]
         
-        subprocess.run("curl -o subs/" + link_title + "/" + folder_season + "/" + file_name + ".ass $(crunchy-cli search --audio ja-JP -o '{{subtitle.locale}} {{subtitle.url}}' " + link + " | grep 'en-US' | awk '{print $2}')", shell=True)
+        subprocess.run("curl -o subs/" + link_title + "/" + folder_season + "/" + file_name + ".ass $(crunchy-cli search --audio " + audio + " -o '{{subtitle.locale}} {{subtitle.url}}' " + link + " | grep 'en-US' | awk '{print $2}')", shell=True)
         
         episodes.update({episode_name : link})
     
