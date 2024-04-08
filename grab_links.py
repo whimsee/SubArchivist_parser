@@ -7,9 +7,15 @@ import sys
 from enum import Enum
 
 class AudioLocale(Enum):
-    EN = "en-US"
     JP = "ja-JP"
+    EN = "en-US"
     CN = "zh-CN"
+
+class LkType(Enum):
+    episode = "E"
+    movie = "M"
+    ova = "OVA"
+    special = "SP"
 
 try:
     arg = str(sys.argv[1])
@@ -18,7 +24,15 @@ except (IndexError, KeyError) as error:
     print(error, "defaulting to ja-JP")
     audio = AudioLocale["JP"].value
 
-print(audio)
+try:
+    arg = str(sys.argv[2])
+    link_type = LkType[arg].value
+except (IndexError, KeyError) as error:
+    print(error, "defaulting to episode")
+    link_type = LkType["episode"].value
+
+print(audio, link_type)
+
 title = ""
 season = ""
 link = ""
@@ -48,7 +62,7 @@ with open("grab.txt", 'r', encoding="utf8") as file:
         if not link:
             break
         
-        episode_name = subprocess.getoutput('crunchy-cli search "' +  link + '" --audio ' + audio + ' -o "E{{episode.sequence_number}} - {{episode.title}}"').replace(r"\N","")
+        episode_name = subprocess.getoutput('crunchy-cli search "' +  link + '" --audio ' + audio + ' -o ' + link_type + '"{{episode.sequence_number}} - {{episode.title}}"').replace(r"\N","")
         
         print(episode_name, link)
         
