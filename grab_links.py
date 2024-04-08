@@ -4,11 +4,19 @@ import subprocess
 import shutil
 import re
 import sys
+from enum import Enum
+
+class AudioLocale(Enum):
+    EN = "en-US"
+    JP = "ja-JP"
+    CN = "zh-CN"
 
 try:
-    audio = str(sys.argv[1])
-except IndexError:
-    audio = "ja-JP"
+    arg = str(sys.argv[1])
+    audio = AudioLocale[arg].value
+except (IndexError, KeyError) as error:
+    print(error, "defaulting to ja-JP")
+    audio = AudioLocale["JP"].value
 
 print(audio)
 title = ""
