@@ -364,7 +364,7 @@ def parse_subs(index):
                 separator(next_line, type="DEFAULT", format="italics")
             elif "texting" in mode:
                 separator(next_line, type="DEFAULT", extra="texting")
-            elif any(s in mode for s in ("song", "song_lyrics", "lyricsromajibd", "lyrics", "op_ed"
+            elif any(s in mode for s in ("op", "ed", "song", "song_lyrics", "lyricsromajibd", "lyrics", "op_ed"
                                          )):
                 separator(next_line, type="DEFAULT", extra="song")
             elif any(s in mode for s in ("messenger", "phone", "tweet", "cell", "messages2",
