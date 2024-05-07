@@ -346,7 +346,8 @@ def parse_subs(index):
                                          "narrator", "question", "4-koma", "s01", "chiha-overlap",
                                          "left", "right", "volley-overlap", "doge", "funi1",
                                          "fus", "funipop", "titan", "human", "pv", "dcmargin",
-                                         "english", "overlap", "secondary", "chinese no subs", "chinese subs"
+                                         "english", "overlap", "secondary", "chinese no subs", "chinese subs",
+                                         "font1outline"
                                          )):
                 if any(s in agent for s in (
                     "board", "desk", "note", "book", "text", "paper",
