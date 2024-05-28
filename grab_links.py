@@ -37,6 +37,7 @@ except (IndexError, KeyError) as error:
 print(audio, link_type)
 
 DEBUG = False
+FAIL = False
 
 title = ""
 season = ""
@@ -70,29 +71,46 @@ with open("grab.txt", 'r', encoding="utf8") as file:
         if not link:
             break
         
-        episode_name = subprocess.getoutput('crunchy-cli search "'
-                                            +  link +
+        episode_get = subprocess.getstatusoutput('crunchy-cli search "'
+                                            + link +
                                             '" --audio '
                                             + audio +
                                             ' -o '
                                             + link_type +
-                                            '"{{episode.sequence_number}} - {{episode.title}}"').replace(r"\N","")
+                                            '"{{episode.sequence_number}} - {{episode.title}}"')
+        
+        episode_name = episode_get[1].replace(r"\N","")
         
         print(episode_name, link)
+        
+        if episode_get[0] != 0:
+            FAIL = True
+            break
         
         file_name_temp = re.sub(r"[/\"':?()*&;<>|]", "", episode_name).replace(" ", "_")
         file_name = file_name_temp[:75]
         
         if DEBUG:
         # For debugging in case crunchy-cli bugs out
-            subprocess.run("curl -o subs/" + link_title + "/" + folder_season + "/" + file_name + ".ass $(crunchy-cli search --audio " + audio + " -o '{{subtitle.locale}} {{subtitle.url}}' " + link + " | grep 'en-US' | awk '{print $2}')", shell=True)
+            subprocess.run("curl -o subs/"
+                           + link_title + "/"
+                           + folder_season + "/"
+                           + file_name + ".ass $(crunchy-cli search --audio "
+                           + audio + " -o '{{subtitle.locale}} {{subtitle.url}}' "
+                           + link + " | grep 'en-US' | awk '{print $2}')",
+                           shell=True)
         
-        else: 
+        else:
             sub_link = subprocess.getoutput("crunchy-cli search --audio '"
                                     + audio +
                                     "' -o '{{subtitle.locale}} {{subtitle.url}}' '"
                                     + link +
                                     "' | grep 'en-US' | awk '{print $2}'")
+            
+            if "TOO_MANY_ACTIVE_STREAMS" in sub_link:
+                print("Too many active streams")
+                FAIL = True
+                break
             
             connection.setopt(connection.URL, sub_link)
             connection.setopt(connection.WRITEDATA, body)
@@ -104,32 +122,35 @@ with open("grab.txt", 'r', encoding="utf8") as file:
                 f.write(sub_file)
             
         episodes.update({episode_name : link})
-    
-data = {
-    "title" : title,
-    "season" : season,
-    "episodes" : episodes
-    }
 
-# Generate name dictionary
-print("Generating name_dict.json")
-try:
-    with open("subs/" + folder_title + "/" + folder_season + "/" + "name_dict.json", 'x') as file:
-        names = {}
-        names.update({"All" : "All"})
-        names.update({"NTP" : "---"})
-        names.update({"" : "---"})
-        json.dump(names, file,  ensure_ascii=False, indent="\t", separators=(',', ' : '))
-#         file.write('{\n\t"All" : "All",\n\t"" : "---"\n}')
-except FileExistsError:
-    pass
+if FAIL:
+    print("FAILED. Check crunchy-cli or grab.txt file")
+else:
+    data = {
+        "title" : title,
+        "season" : season,
+        "episodes" : episodes
+        }
 
-print("Generating links.json")
-# Generate links.json for processing
-with open("subs/" + folder_title + "/" + folder_season + "/" + "links.json", "w", encoding="utf8") as file:
-    json.dump(data, file,  ensure_ascii=False, indent="\t", separators=(',', ' : '))
-    
-print("DONE")
+    # Generate name dictionary
+    print("Generating name_dict.json")
+    try:
+        with open("subs/" + folder_title + "/" + folder_season + "/" + "name_dict.json", 'x') as file:
+            names = {}
+            names.update({"All" : "All"})
+            names.update({"NTP" : "---"})
+            names.update({"" : "---"})
+            json.dump(names, file,  ensure_ascii=False, indent="\t", separators=(',', ' : '))
+    #         file.write('{\n\t"All" : "All",\n\t"" : "---"\n}')
+    except FileExistsError:
+        pass
+
+    print("Generating links.json")
+    # Generate links.json for processing
+    with open("subs/" + folder_title + "/" + folder_season + "/" + "links.json", "w", encoding="utf8") as file:
+        json.dump(data, file,  ensure_ascii=False, indent="\t", separators=(',', ' : '))
+        
+    print("DONE")
     
     
     
