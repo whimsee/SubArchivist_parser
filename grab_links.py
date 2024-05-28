@@ -84,6 +84,7 @@ with open("grab.txt", 'r', encoding="utf8") as file:
         print(episode_name, link)
         
         if episode_get[0] != 0:
+            print("error")
             FAIL = True
             break
         
