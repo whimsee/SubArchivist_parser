@@ -6,6 +6,9 @@ import re
 import sys
 from enum import Enum
 
+import pycurl
+from io import BytesIO
+
 class AudioLocale(Enum):
     JP = "ja-JP"
     EN = "en-US"
@@ -33,6 +36,8 @@ except (IndexError, KeyError) as error:
 
 print(audio, link_type)
 
+DEBUG = False
+
 title = ""
 season = ""
 link = ""
@@ -56,21 +61,48 @@ with open("grab.txt", 'r', encoding="utf8") as file:
     Path("subs/" + folder_title + "/" + folder_season).mkdir(parents=True, exist_ok=True)
     
     while True:
+        body = BytesIO()
+        connection = pycurl.Curl()
+        
         link = file.readline().rstrip('\n')
         
         # Check end of file
         if not link:
             break
         
-        episode_name = subprocess.getoutput('crunchy-cli search "' +  link + '" --audio ' + audio + ' -o ' + link_type + '"{{episode.sequence_number}} - {{episode.title}}"').replace(r"\N","")
+        episode_name = subprocess.getoutput('crunchy-cli search "'
+                                            +  link +
+                                            '" --audio '
+                                            + audio +
+                                            ' -o '
+                                            + link_type +
+                                            '"{{episode.sequence_number}} - {{episode.title}}"').replace(r"\N","")
         
         print(episode_name, link)
         
         file_name_temp = re.sub(r"[/\"':?()*&;<>|]", "", episode_name).replace(" ", "_")
         file_name = file_name_temp[:75]
         
-        subprocess.run("curl -o subs/" + link_title + "/" + folder_season + "/" + file_name + ".ass $(crunchy-cli search --audio " + audio + " -o '{{subtitle.locale}} {{subtitle.url}}' " + link + " | grep 'en-US' | awk '{print $2}')", shell=True)
+        if DEBUG:
+        # For debugging in case crunchy-cli bugs out
+            subprocess.run("curl -o subs/" + link_title + "/" + folder_season + "/" + file_name + ".ass $(crunchy-cli search --audio " + audio + " -o '{{subtitle.locale}} {{subtitle.url}}' " + link + " | grep 'en-US' | awk '{print $2}')", shell=True)
         
+        else: 
+            sub_link = subprocess.getoutput("crunchy-cli search --audio '"
+                                    + audio +
+                                    "' -o '{{subtitle.locale}} {{subtitle.url}}' '"
+                                    + link +
+                                    "' | grep 'en-US' | awk '{print $2}'")
+            
+            connection.setopt(connection.URL, sub_link)
+            connection.setopt(connection.WRITEDATA, body)
+            connection.perform()
+            connection.close()
+            sub_file = body.getvalue().decode('utf-8')
+            
+            with open("subs/" + link_title + "/" + folder_season + "/" + file_name + ".ass","w", encoding="utf8") as f:
+                f.write(sub_file)
+            
         episodes.update({episode_name : link})
     
 data = {
@@ -101,3 +133,4 @@ print("DONE")
     
     
     
+
