@@ -9,6 +9,14 @@ from enum import Enum
 import pycurl
 from io import BytesIO
 
+def download_image(url, save_as):
+    with open("subs/" + link_title + "/" + folder_season + "/" + save_as, 'wb') as file:
+        curl = pycurl.Curl()
+        curl.setopt(curl.URL, url)
+        curl.setopt(curl.WRITEDATA, file)
+        curl.perform()
+        curl.close()
+
 class AudioLocale(Enum):
     JP = "ja-JP"
     EN = "en-US"
@@ -49,9 +57,11 @@ episodes = {}
 with open("grab.txt", 'r', encoding="utf8") as file:
     title = file.readline().rstrip('\n')
     season = file.readline().rstrip('\n')
+    image = file.readline().rstrip('\n')
     
     print("Title: ", title)
-    print("Season :", season)
+    print("Season: ", season)
+    print("Image: ", image)
     
     folder_title = re.sub(r"['\"/;:&,?()<>.]", "", title).replace(" ", "_")
     link_title = re.sub(r"['\"/;:&,?()<>.]", "", title).replace(" ", "_")
@@ -127,6 +137,10 @@ with open("grab.txt", 'r', encoding="utf8") as file:
 if FAIL:
     print("FAILED. Check crunchy-cli or grab.txt file")
 else:
+    if image != "none":
+        print("downloading banner")
+        download_image(image, "banner.jpg")
+    
     data = {
         "title" : title,
         "season" : season,
