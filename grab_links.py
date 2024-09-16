@@ -139,7 +139,11 @@ if FAIL:
 else:
     if image != "none":
         print("downloading banner")
-        download_image(image, "banner.jpg")
+        image_split = image.split(".")
+        if image_split[len(image_split) - 1] == "png":
+            download_image(image, "banner.png")
+        else:
+            download_image(image, "banner.jpg")
     
     data = {
         "title" : title,
