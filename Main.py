@@ -43,8 +43,8 @@ source_links = []
 ### Easy titles from links.json ###
 with open("links.json", 'r', encoding="utf8") as file:
     data = json.load(file)
-    link_title = re.sub(r"['\"/;:&,?()<>.]", "", data['title']).replace(" ", "_")
-    link_season = re.sub(r"['\"/;:&,?()<>.]", "", data['season']).replace(" ", "_")
+    link_title = re.sub(r"['\"/;:&,?()<>.\\]", "", data['title']).replace(" ", "_")
+    link_season = re.sub(r"['\"/;:&,?()<>.\\]", "", data['season']).replace(" ", "_")
     season_length = len(data['episodes'])
     for x, y in data['episodes'].items():
         episodes.append(x)
@@ -347,7 +347,8 @@ def parse_subs(index):
                                          "left", "right", "volley-overlap", "doge", "funi1",
                                          "fus", "funipop", "titan", "human", "pv", "dcmargin",
                                          "english", "overlap", "secondary", "chinese no subs", "chinese subs",
-                                         "font1outline", "manga", "giant_speak", "basic", "germantranslations"
+                                         "font1outline", "manga", "giant_speak", "basic", "germantranslations",
+                                         "poem"
                                          )):
                 if any(s in agent for s in (
                     "board", "desk", "note", "book", "text", "paper",
@@ -474,12 +475,16 @@ def upload_api():
         response = requests.get(secrets['book_url']+"?count=300&sort=-created_at", headers=headers)
         list = response.json()
 
-        for data in list['data']:
-            if anime_title in data['name']:
-                BOOK_ID = data['id']
-                found = True
-                log.append("Anime: " + data['name'] + "\n")
-                break
+        try:
+            for data in list['data']:
+                if anime_title in data['name']:
+                    BOOK_ID = data['id']
+                    found = True
+                    log.append("Anime: " + data['name'] + "\n")
+                    break
+        except KeyError:
+            print("KeyError. Stopping upload. Try again")
+            raise AbortUpload
             
         if not found:
             # add to log
@@ -629,7 +634,7 @@ if multiple:
             
             ##### Episode info #####
             episode_title = episodes[i]
-            file_name_temp = re.sub(r"[/\"':?()*&;\\<>|]", "", episode_title).replace(" ", "_")
+            file_name_temp = re.sub(r"[/\"':?()*&;\\<>|\/]", "", episode_title).replace(" ", "_")
             file_name = file_name_temp[:75]
             sub_file = "subs/" + link_title + "/" + link_season + "/" + file_name + ".ass"
             anime_title = data['title']
@@ -643,7 +648,7 @@ if multiple:
             print("DONE " + str(lines) + " lines")     
 
         except AbortUpload:
-            print("Unhandled lines. start from index " + str(i))
+            print("Unhandled lines or Upload error. start from index " + str(i))
             lines = len(dialogue)
             print("DONE " + str(lines) + " lines")
             break          
@@ -662,7 +667,7 @@ else:
     
     ##### Episode info #####
     episode_title = episodes[index]
-    file_name_temp = re.sub(r"[/\"':?()*&;\\<>|]", "", episode_title).replace(" ", "_")
+    file_name_temp = re.sub(r"[/\"':?()*&;<>|\\\/]", "", episode_title).replace(" ", "_")
     file_name = file_name_temp[:75]
     sub_file = "subs/" + link_title + "/" + link_season + "/" + file_name + ".ass"
     anime_title = data['title']

@@ -63,9 +63,9 @@ with open("grab.txt", 'r', encoding="utf8") as file:
     print("Season: ", season)
     print("Image: ", image)
     
-    folder_title = re.sub(r"['\"/;:&,?()<>.]", "", title).replace(" ", "_")
-    link_title = re.sub(r"['\"/;:&,?()<>.]", "", title).replace(" ", "_")
-    folder_season = re.sub(r"['\"/;:&,?()<>.]", "", season).replace(" ", "_")
+    folder_title = re.sub(r"['\"/;:&,?()<>.\\]", "", title).replace(" ", "_")
+    link_title = re.sub(r"['\"/;:&,?()<>.\\]", "", title).replace(" ", "_")
+    folder_season = re.sub(r"['\"/;:&,?()<>.\\]", "", season).replace(" ", "_")
     
     print(folder_title, link_title, folder_season)
     
@@ -98,7 +98,7 @@ with open("grab.txt", 'r', encoding="utf8") as file:
             FAIL = True
             break
         
-        file_name_temp = re.sub(r"[/\"':?()*&;<>|]", "", episode_name).replace(" ", "_")
+        file_name_temp = re.sub(r"[/\"':?()*&;<>|\\\/]", "", episode_name).replace(" ", "_")
         file_name = file_name_temp[:75]
         
         if DEBUG:
@@ -144,7 +144,9 @@ else:
             download_image(image, "banner.png")
         else:
             download_image(image, "banner.jpg")
-    
+    else:
+        print("no banner to download")
+
     data = {
         "title" : title,
         "season" : season,
