@@ -10,3 +10,5 @@ crunchyroll-rs = "0.12"
 anyhow = "1.0"
 tokio = { version = "1", features = ["full"] }
 quinn-proto = "0.11.7"
+idna = "1.0.0"
+rustls = "0.23.18"
