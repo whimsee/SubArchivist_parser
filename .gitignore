@@ -4,4 +4,4 @@ dumps/
 links.json
 secrets_prod.py
 subs/
-*:Zone.Identifier
+*Zone.Identifier
