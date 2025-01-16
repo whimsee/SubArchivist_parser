@@ -28,7 +28,6 @@ def get_description(file):
         next_line = file.readline().rstrip('\n')
         while next_line != "]]":
             temp_desc.append(next_line.rstrip('\n') + "</p>")
-            print(temp_desc)
             next_line = file.readline().rstrip('\n')
         desc = "<p>" + "<br><p>".join(temp_desc).rstrip('\n')
         return desc, NO_DESC
@@ -96,7 +95,6 @@ with open("grab.txt", 'r', encoding="utf8") as file:
     
     # Get description info if it exists
     description, NO_DESC = get_description(file)
-    print(description)
 
     # Go through each link and process as needed
     while True:
