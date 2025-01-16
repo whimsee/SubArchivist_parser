@@ -2,6 +2,7 @@ import json
 import requests
 import re
 import sys
+import os
 
 development = False
 force_upload = False
@@ -641,7 +642,15 @@ if multiple:
             description = data['description']
             season = data['season']
             source = "Crunchyroll"
-            source_link = source_links[i]    
+            source_link = source_links[i]
+            
+            for image_name in os.listdir("subs/" + link_title + "/" + link_season + "/"):
+                if image_name.endswith(".jpg"):
+                    print(image_name)
+                elif image_name.endswith(".png"):
+                    print(image_name)
+
+            # data = {'photo': open("subs/" + link_title + "/" + link_season + "/" + banner + ".ass", 'rb')}
             
             parse_subs(i)
             lines = len(dialogue)
