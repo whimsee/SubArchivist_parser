@@ -500,10 +500,14 @@ def upload_api():
             log.append("Anime not found. Creating " + anime_title + "\n")
             todo = {
                 "name": anime_title,
-                "description_html": description,
-                "image": banner
+                "description_html": description
             }
-            response = requests.post(secrets['book_url'], json=todo, headers=headers)
+            files = {
+                "name" : banner_name,
+                "file" : banner
+                }
+            # response = requests.post(secrets['book_url'], json=todo, headers=headers)
+            response = requests.post(secrets['book_url'], json=todo, headers=headers, files=files)
             print(response.headers)
             print(response.encoding)
             print(response.request)
@@ -659,36 +663,40 @@ if multiple:
             source = "Crunchyroll"
             source_link = source_links[i]
             banner = None
+            banner_name = None
             
             # NEW
-            # for image_name in os.listdir("subs/" + link_title + "/" + link_season + "/"):
-            #     if image_name.endswith(".jpg"):
-            #         banner_name = "subs/" + link_title + "/" + link_season + "/banner.jpg"
-            #         with open(banner_name, "rb") as image:
-            #             f = image.read()
-            #             c = bytes(f)
-            #             banner_data = convert_to_json(c)
-            #             # banner = {'image': banner_data}
-            #             banner = banner_data
-            #             # banner = {'image': ('banner.jpg', banner_data)}
-            #             # banner = {'image': ['banner.jpg', banner_data]}
-            #         # print(banner_name, "found jpg", banner)
-            #     elif image_name.endswith(".png"):
-            #         banner_name = "subs/" + link_title + "/" + link_season + "/banner.png"
-            #         with open(banner_name, "rb") as image:
-            #             f = image.read()
-            #             c = bytes(f)
-            #             banner_data = convert_to_json(c)
-            #             # banner = {'image': banner_data}
-            #             banner = banner_data
-            #             # banner = {'image': ('banner.png', banner_data)}
-            #             # banner = {'image': ['banner.png', banner_data]}
-            #         # print(banner_name, "found png", banner)
-            #     else:
-            #         pass
+            for image_name in os.listdir("subs/" + link_title + "/" + link_season + "/"):
+                if image_name.endswith(".jpg"):
+                    banner_path = "subs/" + link_title + "/" + link_season + "/banner.jpg"
+                    with open(banner_path, "rb") as image:
+                        f = image.read()
+                        c = bytes(f)
+                        banner_data = convert_to_json(c)
+                        # banner = {'image': banner_data}
+                        banner = banner_data
+                        banner_name = "banner.jpg"
+                        # banner = {'image': ('banner.jpg', banner_data)}
+                        # banner = {'image': ['banner.jpg', banner_data]}
+                    # print(banner_path, "found jpg", banner)
+                elif image_name.endswith(".png"):
+                    banner_path = "subs/" + link_title + "/" + link_season + "/banner.png"
+                    with open(banner_path, "rb") as image:
+                        f = image.read()
+                        c = bytes(f)
+                        banner_data = convert_to_json(c)
+                        # banner = {'image': banner_data}
+                        banner = banner_data
+                        banner_name = "banner.png"
+                        # banner = {'image': ('banner.png', banner_data)}
+                        # banner = {'image': ['banner.png', banner_data]}
+                    # print(banner_path, "found png", banner)
+                else:
+                    pass
                 
-            #     if banner != None:
-            #         break
+                if banner != None:
+                    break
+
             
             parse_subs(i)
             lines = len(dialogue)
@@ -724,36 +732,39 @@ else:
     source = "Crunchyroll"
     source_link = source_links[index]
     banner = None
+    banner_name = None
 
     # NEW
-    # for image_name in os.listdir("subs/" + link_title + "/" + link_season + "/"):
-    #     if image_name.endswith(".jpg"):
-    #         banner_name = "subs/" + link_title + "/" + link_season + "/banner.jpg"
-    #         with open(banner_name, "rb") as image:
-    #             f = image.read()
-    #             c = bytes(f)
-    #             banner_data = convert_to_json(c)
-    #             # banner = {'image': banner_data}
-    #             banner = banner_data
-    #             # banner = {'image': ('banner.jpg', banner_data)}
-    #             # banner = {'image': ['banner.jpg', banner_data]}
-    #         # print(banner_name, "found jpg", banner)
-    #     elif image_name.endswith(".png"):
-    #         banner_name = "subs/" + link_title + "/" + link_season + "/banner.png"
-    #         with open(banner_name, "rb") as image:
-    #             f = image.read()
-    #             c = bytes(f)
-    #             banner_data = convert_to_json(c)
-    #             # banner = {'image': banner_data}
-    #             banner = banner_data
-    #             # banner = {'image': ('banner.png', banner_data)}
-    #             # banner = {'image': ['banner.png', banner_data]}
-    #         # print(banner_name, "found png", banner)
-    #     else:
-    #         pass
+    for image_name in os.listdir("subs/" + link_title + "/" + link_season + "/"):
+        if image_name.endswith(".jpg"):
+            banner_path = "subs/" + link_title + "/" + link_season + "/banner.jpg"
+            with open(banner_path, "rb") as image:
+                f = image.read()
+                c = bytes(f)
+                banner_data = convert_to_json(c)
+                # banner = {'image': banner_data}
+                banner = banner_data
+                banner_name = "banner.jpg"
+                # banner = {'image': ('banner.jpg', banner_data)}
+                # banner = {'image': ['banner.jpg', banner_data]}
+            # print(banner_path, "found jpg", banner)
+        elif image_name.endswith(".png"):
+            banner_path = "subs/" + link_title + "/" + link_season + "/banner.png"
+            with open(banner_path, "rb") as image:
+                f = image.read()
+                c = bytes(f)
+                banner_data = convert_to_json(c)
+                # banner = {'image': banner_data}
+                banner = banner_data
+                banner_name = "banner.png"
+                # banner = {'image': ('banner.png', banner_data)}
+                # banner = {'image': ['banner.png', banner_data]}
+            # print(banner_path, "found png", banner)
+        else:
+            pass
 
-    #     if banner != None:
-    #         break
+        if banner != None:
+            break
 
     
     parse_subs(index)
