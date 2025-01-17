@@ -504,7 +504,11 @@ def upload_api():
                 "image": banner
             }
             response = requests.post(secrets['book_url'], json=todo, headers=headers)
-            print(response, todo)
+            print(response.headers)
+            print(response.encoding)
+            print(response.request)
+            print(response.content)
+            print(response.json())
             BOOK_ID = response.json()['id']
             
 
@@ -665,9 +669,10 @@ if multiple:
             #             c = bytes(f)
             #             banner_data = convert_to_json(c)
             #             # banner = {'image': banner_data}
-            #             # banner = banner_data
-            #             banner = {'image': ('banner.jpg', banner_data)}
-            #         print(banner_name, "found jpg", banner)
+            #             banner = banner_data
+            #             # banner = {'image': ('banner.jpg', banner_data)}
+            #             # banner = {'image': ['banner.jpg', banner_data]}
+            #         # print(banner_name, "found jpg", banner)
             #     elif image_name.endswith(".png"):
             #         banner_name = "subs/" + link_title + "/" + link_season + "/banner.png"
             #         with open(banner_name, "rb") as image:
@@ -675,16 +680,15 @@ if multiple:
             #             c = bytes(f)
             #             banner_data = convert_to_json(c)
             #             # banner = {'image': banner_data}
-            #             # banner = banner_data
-            #             banner = {'image': ('banner.png', banner_data)}
-            #         print(banner_name, "found png", banner)
+            #             banner = banner_data
+            #             # banner = {'image': ('banner.png', banner_data)}
+            #             # banner = {'image': ['banner.png', banner_data]}
+            #         # print(banner_name, "found png", banner)
             #     else:
             #         pass
                 
             #     if banner != None:
             #         break
-
-            # data = {'photo': open("subs/" + link_title + "/" + link_season + "/" + banner + ".ass", 'rb')}
             
             parse_subs(i)
             lines = len(dialogue)
@@ -730,9 +734,10 @@ else:
     #             c = bytes(f)
     #             banner_data = convert_to_json(c)
     #             # banner = {'image': banner_data}
-    #             # banner = banner_data
-    #             banner = {'image': ('banner.jpg', banner_data)}
-    #         print(banner_name, "found jpg", banner)
+    #             banner = banner_data
+    #             # banner = {'image': ('banner.jpg', banner_data)}
+    #             # banner = {'image': ['banner.jpg', banner_data]}
+    #         # print(banner_name, "found jpg", banner)
     #     elif image_name.endswith(".png"):
     #         banner_name = "subs/" + link_title + "/" + link_season + "/banner.png"
     #         with open(banner_name, "rb") as image:
@@ -740,9 +745,10 @@ else:
     #             c = bytes(f)
     #             banner_data = convert_to_json(c)
     #             # banner = {'image': banner_data}
-    #             # banner = banner_data
-    #             banner = {'image': ('banner.png', banner_data)}
-    #         print(banner_name, "found png", banner)
+    #             banner = banner_data
+    #             # banner = {'image': ('banner.png', banner_data)}
+    #             # banner = {'image': ['banner.png', banner_data]}
+    #         # print(banner_name, "found png", banner)
     #     else:
     #         pass
 

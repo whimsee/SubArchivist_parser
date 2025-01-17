@@ -20,17 +20,13 @@ for image_name in os.listdir("subs/Marginal_Prince/Season_1/"):
         banner_name = "subs/Marginal_Prince/Season_1/banner.jpg"
         with open(banner_name, "rb") as image:
             f = image.read()
-
             c = bytes(f)
-            # print(c)
             encode = base64.b64encode(c)
             data = encode.decode('utf-8')
-            # print(encode)
-            # print(data)
-            banner = {'image': encode} 
-            # print(is_jsonable(c))
+            # banner = {'image': encode} 
             print(is_jsonable(data))
-            # print(banner)
+            banner = {'image': ()'banner.png', data)}
+            print(banner)
         #print(banner_name, "found jpg", banner)
     elif image_name.endswith(".png"):
         banner_name = "subs/Marginal_Prince/Season_1/banner.png"
