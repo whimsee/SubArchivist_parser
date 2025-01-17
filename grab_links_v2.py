@@ -29,7 +29,7 @@ def get_description(file):
         while next_line != "]]":
             temp_desc.append(next_line.rstrip('\n') + "</p>")
             next_line = file.readline().rstrip('\n')
-        desc = "<p>" + "<br><p>".join(temp_desc).rstrip('\n')
+        desc = "<p>" + "<p>".join(temp_desc).rstrip('\n')
         return desc, NO_DESC
     else:
         NO_DESC = True

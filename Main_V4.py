@@ -491,7 +491,8 @@ def upload_api():
             log.append("Anime not found. Creating " + anime_title + "\n")
             todo = {
                 "name": anime_title,
-                "description_html": description
+                "description_html": description,
+                "image": banner
             }
             response = requests.post(secrets['book_url'], json=todo, headers=headers)
             BOOK_ID = response.json()['id']
@@ -646,9 +647,13 @@ if multiple:
             
             for image_name in os.listdir("subs/" + link_title + "/" + link_season + "/"):
                 if image_name.endswith(".jpg"):
-                    print(image_name)
+                    banner_name = "subs/" + link_title + "/" + link_season + "/" + image_name
+                    banner = {'photo': open(banner_name, 'rb')}
                 elif image_name.endswith(".png"):
-                    print(image_name)
+                    banner_name = "subs/" + link_title + "/" + link_season + "/" + image_name
+                    banner = {'photo': open(banner_name, 'rb')}
+                else:
+                    banner = None
 
             # data = {'photo': open("subs/" + link_title + "/" + link_season + "/" + banner + ".ass", 'rb')}
             
@@ -684,7 +689,18 @@ else:
     description = data['description']
     season = data['season']
     source = "Crunchyroll"
-    source_link = source_links[index]    
+    source_link = source_links[index]
+
+    for image_name in os.listdir("subs/" + link_title + "/" + link_season + "/"):
+        if image_name.endswith(".jpg"):
+            banner_name = "subs/" + link_title + "/" + link_season + "/" + image_name
+            banner = {'photo': open(banner_name, 'rb')}
+        elif image_name.endswith(".png"):
+            banner_name = "subs/" + link_title + "/" + link_season + "/" + image_name
+            banner = {'photo': open(banner_name, 'rb')}
+        else:
+            banner = None
+
     
     parse_subs(index)
     
