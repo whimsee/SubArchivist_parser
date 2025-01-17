@@ -17,6 +17,24 @@ def download_image(url, save_as):
         curl.perform()
         curl.close()
 
+def get_description(file):
+    temp_desc = []
+    desc = ""
+    NO_DESC = False
+
+    next_line = file.readline().rstrip('\n')
+    if next_line == "[[":
+        print("Getting description")
+        next_line = file.readline().rstrip('\n')
+        while next_line != "]]":
+            temp_desc.append(next_line.rstrip('\n') + "</p>")
+            next_line = file.readline().rstrip('\n')
+        desc = "<p>" + "<p>".join(temp_desc).rstrip('\n')
+        return desc, NO_DESC
+    else:
+        NO_DESC = True
+        return next_line, NO_DESC
+
 class AudioLocale(Enum):
     JP = "ja-JP"
     EN = "en-US"
@@ -44,17 +62,21 @@ except (IndexError, KeyError) as error:
 
 print(audio, link_type)
 
+# Initialize variables and defaults
 DEBUG = False
 FAIL = False
+NO_DESC = False
 
 title = ""
 season = ""
 link = ""
 data = {}
 episodes = {}
+description = ""
 
 # Read plaintext file to extract titles and subs
 with open("grab.txt", 'r', encoding="utf8") as file:
+    # Get info from first three lines
     title = file.readline().rstrip('\n')
     season = file.readline().rstrip('\n')
     image = file.readline().rstrip('\n')
@@ -71,12 +93,19 @@ with open("grab.txt", 'r', encoding="utf8") as file:
     
     Path("subs/" + folder_title + "/" + folder_season).mkdir(parents=True, exist_ok=True)
     
+    # Get description info if it exists
+    description, NO_DESC = get_description(file)
+
+    # Go through each link and process as needed
     while True:
         body = BytesIO()
         connection = pycurl.Curl()
         
-        link = file.readline().rstrip('\n')
-        
+        if NO_DESC and link == "":
+            link = description
+        else:
+            link = file.readline().rstrip('\n')
+
         # Check end of file
         if not link:
             break
@@ -147,9 +176,13 @@ else:
     else:
         print("no banner to download")
 
+    if NO_DESC:
+        description = ""
+
     data = {
         "title" : title,
         "season" : season,
+        "description" : description,
         "episodes" : episodes
         }
 

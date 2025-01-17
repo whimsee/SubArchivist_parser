@@ -488,6 +488,7 @@ def upload_api():
             
         if not found:
             # add to log
+            print(banner)
             log.append("Anime not found. Creating " + anime_title + "\n")
             todo = {
                 "name": anime_title,
@@ -648,10 +649,10 @@ if multiple:
             for image_name in os.listdir("subs/" + link_title + "/" + link_season + "/"):
                 if image_name.endswith(".jpg"):
                     banner_name = "subs/" + link_title + "/" + link_season + "/" + image_name
-                    banner = {'photo': open(banner_name, 'rb')}
+                    banner = {'image': open(banner_name, 'rb')}
                 elif image_name.endswith(".png"):
                     banner_name = "subs/" + link_title + "/" + link_season + "/" + image_name
-                    banner = {'photo': open(banner_name, 'rb')}
+                    banner = {'image': open(banner_name, 'rb')}
                 else:
                     banner = None
 
@@ -693,11 +694,13 @@ else:
 
     for image_name in os.listdir("subs/" + link_title + "/" + link_season + "/"):
         if image_name.endswith(".jpg"):
-            banner_name = "subs/" + link_title + "/" + link_season + "/" + image_name
-            banner = {'photo': open(banner_name, 'rb')}
+            banner_name = "subs/" + link_title + "/" + link_season + "/" + "banner.jpg"
+            banner = {'image': open(banner_name, 'rb')}
+            print(banner_name, "found jpg", banner)
         elif image_name.endswith(".png"):
-            banner_name = "subs/" + link_title + "/" + link_season + "/" + image_name
-            banner = {'photo': open(banner_name, 'rb')}
+            banner_name = "subs/" + link_title + "/" + link_season + "/" + "banner.png"
+            banner = {'image': open(banner_name, 'rb')}
+            print(banner_name, "found jpg", banner)
         else:
             banner = None
 
@@ -706,7 +709,3 @@ else:
     
     lines = len(dialogue)
     print("DONE " + str(lines) + " lines")
-    
-    
-    
-
