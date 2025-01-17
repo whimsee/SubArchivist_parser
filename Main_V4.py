@@ -516,8 +516,8 @@ def upload_api():
             # print(response.headers)
             # print(response.encoding)
             # print(response.request.body)
-            # print(response.content)
-            # print(response.json())
+            print(response.content)
+            print(response.json())
             BOOK_ID = response.json()['id']
             
 
