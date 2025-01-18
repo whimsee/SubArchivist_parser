@@ -489,14 +489,20 @@ def upload_api():
         if not found:
             # add to log
             log.append("Anime not found. Creating " + anime_title + "\n")
-            todo = {
-                "name": anime_title,
-                "description_html": description,
-            }
-            files = {
-                "image": (open(banner_name, "rb"))
-                }
-            response = requests.post(secrets['book_url'], data=todo, files=files, headers=headers)
+            if banner_name is None:
+                files = {
+                    "name": (None, anime_title),
+                    "description_html": (None, description),
+                    }
+                print("No cover image")
+            else:
+                files = {
+                    "name": (None, anime_title),
+                    "description_html": (None, description),
+                    "image": (open(banner_name, "rb"))
+                    }
+                print("Uploading cover image")
+            response = requests.post(secrets['book_url'], files=files, headers=headers)
             BOOK_ID = response.json()['id']
             
 
@@ -650,14 +656,13 @@ if multiple:
             for image_name in os.listdir("subs/" + link_title + "/" + link_season + "/"):
                 if image_name.endswith(".jpg"):
                     banner_name = "subs/" + link_title + "/" + link_season + "/" + image_name
-                    banner = {'photo': open(banner_name, 'rb')}
                 elif image_name.endswith(".png"):
                     banner_name = "subs/" + link_title + "/" + link_season + "/" + image_name
-                    banner = {'photo': open(banner_name, 'rb')}
                 else:
-                    banner = None
-
-            # data = {'photo': open("subs/" + link_title + "/" + link_season + "/" + banner + ".ass", 'rb')}
+                    banner_name = None
+                
+                if banner_name is not None:
+                    break
             
             parse_subs(i)
             lines = len(dialogue)
@@ -696,12 +701,13 @@ else:
     for image_name in os.listdir("subs/" + link_title + "/" + link_season + "/"):
         if image_name.endswith(".jpg"):
             banner_name = "subs/" + link_title + "/" + link_season + "/" + image_name
-            banner = {'photo': open(banner_name, 'rb')}
         elif image_name.endswith(".png"):
             banner_name = "subs/" + link_title + "/" + link_season + "/" + image_name
-            banner = {'photo': open(banner_name, 'rb')}
         else:
-            banner = None
+            banner_name = None
+
+        if banner_name is not None:
+            break
 
     
     parse_subs(index)
