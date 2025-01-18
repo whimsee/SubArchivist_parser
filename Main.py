@@ -2,6 +2,7 @@ import json
 import requests
 import re
 import sys
+import os
 
 development = False
 force_upload = False
@@ -76,13 +77,6 @@ class AbortUpload(Exception):
     pass
 
 ############## Functions #####################
-
-### Convert image bytes to json
-def convert_to_json(to_convert):
-    encode = base64.b64encode(to_convert)
-    to_utf = encode.decode('utf-8')
-    return to_utf
-
 ### Multiple replace
 def replace_all(text, dic):
     for i, j in pre_dictionary.items():
@@ -497,9 +491,12 @@ def upload_api():
             log.append("Anime not found. Creating " + anime_title + "\n")
             todo = {
                 "name": anime_title,
-                "description_html": description
+                "description_html": description,
             }
-            response = requests.post(secrets['book_url'], json=todo, headers=headers)
+            files = {
+                "image": (open(banner_name, "rb"))
+                }
+            response = requests.post(secrets['book_url'], data=todo, files=files, headers=headers)
             BOOK_ID = response.json()['id']
             
 
@@ -650,6 +647,18 @@ if multiple:
             source = "Crunchyroll"
             source_link = source_links[i]
             
+            for image_name in os.listdir("subs/" + link_title + "/" + link_season + "/"):
+                if image_name.endswith(".jpg"):
+                    banner_name = "subs/" + link_title + "/" + link_season + "/" + image_name
+                    banner = {'photo': open(banner_name, 'rb')}
+                elif image_name.endswith(".png"):
+                    banner_name = "subs/" + link_title + "/" + link_season + "/" + image_name
+                    banner = {'photo': open(banner_name, 'rb')}
+                else:
+                    banner = None
+
+            # data = {'photo': open("subs/" + link_title + "/" + link_season + "/" + banner + ".ass", 'rb')}
+            
             parse_subs(i)
             lines = len(dialogue)
             print("DONE " + str(lines) + " lines")     
@@ -683,8 +692,23 @@ else:
     season = data['season']
     source = "Crunchyroll"
     source_link = source_links[index]
+
+    for image_name in os.listdir("subs/" + link_title + "/" + link_season + "/"):
+        if image_name.endswith(".jpg"):
+            banner_name = "subs/" + link_title + "/" + link_season + "/" + image_name
+            banner = {'photo': open(banner_name, 'rb')}
+        elif image_name.endswith(".png"):
+            banner_name = "subs/" + link_title + "/" + link_season + "/" + image_name
+            banner = {'photo': open(banner_name, 'rb')}
+        else:
+            banner = None
+
     
     parse_subs(index)
     
     lines = len(dialogue)
     print("DONE " + str(lines) + " lines")
+    
+    
+    
+

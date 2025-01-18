@@ -495,12 +495,11 @@ def upload_api():
             }
 #             response = requests.post(secrets['book_url'], json=todo, headers=headers)
             files = {
-                "image": {
-                    "name": "'banner.jpg'",
-                    "image": open(banner_name, "rb")
-                    }
+#                 "name": "'" + anime_title + "'",
+#                 "description_html": description,
+                "image": (open(banner_name, "rb"))
                 }
-            response = requests.post(secrets['book_url'], json=todo, files=files, headers=headers)
+            response = requests.post(secrets['book_url'], data=todo, files=files, headers=headers)
             print(response.request.body)
             print(response.json())
             BOOK_ID = response.json()['id']
