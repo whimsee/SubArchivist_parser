@@ -1,0 +1,436 @@
+[Script Info]
+Title: English (US)
+Original Script: KingRecords  [http://www.crunchyroll.com/user/KingRecords]
+Original Translation: 
+Original Editing: 
+Original Timing: 
+Synch Point: 
+Script Updated By: 
+Update Details: 
+ScriptType: v4.00+
+Collisions: Normal
+PlayResX: 640
+PlayResY: 360
+Timer: 0.0000
+WrapStyle: 0
+
+[V4+ Styles]
+Format: Name,Fontname,Fontsize,PrimaryColour,SecondaryColour,OutlineColour,BackColour,Bold,Italic,Underline,Strikeout,ScaleX,ScaleY,Spacing,Angle,BorderStyle,Outline,Shadow,Alignment,MarginL,MarginR,MarginV,Encoding
+Style: Default,Arial,20,&H00FFFFFF,&H000000FF,&H00000000,&H00000000,0,0,0,0,100,100,0,0,1,2,2,2,0010,0010,0010,1
+Style: main,Trebuchet MS,24,&H00FFFFFF,&H000000FF,&H00000000,&H00000000,0,0,0,0,100,100,0,0,1,2,1,2,0010,0010,0018,0
+Style: top,Trebuchet MS,24,&H00FFFFFF,&H000000FF,&H00000000,&H00000000,0,0,0,0,100,100,0,0,1,2,1,8,0010,0010,0018,0
+Style: italics,Trebuchet MS,24,&H00FFFFFF,&H000000FF,&H00000000,&H00000000,0,-1,0,0,100,100,0,0,1,2,1,2,0010,0010,0018,0
+Style: italicstop,Trebuchet MS,24,&H00FFFFFF,&H000000FF,&H00000000,&H00000000,0,-1,0,0,100,100,0,0,1,2,1,8,0010,0010,0018,0
+Style: flashback,Trebuchet MS,24,&H00FFFFFF,&H000000FF,&H00400000,&H00400000,0,0,0,0,100,100,0,0,1,2,1,2,0010,0010,0018,1
+Style: flashback italics,Trebuchet MS,24,&H00FFFFFF,&H000000FF,&H00400000,&H00400000,0,-1,0,0,100,100,0,0,1,2,1,2,0010,0010,0018,1
+Style: flashbacktop,Trebuchet MS,24,&H00FFFFFF,&H000000FF,&H00400000,&H00400000,0,0,0,0,100,100,0,0,1,2,1,8,0020,0020,0018,0
+Style: flashbackitalicstop,Trebuchet MS,24,&H00FFFFFF,&H000000FF,&H00400000,&H00400000,0,-1,0,0,100,100,0,0,1,2,1,8,0010,0010,0018,0
+Style: overlap,Trebuchet MS,24,&H007FD3F2,&H000000FF,&H00000000,&H00000000,0,0,0,0,100,100,0,0,1,2,1,2,0010,0010,0018,0
+Style: Ep_Title,Times New Roman,16,&H00F9EDE7,&H000000FF,&H7F000000,&H00000000,-1,0,0,0,100,100,0,0,1,1,0,3,0018,0033,0039,1
+Style: Next_Ep_Number,Times New Roman,20,&H00FFFFFF,&H000000FF,&H00000000,&H00000000,-1,0,0,0,100,100,0,0,1,0,0,2,0029,0020,0231,1
+Style: Next_Ep_Title,Times New Roman,22,&H00FFFFFF,&H000000FF,&H00000000,&H00000000,-1,0,0,0,100,100,0,0,1,0,0,2,0028,0020,0130,1
+Style: sign_5956_45_House_Tranquilit,Trebuchet MS,10,&H00442619,&H000000FF,&H009F7158,&H00000000,-1,0,0,0,100,100,0,0,1,2,0,7,0030,0030,0020,1
+Style: sign_7312_57_Graduation,Times New Roman,20,&H00282725,&H000000FF,&H00979591,&H00000000,-1,0,0,0,100,100,0,0,1,4,0,9,0030,0030,0020,1
+Style: sign_7340_58_Graduation_Cerem,Times New Roman,20,&H007A7D75,&H000000FF,&H00CDCCC3,&H00000000,-1,0,0,0,100,100,0,0,1,2,0,2,0210,0210,0010,1
+Style: sign_9243_94_Strong_Z,Verdana,34,&H0009110F,&H000000FF,&H00DBDDD6,&H00000000,-1,0,0,0,100,100,0,0,1,3,0,8,0030,0030,0020,1
+Style: sign_14676_176_To_Second_Island,Arial,8,&H006C6E70,&H000000FF,&H00F3F8F6,&H00000000,-1,0,0,0,100,100,0,0,1,2,0,2,0030,0030,0020,1
+Style: sign_15818_189_Ayaka_Islands,Times New Roman,25,&H00A2B4BD,&H000000FF,&H00352A97,&H00000000,-1,0,0,0,100,100,0,0,1,3,0,9,0030,0030,0020,1
+Style: sign_16162_197_Welcome_,Verdana,15,&H0019AFCC,&H000000FF,&H002837A6,&H00000000,-1,0,0,0,100,100,0,0,1,3,0,7,0030,0030,0020,1
+
+[Events]
+Format: Layer,Start,End,Style,Name,MarginL,MarginR,MarginV,Effect,Text
+Dialogue: 0,0:00:20.99,0:00:22.75,main,JINGI,0000,0000,0000,,Yukito, you okay?
+Dialogue: 0,0:00:22.75,0:00:23.91,main,YUKITO,0000,0000,0000,,Y-Yeah.
+Dialogue: 0,0:00:27.33,0:00:29.29,main,JINGI,0000,0000,0000,,I promise I'll keep you safe.
+Dialogue: 0,0:00:29.29,0:00:32.67,main,JINGI,0000,0000,0000,,Come on, we're almost at \Nthe ferry. Hang in there.
+Dialogue: 0,0:00:39.51,0:00:43.18,main,INOU,0000,0000,0000,,Don't panic, please! \NThere will be more ferries!
+Dialogue: 0,0:00:43.18,0:00:44.14,main,JINGI,0000,0000,0000,,Hey, old man!
+Dialogue: 0,0:00:44.64,0:00:47.23,main,INOU,0000,0000,0000,,Jingi! I'm so glad you're safe!
+Dialogue: 0,0:00:47.23,0:00:48.48,main,INOU,0000,0000,0000,,Where's Momoko-san?
+Dialogue: 0,0:00:48.48,0:00:50.44,main,INOU,0000,0000,0000,,Leading the evac back there.
+Dialogue: 0,0:00:50.44,0:00:52.90,main,INOU,0000,0000,0000,,She told us to get on the ferry first.
+Dialogue: 0,0:00:52.90,0:00:56.36,main,INOU,0000,0000,0000,,I see. Yes, you two should get on.
+Dialogue: 0,0:00:56.36,0:00:58.41,main,JINGI,0000,0000,0000,,But Haru-nii and Aka-nii are still...
+Dialogue: 0,0:00:58.62,0:01:01.70,main,INOU,0000,0000,0000,,I know. Yanagi went to get them.
+Dialogue: 0,0:01:01.70,0:01:02.74,main,JINGI,0000,0000,0000,,Master did?
+Dialogue: 0,0:01:02.74,0:01:03.54,main,INOU,0000,0000,0000,,But...
+Dialogue: 0,0:01:03.83,0:01:06.75,main,INOU,0000,0000,0000,,If Yanagi doesn't return,
+Dialogue: 0,0:01:07.08,0:01:08.33,main,INOU,0000,0000,0000,,that means...
+Dialogue: 0,0:01:18.51,0:01:21.81,main,YANAGI,0000,0000,0000,,Hah. You've got no patience.
+Dialogue: 0,0:01:22.10,0:01:24.48,main,YANAGI,0000,0000,0000,,But, well, I guess you did hold out well.
+Dialogue: 0,0:01:24.89,0:01:28.40,main,YANAGI,0000,0000,0000,,As they say, you gotta know \Nwhen to fold and walk away.
+Dialogue: 0,0:01:29.35,0:01:34.32,main,YANAGI,0000,0000,0000,,Guess it's time for one last job.
+Dialogue: 0,0:01:40.20,0:01:42.20,main,IBUKI,0000,0000,0000,,Hey, Haruaki! Why, you...
+Dialogue: 0,0:01:47.71,0:01:49.25,main,IBUKI,0000,0000,0000,,Master...
+Dialogue: 0,0:01:54.46,0:01:56.55,main,PEOPLE,0000,0000,0000,,What's happening?
+Dialogue: 0,0:01:56.55,0:01:57.76,main,PEOPLE,0000,0000,0000,,Are we gonna be okay?
+Dialogue: 0,0:01:57.76,0:01:59.22,main,PEOPLE,0000,0000,0000,,I've never seen anything like this.
+Dialogue: 0,0:02:06.23,0:02:07.64,main,JINGI,0000,0000,0000,,Master...
+Dialogue: 0,0:02:28.41,0:02:31.46,sign_5956_45_House_Tranquilit,SIGN,0000,0000,0000,,{\c&H5D8F9B&\3c&H1D5B62&\fax-0.1\frz10.8\pos(327,277)}House Tranquility
+Dialogue: 0,0:02:31.50,0:02:34.78,Ep_Title,SIGN,0000,0000,0000,,{\blur2\fad(485,1)}Episode 1: Why Don't You Go for a Ride?
+Dialogue: 0,0:02:34.80,0:02:37.46,sign_5956_45_House_Tranquilit,SIGN,0000,0000,0000,,To Yanagi Yukito,\N\NI apologize for this sudden letter.\NMy name is Inou Sanji,\N and I was a friend of your father's.\NFor certain reasons, \NI had to place you in foster care\N after you lost your father at the age of five,\Nbut I want to bring you back to your birthplace,\N the Ayaka Islands, once you graduate middle school.\NI will be your guardian, and guarantee\N that you'll be able to attend high school\N and live a comfortable life in the Ayaka Islands.\NI'm sure this will all be a bit too much \Nfor you to take in at first, but this is\N what I promised your father Yanagi Makoto. \NIt's what he would've wanted.\NI'll come pick you up once you've graduated middle school,\N and we can discuss this further then.\NI wish you the best of luck and good health\N until the time comes.\N\NFrom Inou Sanji
+Dialogue: 0,0:02:37.80,0:02:40.09,main,YUKITO,0000,0000,0000,,Inou-san? Who's that?
+Dialogue: 0,0:02:54.36,0:02:57.23,italics,YUKITO,0000,0000,0000,,Ah, this dream again.
+Dialogue: 0,0:02:58.69,0:03:01.28,italics,YUKITO,0000,0000,0000,,I have this recurring dream.
+Dialogue: 0,0:03:01.70,0:03:03.95,italics,YUKITO,0000,0000,0000,,I'm all alone, underwater.
+Dialogue: 0,0:03:04.37,0:03:06.45,italics,YUKITO,0000,0000,0000,,Strangely, it feels pleasant.
+Dialogue: 0,0:03:07.58,0:03:10.79,italics,YUKITO,0000,0000,0000,,As someone who avoids \Ngetting close to people,
+Dialogue: 0,0:03:10.79,0:03:13.04,italics,YUKITO,0000,0000,0000,,I'm probably more comfortable here.
+Dialogue: 0,0:03:19.84,0:03:20.72,italics,YUKITO,0000,0000,0000,,Huh?
+Dialogue: 0,0:03:25.39,0:03:26.56,main,YUKITO,0000,0000,0000,,What was that?
+Dialogue: 0,0:03:29.85,0:03:31.35,main,HEADMASTER,0000,0000,0000,,My dear students.
+Dialogue: 0,0:03:31.35,0:03:32.52,sign_7312_57_Graduation,SIGN,0000,0000,0000,,Graduation
+Dialogue: 0,0:03:31.35,0:03:33.94,main,HEADMASTER,0000,0000,0000,,Congratulations on graduating.
+Dialogue: 0,0:03:32.52,0:03:37.48,sign_7340_58_Graduation_Cerem,SIGN,0000,0000,0000,,{\move(325,100,325,105)\t(1,4970\fs19)}G{*\c&H7D817A&\3c&HD1D0C9&}r{*\c&H81857E&\3c&HD5D5CF&}a{*\c&H848883&\3c&HD9D9D5&}d{*\c&H878C88&\3c&HDDDDDB&}u{*\c&H8B908C&\3c&HE2E2E0&}a{*\c&H8E9491&\3c&HE6E6E6&}t{*\c&H919796&\3c&HEAEAEC&}i{*\c&H959B9A&\3c&HEEEFF2&}o{\c&H989F9F&\3c&HF2F3F8&}n {*\c&H8F9696&\3c&HE8EBEA&}C{*\c&H8A9191&\3c&HE4E7E3&}e{*\c&H858C8D&\3c&HDFE3DC&}r{*\c&H818888&\3c&HDAE0D5&}e{*\c&H7C8384&\3c&HD5DCCE&}m{*\c&H777E7F&\3c&HD1D8C7&}o{*\c&H737A7B&\3c&HCCD4C0&}n{\c&H6E7576&\3c&HC7D0B9&}y
+Dialogue: 0,0:03:33.94,0:03:37.48,main,HEADMASTER,0000,0000,0000,,I hope you treasure the experiences you've \Nhad in these three years of middle school—
+Dialogue: 0,0:03:37.48,0:03:38.90,main,STUDENTS,0000,0000,0000,,See in you high school, bro.
+Dialogue: 0,0:03:37.61,0:03:38.90,top,STUDENTS,0000,0000,0000,,Let's take a selfie!
+Dialogue: 0,0:03:38.78,0:03:40.65,overlap,STUDENTS,0000,0000,0000,,I've always liked you!
+Dialogue: 0,0:03:38.90,0:03:40.65,main,STUDENTS,0000,0000,0000,,Dude, are you crying?
+Dialogue: 0,0:03:40.65,0:03:42.24,main,STUDENTS,0000,0000,0000,,Sorry, I can't. Bye.
+Dialogue: 0,0:03:42.24,0:03:43.78,main,STUDENTS,0000,0000,0000,,What?!
+Dialogue: 0,0:03:42.70,0:03:44.45,top,STUDENTS,0000,0000,0000,,Let's party after this.
+Dialogue: 0,0:03:44.45,0:03:44.99,main,STUDENTS,0000,0000,0000,,Sounds good.
+Dialogue: 0,0:03:44.99,0:03:45.49,main,STUDENTS,0000,0000,0000,,I'm in.
+Dialogue: 0,0:03:45.49,0:03:46.99,main,STUDENTS,0000,0000,0000,,Yo, he just got rejected.
+Dialogue: 0,0:03:46.99,0:03:47.62,main,STUDENTS,0000,0000,0000,,Shut up!
+Dialogue: 0,0:03:52.91,0:03:54.04,main,TEACHER,0000,0000,0000,,Yanagi-kun.
+Dialogue: 0,0:03:55.33,0:03:56.50,main,YUKITO,0000,0000,0000,,Sensei.
+Dialogue: 0,0:03:57.13,0:04:01.26,main,TEACHER,0000,0000,0000,,Congrats on graduating. \NYou'll be moving soon, yes?
+Dialogue: 0,0:04:01.26,0:04:05.93,main,YUKITO,0000,0000,0000,,Yes. I'm leaving the foster home \Nand going back to my birthplace.
+Dialogue: 0,0:04:06.30,0:04:10.39,main,YUKITO,0000,0000,0000,,A friend of my late father has \Ndecided to become my guardian.
+Dialogue: 0,0:04:10.39,0:04:11.39,main,TEACHER,0000,0000,0000,,I see.
+Dialogue: 0,0:04:11.77,0:04:14.35,main,TEACHER,0000,0000,0000,,But I can't help but find \Nit all a bit selfish.
+Dialogue: 0,0:04:14.77,0:04:19.82,main,TEACHER,0000,0000,0000,,They leave you alone all these years, \Nand suddenly tell you to come back?
+Dialogue: 0,0:04:19.82,0:04:21.65,main,TEACHER,0000,0000,0000,,Are you okay with that, Yanagi-kun?
+Dialogue: 0,0:04:21.65,0:04:22.65,main,YUKITO,0000,0000,0000,,Yeah.
+Dialogue: 0,0:04:22.65,0:04:24.74,main,YUKITO,0000,0000,0000,,Wherever I go, I doubt my life will change.
+Dialogue: 0,0:04:26.87,0:04:29.87,main,YUKITO,0000,0000,0000,,Thank you for everything, Sensei.
+Dialogue: 0,0:04:30.91,0:04:31.75,main,TEACHER,0000,0000,0000,,Yanagi-kun...
+Dialogue: 0,0:04:33.16,0:04:35.54,italics,YUKITO,0000,0000,0000,,After my father died when I was five,
+Dialogue: 0,0:04:35.54,0:04:38.08,italics,YUKITO,0000,0000,0000,,I grew up in a foster home.
+Dialogue: 0,0:04:38.71,0:04:40.55,italics,YUKITO,0000,0000,0000,,The people around me were all nice,
+Dialogue: 0,0:04:41.05,0:04:42.92,italics,YUKITO,0000,0000,0000,,and I wasn't treated badly at all.
+Dialogue: 0,0:04:43.76,0:04:46.22,italics,YUKITO,0000,0000,0000,,It's really my own fault that I'm all alone.
+Dialogue: 0,0:04:47.14,0:04:48.55,main,STUDENTS,0000,0000,0000,,What's with that guy?
+Dialogue: 0,0:04:47.84,0:04:49.51,top,STUDENTS,0000,0000,0000,,He looks crazy.
+Dialogue: 0,0:04:49.51,0:04:50.72,main,STUDENTS,0000,0000,0000,,Isn't he kinda hot?
+Dialogue: 0,0:04:50.72,0:04:51.89,main,STUDENTS,0000,0000,0000,,No way.
+Dialogue: 0,0:04:51.89,0:04:54.31,sign_9243_94_Strong_Z,SIGN,0000,0000,0000,,Strong Z
+Dialogue: 0,0:05:02.61,0:05:05.40,main,JINGI,0000,0000,0000,,Damn, what's taking so long?
+Dialogue: 0,0:05:05.40,0:05:08.24,main,JINGI,0000,0000,0000,,Oh, hey, congrats on graduating!
+Dialogue: 0,0:05:06.82,0:05:08.95,top,GIRL,0000,0000,0000,,I-I'm not in that class!
+Dialogue: 0,0:05:08.95,0:05:09.66,main,JINGI,0000,0000,0000,,Whoops.
+Dialogue: 0,0:05:10.24,0:05:11.74,main,YUKITO,0000,0000,0000,,What the hell?
+Dialogue: 0,0:05:13.54,0:05:17.21,main,JINGI,0000,0000,0000,,Hope he gets here soon. \NI'm running out of booze.
+Dialogue: 0,0:05:17.21,0:05:17.87,main,JINGI,0000,0000,0000,,Oh?
+Dialogue: 0,0:05:17.87,0:05:20.67,main,JINGI,0000,0000,0000,,Hey! It's been a while!
+Dialogue: 0,0:05:21.88,0:05:24.05,main,JINGI,0000,0000,0000,,You've gotten so big!
+Dialogue: 0,0:05:24.42,0:05:26.59,main,JINGI,0000,0000,0000,,How you been doing?
+Dialogue: 0,0:05:26.59,0:05:27.84,main,YUKITO,0000,0000,0000,,You reek of booze!
+Dialogue: 0,0:05:27.84,0:05:30.72,main,JINGI,0000,0000,0000,,Let's celebrate our reunion! Have a swig!
+Dialogue: 0,0:05:30.72,0:05:32.60,main,YUKITO,0000,0000,0000,,I think you have the wrong person.
+Dialogue: 0,0:05:32.60,0:05:33.39,main,JINGI,0000,0000,0000,,Huh?
+Dialogue: 0,0:05:33.81,0:05:37.19,main,JINGI,0000,0000,0000,,You're Yukito, right? Yanagi Yukito?
+Dialogue: 0,0:05:37.19,0:05:38.81,main,YUKITO,0000,0000,0000,,N-Nope.
+Dialogue: 0,0:05:38.81,0:05:39.52,main,JINGI,0000,0000,0000,,What?
+Dialogue: 0,0:05:39.52,0:05:42.32,main,JINGI,0000,0000,0000,,Oh, come on. Don't lie to me.
+Dialogue: 0,0:05:42.32,0:05:43.65,main,JINGI,0000,0000,0000,,You're totally Yukito.
+Dialogue: 0,0:05:42.73,0:05:45.15,top,YUKITO,0000,0000,0000,,I'm not! Goodbye!
+Dialogue: 0,0:05:48.20,0:05:49.24,main,JINGI,0000,0000,0000,,Huh?
+Dialogue: 0,0:05:52.08,0:05:53.70,italics,YUKITO,0000,0000,0000,,What was with that guy?
+Dialogue: 0,0:05:53.70,0:05:55.75,main,JINGI,0000,0000,0000,,Hey, wait up.
+Dialogue: 0,0:05:55.75,0:05:59.46,main,JINGI,0000,0000,0000,,You're Yukito, right? Don't ignore me.
+Dialogue: 0,0:06:00.00,0:06:01.96,main,YUKITO,0000,0000,0000,,I'm telling you, I'm not.
+Dialogue: 0,0:06:02.25,0:06:03.34,main,JINGI,0000,0000,0000,,Oh?
+Dialogue: 0,0:06:03.75,0:06:05.38,main,JINGI,0000,0000,0000,,Well, you forced my hand.
+Dialogue: 0,0:06:05.38,0:06:06.05,main,YUKITO,0000,0000,0000,,Huh?
+Dialogue: 0,0:06:06.05,0:06:07.67,main,YUKITO,0000,0000,0000,,Wh-What?
+Dialogue: 0,0:06:08.01,0:06:09.68,main,JINGI,0000,0000,0000,,Why don't you go for a ride?
+Dialogue: 0,0:06:09.68,0:06:10.89,main,YUKITO,0000,0000,0000,,What does that mean?!
+Dialogue: 0,0:06:11.26,0:06:13.35,main,JINGI,0000,0000,0000,,Yukito, taking off!
+Dialogue: 0,0:06:18.44,0:06:20.10,main,JINGI,0000,0000,0000,,Now, then...
+Dialogue: 0,0:06:20.48,0:06:21.81,italics,YUKITO,0000,0000,0000,,What's his deal?
+Dialogue: 0,0:06:22.65,0:06:24.40,italics,YUKITO,0000,0000,0000,,My clothes feel so heavy.
+Dialogue: 0,0:06:24.40,0:06:26.74,italics,YUKITO,0000,0000,0000,,This is bad... I'm gonna drown.
+Dialogue: 0,0:06:26.74,0:06:27.74,italics,YUKITO,0000,0000,0000,,Shit, shit...
+Dialogue: 0,0:06:28.03,0:06:30.61,italics,YUKITO,0000,0000,0000,,Shit, shit, shit...
+Dialogue: 0,0:06:39.04,0:06:40.92,italics,YUKITO,0000,0000,0000,,No, not again!
+Dialogue: 0,0:06:42.96,0:06:44.84,italics,YUKITO,0000,0000,0000,,Calm down, calm down!
+Dialogue: 0,0:06:44.84,0:06:46.84,italics,YUKITO,0000,0000,0000,,Stop! Stop, stop!
+Dialogue: 0,0:06:45.05,0:06:47.63,top,JINGI,0000,0000,0000,,Even in the shadows and the dark,\N my soul remains pure.
+Dialogue: 0,0:06:52.55,0:06:54.72,main,JINGI,0000,0000,0000,,Yeah, you are Yukito.
+Dialogue: 0,0:06:54.72,0:06:56.64,main,YUKITO,0000,0000,0000,,Did you stop that?
+Dialogue: 0,0:06:57.18,0:06:59.39,main,JINGI,0000,0000,0000,,Let's get going, then.
+Dialogue: 0,0:06:59.39,0:06:59.85,main,YUKITO,0000,0000,0000,,Huh?
+Dialogue: 0,0:07:00.35,0:07:02.10,main,YUKITO,0000,0000,0000,,Go where?
+Dialogue: 0,0:07:02.10,0:07:04.94,main,JINGI,0000,0000,0000,,An empty vessel serves its \Npurpose by being empty.
+Dialogue: 0,0:07:12.57,0:07:13.62,main,YUKITO,0000,0000,0000,,Where am I?
+Dialogue: 0,0:07:16.28,0:07:17.20,main,YUKITO,0000,0000,0000,,The sea?
+Dialogue: 0,0:07:17.87,0:07:19.87,main,YUKITO,0000,0000,0000,,Why?!
+Dialogue: 0,0:07:20.50,0:07:22.42,main,JINGI,0000,0000,0000,,Oh, hey, you're up?
+Dialogue: 0,0:07:22.42,0:07:23.67,main,YUKITO,0000,0000,0000,,Where are we?!
+Dialogue: 0,0:07:23.67,0:07:25.42,main,JINGI,0000,0000,0000,,Well, calm down first.
+Dialogue: 0,0:07:25.42,0:07:28.34,main,YUKITO,0000,0000,0000,,Who could stay calm in this situation?!
+Dialogue: 0,0:07:29.46,0:07:32.09,main,JINGI,0000,0000,0000,,Oh, yeah, congrats on graduating.
+Dialogue: 0,0:07:32.09,0:07:33.43,main,JINGI,0000,0000,0000,,Feel like a drink?
+Dialogue: 0,0:07:33.43,0:07:34.84,main,YUKITO,0000,0000,0000,,I'm not of legal drinking age...
+Dialogue: 0,0:07:34.84,0:07:36.35,main,YUKITO,0000,0000,0000,,Wait, screw that!
+Dialogue: 0,0:07:37.64,0:07:40.48,main,CAPTAIN,0000,0000,0000,,Looks like you want off Jingi's wild ride.
+Dialogue: 0,0:07:40.48,0:07:43.48,main,CAPTAIN,0000,0000,0000,,He's known for his craziness \Non our islands, too.
+Dialogue: 0,0:07:43.48,0:07:44.48,main,YUKITO,0000,0000,0000,,Islands?
+Dialogue: 0,0:07:44.48,0:07:45.90,main,JINGI,0000,0000,0000,,The Ayaka Islands.
+Dialogue: 0,0:07:45.90,0:07:48.27,main,JINGI,0000,0000,0000,,Your new home from now on.
+Dialogue: 0,0:07:48.27,0:07:51.90,main,YUKITO,0000,0000,0000,,What? So you're from the \Nislands where I was born?
+Dialogue: 0,0:07:52.11,0:07:53.24,main,JINGI,0000,0000,0000,,You got it.
+Dialogue: 0,0:07:53.24,0:07:56.37,main,JINGI,0000,0000,0000,,We'll get your stuff shipped from the foster \Nhome later, so don't worry about that.
+Dialogue: 0,0:07:56.70,0:07:58.24,main,JINGI,0000,0000,0000,,For now, here.
+Dialogue: 0,0:07:58.74,0:08:01.62,main,JINGI,0000,0000,0000,,You've got a change of clothes, right? \NYou're gonna catch a cold like that.
+Dialogue: 0,0:08:01.62,0:08:05.79,main,YUKITO,0000,0000,0000,,What is with that bag? \NWhat the heck's going on?
+Dialogue: 0,0:08:06.08,0:08:09.05,main,JINGO,0000,0000,0000,,Didn't old man Inou tell you all about it?
+Dialogue: 0,0:08:09.05,0:08:10.88,main,YUKITO,0000,0000,0000,,I did get a letter...
+Dialogue: 0,0:08:10.88,0:08:15.64,main,YUKITO,0000,0000,0000,,So, you know my father's friend, \Nand came to pick me up?
+Dialogue: 0,0:08:15.64,0:08:16.84,main,JINGI,0000,0000,0000,,Pretty much.
+Dialogue: 0,0:08:16.84,0:08:18.64,main,JINGI,0000,0000,0000,,I'm Sagawa Jingi.
+Dialogue: 0,0:08:19.10,0:08:20.93,main,JINGI,0000,0000,0000,,Call me Jingi-san!
+Dialogue: 0,0:08:21.85,0:08:24.35,main,JINGI,0000,0000,0000,,I'm somewhat of an older brother to you.
+Dialogue: 0,0:08:24.35,0:08:25.77,main,YUKITO,0000,0000,0000,,"Somewhat"?
+Dialogue: 0,0:08:25.77,0:08:27.36,main,JINGI,0000,0000,0000,,Since your dad...
+Dialogue: 0,0:08:29.11,0:08:32.99,main,JINGI,0000,0000,0000,,Master was a father figure to me.
+Dialogue: 0,0:08:33.24,0:08:34.61,main,YUKITO,0000,0000,0000,,What are you talking about?
+Dialogue: 0,0:08:38.49,0:08:40.91,sign_14676_176_To_Second_Island,SIGN,0000,0000,0000,,{\pos(290,105)}To Second Island
+Dialogue: 0,0:08:41.41,0:08:43.83,main,YUKITO,0000,0000,0000,,A train... over the sea?
+Dialogue: 0,0:08:43.83,0:08:46.46,main,CAPTAIN,0000,0000,0000,,That's the Marine Liner. \NIt links the Ayaka Islands.
+Dialogue: 0,0:08:47.04,0:08:49.88,main,CAPTAIN,0000,0000,0000,,How do you like it? Ain't it Ayakastic?
+Dialogue: 0,0:08:49.88,0:08:51.21,main,YUKITO,0000,0000,0000,,"Ayakastic"?
+Dialogue: 0,0:08:51.21,0:08:53.01,main,JINGI,0000,0000,0000,,Look, we're almost there.
+Dialogue: 0,0:09:16.11,0:09:17.53,main,YUKITO,0000,0000,0000,,You know...
+Dialogue: 0,0:09:17.53,0:09:17.95,main,JINGI,0000,0000,0000,,Hmm?
+Dialogue: 0,0:09:18.66,0:09:21.12,main,YUKITO,0000,0000,0000,,This island's got a strange air about it.
+Dialogue: 0,0:09:23.24,0:09:26.12,main,JINGI,0000,0000,0000,,This is Second Island,\Npart of the Ayaka Islands.
+Dialogue: 0,0:09:26.12,0:09:29.42,main,JINGI,0000,0000,0000,,You lived here until you were five.
+Dialogue: 0,0:09:26.12,0:09:32.05,sign_15818_189_Ayaka_Islands,SIGN,0000,0000,0000,,Ayaka Islands
+Dialogue: 0,0:09:29.42,0:09:30.13,main,YUKITO,0000,0000,0000,,Right...
+Dialogue: 0,0:09:30.71,0:09:32.05,main,JINGI,0000,0000,0000,,Come on, this way.
+Dialogue: 0,0:09:32.42,0:09:33.67,main,JINGI,0000,0000,0000,,This take you back?
+Dialogue: 0,0:09:33.67,0:09:36.67,main,YUKITO,0000,0000,0000,,Not really. I don't remember \Nmuch of my childhood.
+Dialogue: 0,0:09:37.22,0:09:38.63,main,MOMOKO,0000,0000,0000,,Yukito-kun!
+Dialogue: 0,0:09:38.89,0:09:40.47,main,MOMOKO&INOU,0000,0000,0000,,Hey!
+Dialogue: 0,0:09:40.47,0:09:42.35,sign_16162_197_Welcome_,SIGNL,0000,0000,0000,,Welcome!
+Dialogue: 0,0:09:40.47,0:09:42.35,sign_16162_197_Welcome_,SIGNR,0000,0000,0000,,{\an9\c&HA27AC8&}Yukito{\c&H1596B1&}-kun♥
+Dialogue: 0,0:09:40.89,0:09:42.35,main,MOMOKO,0000,0000,0000,,It's been so long!
+Dialogue: 0,0:09:42.68,0:09:44.68,main,JINGI,0000,0000,0000,,Cheers for coming to pick us up.
+Dialogue: 0,0:09:44.68,0:09:46.56,main,INOU,0000,0000,0000,,Thanks, Jingi-kun.
+Dialogue: 0,0:09:46.56,0:09:48.85,main,MOMOKO,0000,0000,0000,,You've grown so big, Yukito-kun.
+Dialogue: 0,0:09:48.85,0:09:51.40,main,YUKITO,0000,0000,0000,,Uh, and you are...
+Dialogue: 0,0:09:51.77,0:09:53.61,main,MOMOKO,0000,0000,0000,,I'm Amamiya Momoko.
+Dialogue: 0,0:09:53.61,0:09:57.11,main,MOMOKO,0000,0000,0000,,The landlord of your childhood home.
+Dialogue: 0,0:09:57.11,0:10:00.57,main,MOMOKO,0000,0000,0000,,We once lived together like family.
+Dialogue: 0,0:10:00.57,0:10:01.49,main,YUKITO,0000,0000,0000,,Right...
+Dialogue: 0,0:10:01.49,0:10:04.41,main,INOU,0000,0000,0000,,I'm the mayor of Ayakashima City.
+Dialogue: 0,0:10:04.41,0:10:07.25,main,INOU,0000,0000,0000,,The name's Inou Sanji. Your guardian.
+Dialogue: 0,0:10:07.25,0:10:09.00,main,INOU,0000,0000,0000,,Did you read my letter?
+Dialogue: 0,0:10:09.00,0:10:10.21,main,YUKITO,0000,0000,0000,,Y-Yes.
+Dialogue: 0,0:10:10.63,0:10:12.54,main,MOMOKO,0000,0000,0000,,Welcome back, Yukito-kun!
+Dialogue: 0,0:10:10.63,0:10:14.30,sign_16162_197_Welcome_,SIGNL,0000,0000,0000,,{\pos(220,20)}Welcome!
+Dialogue: 0,0:10:10.63,0:10:14.30,sign_16162_197_Welcome_,SIGNR,0000,0000,0000,,{\an9\c&HA27AC8&\pos(450,20)}Yukito{\c&H1596B1&}-kun♥
+Dialogue: 0,0:10:12.54,0:10:14.30,main,INOU,0000,0000,0000,,Welcome to Ayaka Islands.
+Dialogue: 0,0:10:14.88,0:10:15.92,main,YUKITO,0000,0000,0000,,Thank you.
+Dialogue: 0,0:10:18.17,0:10:21.64,main,INOU,0000,0000,0000,,Jingi-kun insisted on going to pick you up.
+Dialogue: 0,0:10:21.64,0:10:23.85,main,INOU,0000,0000,0000,,He didn't bother you in any way, did he?
+Dialogue: 0,0:10:23.85,0:10:26.31,main,JINGI,0000,0000,0000,,Hey, I escorted him here like a gentleman!
+Dialogue: 0,0:10:37.99,0:10:40.61,main,MOMOKO,0000,0000,0000,,It may be remote, but this \Nis a pretty place, isn't it?
+Dialogue: 0,0:10:40.61,0:10:41.41,main,YUKITO,0000,0000,0000,,Yes.
+Dialogue: 0,0:10:41.41,0:10:44.66,main,MOMOKO,0000,0000,0000,,First Island is a lot livelier \Nand has a bunch of facilities,
+Dialogue: 0,0:10:44.66,0:10:47.20,main,MOMOKO,0000,0000,0000,,so I'd recommend going there \Nif you want to have fun.
+Dialogue: 0,0:10:51.83,0:10:53.67,main,JINGI,0000,0000,0000,,What's up? Anything wrong?
+Dialogue: 0,0:10:53.67,0:10:56.00,main,YUKITO,0000,0000,0000,,No, nothing.
+Dialogue: 0,0:10:59.22,0:11:00.63,main,YUKITO,0000,0000,0000,,Thanks for having me.
+Dialogue: 0,0:11:02.59,0:11:04.97,main,JINGI,0000,0000,0000,,Whew, finally back!
+Dialogue: 0,0:11:04.97,0:11:08.68,main,INOU,0000,0000,0000,,Consider this your own home and \Nmake yourself comfortable.
+Dialogue: 0,0:11:08.68,0:11:09.56,main,YUKITO,0000,0000,0000,,Thank you.
+Dialogue: 0,0:11:09.93,0:11:12.27,main,JINGI,0000,0000,0000,,Well, recall anything yet?
+Dialogue: 0,0:11:12.52,0:11:13.40,main,YUKITO,0000,0000,0000,,No...
+Dialogue: 0,0:11:14.69,0:11:16.77,main,JINGI,0000,0000,0000,,That's Master.
+Dialogue: 0,0:11:16.77,0:11:18.86,italics,YUKITO,0000,0000,0000,,This was my dad?
+Dialogue: 0,0:11:19.15,0:11:21.82,italics,YUKITO,0000,0000,0000,,Was he really my biological father?
+Dialogue: 0,0:11:22.28,0:11:25.62,main,MOMOKO,0000,0000,0000,,Your father, Yanagi-sensei,
+Dialogue: 0,0:11:25.62,0:11:29.75,main,MOMOKO,0000,0000,0000,,was an amazing Ley Master who maintained \Nthe harmony of the Ayaka Islands.
+Dialogue: 0,0:11:29.75,0:11:31.37,main,YUKITO,0000,0000,0000,,"Ley Master"?
+Dialogue: 0,0:11:31.58,0:11:34.83,main,JINGI,0000,0000,0000,,People with strange abilities \Nlike ours, basically.
+Dialogue: 0,0:11:35.04,0:11:39.55,main,YUKITO,0000,0000,0000,,So, like, stuffing me in that \Nweird dimensional-pocket bag?
+Dialogue: 0,0:11:39.55,0:11:40.67,main,JINGI,0000,0000,0000,,Pretty much.
+Dialogue: 0,0:11:40.67,0:11:42.51,main,MOMOKO,0000,0000,0000,,Jingi-chan?
+Dialogue: 0,0:11:42.51,0:11:45.18,main,MOMOKO,0000,0000,0000,,Did I hear you stuffed \NYukito-kun in your bag?
+Dialogue: 0,0:11:45.18,0:11:46.68,main,JINGI,0000,0000,0000,,M-Momoko-san?!
+Dialogue: 0,0:11:46.68,0:11:48.72,main,JINGI,0000,0000,0000,,That was just a joke.
+Dialogue: 0,0:11:48.72,0:11:51.39,main,JINGI,0000,0000,0000,,A buddy-buddy game between Yukito and me.
+Dialogue: 0,0:11:51.39,0:11:53.39,main,JINGI,0000,0000,0000,,It's not what you think!
+Dialogue: 0,0:11:53.39,0:11:54.44,italics,YUKITO,0000,0000,0000,,Ley Master...
+Dialogue: 0,0:11:54.44,0:11:57.57,main,INOU,0000,0000,0000,,Jingi-kun was Yanagi's third student.
+Dialogue: 0,0:11:57.57,0:12:00.74,main,INOU,0000,0000,0000,,The first and second are \Nmuch more incredible.
+Dialogue: 0,0:12:00.74,0:12:02.53,main,JINGI,0000,0000,0000,,Don't compare me to my brothers.
+Dialogue: 0,0:12:02.78,0:12:04.61,main,JINGI,0000,0000,0000,,They got a head start of years.
+Dialogue: 0,0:12:05.11,0:12:06.16,main,YUKITO,0000,0000,0000,,Then...
+Dialogue: 0,0:12:06.41,0:12:08.41,main,YUKITO,0000,0000,0000,,That's what my weird power is?
+Dialogue: 0,0:12:08.70,0:12:13.00,main,JINGI,0000,0000,0000,,Yeah, though you don't even have the \Nbasics down right. Just brute force.
+Dialogue: 0,0:12:13.00,0:12:17.67,main,MOMOKO,0000,0000,0000,,You are Yanagi-sensei's son, so you must've \Nbeen born with an amazing talent.
+Dialogue: 0,0:12:17.96,0:12:22.05,main,YUKITO,0000,0000,0000,,I had no idea my father was \Ninvolved in such things.
+Dialogue: 0,0:12:23.26,0:12:24.93,main,YUKITO,0000,0000,0000,,Um, what about my mother?
+Dialogue: 0,0:12:24.93,0:12:28.60,main,MOMOKO,0000,0000,0000,,Well... this is hard to say.
+Dialogue: 0,0:12:28.60,0:12:32.60,main,JINGI,0000,0000,0000,,It freaked all of us out when Master \Nsuddenly brought a kid home.
+Dialogue: 0,0:12:32.60,0:12:35.31,main,JINGI,0000,0000,0000,,He never did say anything \Nabout his partner, right?
+Dialogue: 0,0:12:35.31,0:12:36.52,main,MOMOKO,0000,0000,0000,,Quiet, Jingi-chan!
+Dialogue: 0,0:12:36.52,0:12:38.31,main,JINGI,0000,0000,0000,,That was so like him.
+Dialogue: 0,0:12:39.40,0:12:41.78,main,YUKITO,0000,0000,0000,,So nobody knows who my mother is.
+Dialogue: 0,0:12:42.15,0:12:46.61,main,INOU,0000,0000,0000,,We left you in foster care on \Nthe mainland all these years,
+Dialogue: 0,0:12:46.61,0:12:48.74,main,INOU,0000,0000,0000,,unable to even talk about \Nthese things with you.
+Dialogue: 0,0:12:48.74,0:12:52.37,main,YUKITO,0000,0000,0000,,What made you call me back here so suddenly?
+Dialogue: 0,0:12:52.37,0:12:54.75,main,INOU,0000,0000,0000,,We were carrying out Yanagi's will.
+Dialogue: 0,0:12:54.75,0:12:56.00,main,YUKITO,0000,0000,0000,,My father's?
+Dialogue: 0,0:12:56.00,0:12:57.75,main,INOU,0000,0000,0000,,If he died,
+Dialogue: 0,0:12:57.75,0:13:00.00,main,INOU,0000,0000,0000,,we were to let you grow up on the mainland,
+Dialogue: 0,0:13:00.00,0:13:03.46,main,INOU,0000,0000,0000,,severing all ties with the \NAyaka Islands while you did.
+Dialogue: 0,0:13:03.67,0:13:07.43,main,INOU,0000,0000,0000,,And he told us when it would be \Nacceptable for us to call you back.
+Dialogue: 0,0:13:07.43,0:13:10.30,main,INOU,0000,0000,0000,,We don't know his reasons, however.
+Dialogue: 0,0:13:10.64,0:13:14.60,main,MOMOKO,0000,0000,0000,,Really, why did Yanagi-sensei \Nleave instructions like {\i1}that{\i0} behind?
+Dialogue: 0,0:13:15.31,0:13:18.02,main,INOU,0000,0000,0000,,But, knowing Yanagi,
+Dialogue: 0,0:13:18.02,0:13:22.27,main,INOU,0000,0000,0000,,we had no choice but to infer \Nthat it must've been important.
+Dialogue: 0,0:13:22.27,0:13:23.32,main,INOU,0000,0000,0000,,We're so sorry.
+Dialogue: 0,0:13:25.32,0:13:29.37,main,INOU,0000,0000,0000,,Would you be willing to \Nlive with us from now on?
+Dialogue: 0,0:13:29.37,0:13:31.83,main,MOMOKO,0000,0000,0000,,Sorry. This must all \Nsound so selfish to you.
+Dialogue: 0,0:13:32.08,0:13:32.87,main,YUKITO,0000,0000,0000,,No.
+Dialogue: 0,0:13:33.29,0:13:35.96,main,YUKITO,0000,0000,0000,,That's fine with me. I don't really mind.
+Dialogue: 0,0:13:36.41,0:13:38.46,main,YUKITO,0000,0000,0000,,It doesn't change anything, anyway.
+Dialogue: 0,0:13:39.00,0:13:40.71,main,YUKITO,0000,0000,0000,,Thanks for having me.
+Dialogue: 0,0:13:49.14,0:13:52.10,main,YUKITO,0000,0000,0000,,This is my room, huh?
+Dialogue: 0,0:13:59.85,0:14:01.06,main,YUKITO,0000,0000,0000,,What is that?
+Dialogue: 0,0:14:01.06,0:14:04.32,main,JINGI,0000,0000,0000,,A Mitama. This one's harmless.
+Dialogue: 0,0:14:04.32,0:14:05.40,main,YUKITO,0000,0000,0000,,Mitama?
+Dialogue: 0,0:14:05.65,0:14:07.86,main,JINGI,0000,0000,0000,,They're all over these islands.
+Dialogue: 0,0:14:07.86,0:14:09.82,main,JINGI,0000,0000,0000,,You'll get used to them.
+Dialogue: 0,0:14:09.82,0:14:11.24,main,YUKITO,0000,0000,0000,,The heck?
+Dialogue: 0,0:14:11.24,0:14:14.12,main,YUKITO,0000,0000,0000,,And wait, don't just barge into my room!
+Dialogue: 0,0:14:14.95,0:14:16.66,main,JINGI,0000,0000,0000,,What's the big deal?
+Dialogue: 0,0:14:19.42,0:14:23.09,main,JINGI,0000,0000,0000,,Dude, why are you putting \Nup this weird barrier?
+Dialogue: 0,0:14:23.67,0:14:25.88,main,JINGI,0000,0000,0000,,You've practically walled \Nyourself off from people.
+Dialogue: 0,0:14:25.88,0:14:29.22,main,JINGI,0000,0000,0000,,And what was that earlier? \N"It doesn't change anything"?
+Dialogue: 0,0:14:29.22,0:14:31.68,main,JINGI,0000,0000,0000,,You didn't have to do them dirty like that.
+Dialogue: 0,0:14:32.14,0:14:37.14,main,YUKITO,0000,0000,0000,,If I was rude to Momoko-san and Inou-san, \Nthen I do feel bad about that.
+Dialogue: 0,0:14:37.47,0:14:41.31,main,YUKITO,0000,0000,0000,,But you were far ruder to me, \Nso you're not getting any apologies.
+Dialogue: 0,0:14:41.31,0:14:43.06,main,JINGI,0000,0000,0000,,Don't change the topic.
+Dialogue: 0,0:14:43.86,0:14:48.44,main,YUKITO,0000,0000,0000,,I don't want to get too close to people.
+Dialogue: 0,0:14:50.78,0:14:52.74,main,JINGI,0000,0000,0000,,What happened?
+Dialogue: 0,0:14:52.74,0:14:55.83,main,JINGI,0000,0000,0000,,I know you're not just acting out because \Nyou got bullied in foster care.
+Dialogue: 0,0:14:56.08,0:14:57.45,main,JINGI,0000,0000,0000,,Talk to me, man.
+Dialogue: 0,0:14:59.96,0:15:01.25,main,YUKITO,0000,0000,0000,,When I was little,
+Dialogue: 0,0:15:01.75,0:15:06.50,main,YUKITO,0000,0000,0000,,me and the other kids from the foster \Nhome went on a riverside picnic.
+Dialogue: 0,0:15:06.96,0:15:11.22,main,YUKITO,0000,0000,0000,,One of the kids there \Nwas kind of mean to me,
+Dialogue: 0,0:15:13.55,0:15:15.97,main,YUKITO,0000,0000,0000,,and I got really mad.
+Dialogue: 0,0:15:21.89,0:15:22.94,main,YUKITO,0000,0000,0000,,Before I knew it,
+Dialogue: 0,0:15:23.65,0:15:26.61,main,YUKITO,0000,0000,0000,,the river had attacked that kid.
+Dialogue: 0,0:15:29.36,0:15:32.24,main,YUKITO,0000,0000,0000,,I had no idea what was going on,
+Dialogue: 0,0:15:32.74,0:15:35.66,main,YUKITO,0000,0000,0000,,but I did realize that it was my doing.
+Dialogue: 0,0:15:36.16,0:15:39.95,main,YUKITO,0000,0000,0000,,It happened again several \Ntimes after that...
+Dialogue: 0,0:15:40.50,0:15:43.33,main,YUKITO,0000,0000,0000,,And I started keeping my \Ndistance from people.
+Dialogue: 0,0:15:44.29,0:15:47.21,main,YUKITO,0000,0000,0000,,Because if I'm alone, \Nmy emotions will remain stable.
+Dialogue: 0,0:15:47.75,0:15:51.05,main,YUKITO,0000,0000,0000,,This is the only way I can live my life now.
+Dialogue: 0,0:15:51.05,0:15:53.63,main,JINGI,0000,0000,0000,,Damn, I lost.
+Dialogue: 0,0:15:53.63,0:15:56.22,main,JINGI,0000,0000,0000,,I was so close to clearing it, too.
+Dialogue: 0,0:15:56.22,0:15:57.55,main,JINGI,0000,0000,0000,,Oh, are you done?
+Dialogue: 0,0:15:59.43,0:16:00.72,main,YUKIKO,0000,0000,0000,,Yeah, we're done.
+Dialogue: 0,0:16:00.72,0:16:03.56,main,JINGI,0000,0000,0000,,Hold on. I'm sorry about that.
+Dialogue: 0,0:16:07.40,0:16:10.11,main,MOMOKO,0000,0000,0000,,Yukito-kun? Dinner's almost ready.
+Dialogue: 0,0:16:11.03,0:16:14.36,main,YUKITO,0000,0000,0000,,I'm sorry. I need to go \Ncool my head a little.
+Dialogue: 0,0:16:14.95,0:16:15.91,main,MOMOKO,0000,0000,0000,,Oh?
+Dialogue: 0,0:16:22.33,0:16:24.62,italics,YUKITO,0000,0000,0000,,No! Don't get irritated!
+Dialogue: 0,0:16:24.62,0:16:26.42,italics,YUKITO,0000,0000,0000,,Keep your emotions in check!
+Dialogue: 0,0:16:28.42,0:16:31.05,italics,YUKITO,0000,0000,0000,,Until now, as long as I kept my distance,
+Dialogue: 0,0:16:31.67,0:16:35.30,italics,YUKITO,0000,0000,0000,,nobody came any closer than \Nthey had to. So why now?
+Dialogue: 0,0:16:48.06,0:16:49.06,main,YUKITO,0000,0000,0000,,What the...?
+Dialogue: 0,0:17:00.78,0:17:02.16,main,JINGI,0000,0000,0000,,...unfit to show any man.
+Dialogue: 0,0:17:05.12,0:17:08.54,main,JINGI,0000,0000,0000,,Wow, you ran into an Ara-Mitama already.
+Dialogue: 0,0:17:08.54,0:17:09.42,main,YUKITO,0000,0000,0000,,Ara-Mitama?
+Dialogue: 0,0:17:10.46,0:17:14.55,main,JINGI,0000,0000,0000,,A harmful being, unlike the \None in your room earlier.
+Dialogue: 0,0:17:14.55,0:17:17.55,main,JINGI,0000,0000,0000,,It was probably attracted to the \Ngloomy aura you were projecting.
+Dialogue: 0,0:17:17.55,0:17:20.01,main,YUKITO,0000,0000,0000,,No... Wh-What do we do?
+Dialogue: 0,0:17:20.01,0:17:21.10,main,JINGI,0000,0000,0000,,Well, just you watch.
+Dialogue: 0,0:17:21.47,0:17:26.52,main,JINGI,0000,0000,0000,,I'll show you what your father Yanagi \NMakoto's third student, Sagawa Jingi,
+Dialogue: 0,0:17:26.52,0:17:28.19,main,JINGI,0000,0000,0000,,and his Ley Mastery is capable of.
+Dialogue: 0,0:17:34.19,0:17:35.40,main,JINGI,0000,0000,0000,,Human knowledge and heavenly ways...
+Dialogue: 0,0:17:37.95,0:17:41.16,main,JINGI,0000,0000,0000,,All creation bears the Yin,\N embraces the Yang,
+Dialogue: 0,0:17:41.16,0:17:43.74,main,JINGI,0000,0000,0000,,and strikes a balance to create harmony.
+Dialogue: 0,0:17:55.76,0:17:57.30,main,JINGI,0000,0000,0000,,That takes care of that.
+Dialogue: 0,0:17:57.59,0:17:58.51,main,JINGI,0000,0000,0000,,Thoughts?
+Dialogue: 0,0:17:58.51,0:17:59.38,main,YUKITO,0000,0000,0000,,Wow...
+Dialogue: 0,0:17:59.38,0:18:02.97,main,JINGI,0000,0000,0000,,Amazed, are we? You better \Nshow me some respect!
+Dialogue: 0,0:18:05.39,0:18:07.14,main,YUKITO,0000,0000,0000,,Jingi-san... Behind you!
+Dialogue: 0,0:18:09.69,0:18:10.65,main,JINGI,0000,0000,0000,,Yukito...
+Dialogue: 0,0:18:10.65,0:18:11.52,main,YUKITO,0000,0000,0000,,Y-Yes?
+Dialogue: 0,0:18:11.52,0:18:13.32,main,JINGI,0000,0000,0000,,Why don't you go for a ride?
+Dialogue: 0,0:18:13.32,0:18:14.27,main,YUKITO,0000,0000,0000,,Wha?
+Dialogue: 0,0:18:14.27,0:18:15.94,main,JINGI,0000,0000,0000,,I wish you luck!
+Dialogue: 0,0:18:20.74,0:18:22.07,italics,YUKITO,0000,0000,0000,,Again?
+Dialogue: 0,0:18:22.07,0:18:24.03,italics,YUKITO,0000,0000,0000,,Seriously, what is his problem?
+Dialogue: 0,0:18:26.58,0:18:27.41,italics,YUKITO,0000,0000,0000,,Damn it...
+Dialogue: 0,0:18:28.21,0:18:31.00,italics,YUKITO,0000,0000,0000,,You just show up of nowhere, drive me nuts,
+Dialogue: 0,0:18:31.00,0:18:33.21,italics,YUKITO,0000,0000,0000,,and now you're trying to kill me?
+Dialogue: 0,0:18:33.54,0:18:36.09,italics,YUKITO,0000,0000,0000,,I've had enough of your bullshit!
+Dialogue: 0,0:18:41.76,0:18:44.76,main,JINGI,0000,0000,0000,,His brute force is pretty \Nimpressive, at least.
+Dialogue: 0,0:18:49.06,0:18:51.14,italics,YUKITO,0000,0000,0000,,No, I did it again...
+Dialogue: 0,0:18:51.14,0:18:52.85,main,JINGI,0000,0000,0000,,A fish is not meant to leave the water.
+Dialogue: 0,0:18:53.36,0:18:56.52,main,JINGI,0000,0000,0000,,Its plagued plight is unfit to show any man.
+Dialogue: 0,0:19:04.49,0:19:06.16,main,JINGI,0000,0000,0000,,Hey, good job.
+Dialogue: 0,0:19:07.54,0:19:09.37,main,JINGI,0000,0000,0000,,What're you spacing out for?
+Dialogue: 0,0:19:10.00,0:19:12.37,main,YUKITO,0000,0000,0000,,Did you stop that, Jingi-san?
+Dialogue: 0,0:19:12.37,0:19:13.46,main,JINGI,0000,0000,0000,,Listen, man.
+Dialogue: 0,0:19:13.79,0:19:17.42,main,JINGI,0000,0000,0000,,You seem to be terrified of your own powers.
+Dialogue: 0,0:19:17.42,0:19:21.72,main,JINGI,0000,0000,0000,,They're not the problem. You are, \Nbecause you suck at controlling them.
+Dialogue: 0,0:19:22.13,0:19:25.55,main,JINGI,0000,0000,0000,,If you're scared of them going berserk, \Nlearn how to keep control of them.
+Dialogue: 0,0:19:25.55,0:19:27.97,main,YUKITO,0000,0000,0000,,Is that even possible?
+Dialogue: 0,0:19:28.47,0:19:30.23,main,JINGI,0000,0000,0000,,'Course it is.
+Dialogue: 0,0:19:30.23,0:19:33.35,main,JINGI,0000,0000,0000,,You're hopeless, so I'll tag \Nalong with your training.
+Dialogue: 0,0:19:33.35,0:19:35.19,main,JINGI,0000,0000,0000,,Respect me and call me "Master."
+Dialogue: 0,0:19:39.86,0:19:41.15,main,YUKITO,0000,0000,0000,,What's this?
+Dialogue: 0,0:19:41.15,0:19:43.28,main,JINGI,0000,0000,0000,,The Ara-Mitama's been purified.
+Dialogue: 0,0:19:43.28,0:19:46.53,main,JINGI,0000,0000,0000,,Wasn't the most elegant of methods, though.
+Dialogue: 0,0:19:50.75,0:19:55.46,main,JINGI,0000,0000,0000,,Quit whining and talking about how \Nyou don't wanna get close to people.
+Dialogue: 0,0:19:56.04,0:19:59.05,main,JINGI,0000,0000,0000,,We grown-ups can deal with your childish \Noutbursts with our eyes closed.
+Dialogue: 0,0:19:59.05,0:20:01.17,main,JINGI,0000,0000,0000,,Wear your heart on your sleeve, man.
+Dialogue: 0,0:20:01.17,0:20:01.76,main,YUKITO,0000,0000,0000,,Ow!
+Dialogue: 0,0:20:06.68,0:20:09.01,italics,YUKITO,0000,0000,0000,,Huh? I feel like...
+Dialogue: 0,0:20:09.60,0:20:12.35,italics,YUKITO,0000,0000,0000,,I had an older brother \Nfigure like him, long ago.
+Dialogue: 0,0:20:13.14,0:20:14.81,main,JINGI,0000,0000,0000,,Anyway, let's head home.
+Dialogue: 0,0:20:14.81,0:20:18.02,main,JINGI,0000,0000,0000,,You nearly had me panicking with how long \Nyou took to get out of that thing.
+Dialogue: 0,0:20:18.02,0:20:19.82,main,JINGI,0000,0000,0000,,I should have a drink to celebrate.
+Dialogue: 0,0:20:20.19,0:20:21.74,main,JINGI,0000,0000,0000,,You'll join me, right?
+Dialogue: 0,0:20:22.82,0:20:25.70,main,YUKITO,0000,0000,0000,,I'm going to wear my heart \Non my sleeve, like you said.
+Dialogue: 0,0:20:26.36,0:20:27.87,main,YUKITO,0000,0000,0000,,I told you, I'm not of legal drinking age!
+Dialogue: 0,0:20:47.72,0:20:49.14,main,KURAMA,0000,0000,0000,,I see.
+Dialogue: 0,0:20:50.31,0:20:51.72,main,CHATARO,0000,0000,0000,,Sensei?
+Dialogue: 0,0:20:51.72,0:20:53.39,main,YAGO,0000,0000,0000,,Is something the matter?
+Dialogue: 0,0:20:53.68,0:20:55.69,main,KURAMA,0000,0000,0000,,No, it's just...
+Dialogue: 0,0:20:56.14,0:20:58.27,main,KURAMA,0000,0000,0000,,It seems that boy has returned.
+Dialogue: 0,0:21:15.12,0:21:17.46,main,IBARA,0000,0000,0000,,No other abnormalities \Nfound in the Eastern Ward.
+Dialogue: 0,0:21:17.46,0:21:19.54,main,IBARA,0000,0000,0000,,Will we expand the search \Nto the Western Ward?
+Dialogue: 0,0:21:20.96,0:21:21.92,main,IBARA,0000,0000,0000,,Boss?
+Dialogue: 0,0:21:22.34,0:21:25.47,main,IBUKI,0000,0000,0000,,It's nothing. We're done for the day.
+Dialogue: 0,0:21:25.47,0:21:26.93,main,IBUKI,0000,0000,0000,,Let's head back to GOZ.
+Dialogue: 0,0:21:26.93,0:21:27.72,main,IBARA,0000,0000,0000,,Okay.
+Dialogue: 0,0:21:28.43,0:21:30.97,main,JINGI,0000,0000,0000,,Brr... We're back.
+Dialogue: 0,0:21:30.97,0:21:33.43,main,MOMOKO,0000,0000,0000,,My, what happened to you two?
+Dialogue: 0,0:21:33.43,0:21:36.02,main,JINGI,0000,0000,0000,,We ran into an Ara-Mitama by the canals.
+Dialogue: 0,0:21:36.02,0:21:37.39,main,JINGI,0000,0000,0000,,I'm cold, Momoko-san!
+Dialogue: 0,0:21:37.39,0:21:38.81,main,MOMOKO,0000,0000,0000,,Are you okay?
+Dialogue: 0,0:21:38.81,0:21:41.27,main,MOMOKO,0000,0000,0000,,The bath's ready, so go ahead and use it.
+Dialogue: 0,0:21:41.27,0:21:42.23,main,JINGI,0000,0000,0000,,Cheers!
+Dialogue: 0,0:21:42.23,0:21:43.82,main,YUKITO,0000,0000,0000,,Thank you.
+Dialogue: 0,0:21:43.82,0:21:45.32,main,MOMOKO,0000,0000,0000,,You're not hurt, are you?
+Dialogue: 0,0:21:45.32,0:21:47.20,main,YUKITO,0000,0000,0000,,Huh? No, I'm not.
+Dialogue: 0,0:21:47.40,0:21:48.82,main,MOMOKO,0000,0000,0000,,That's good.
+Dialogue: 0,0:21:49.32,0:21:51.45,main,MOMOKO,0000,0000,0000,,Welcome home, Yukito-kun.
+Dialogue: 0,0:21:53.45,0:21:54.58,main,YUKITO,0000,0000,0000,,Uh...
+Dialogue: 0,0:21:56.62,0:21:57.75,main,YUKITO,0000,0000,0000,,Thank you.
+Dialogue: 0,0:21:58.79,0:21:59.83,main,YUKITO,0000,0000,0000,,It's good to be back.
+Dialogue: 0,0:23:36.97,0:23:40.05,Next_Ep_Number,SIGN,0000,0000,0000,,{\fad(1320,1)\blur4\t(0,1320,\blur0)}Episode 2
+Dialogue: 0,0:23:36.97,0:23:40.05,Next_Ep_Title,SIGN,0000,0000,0000,,{\fad(1320,1)\blur4\t(0,1320,\blur0)}"I Definitely Drank Too Much"

@@ -503,23 +503,23 @@ def upload_api():
             }
             print(banner_name)
             # print(banner)
-            # files = {
-            #     "name" : "banner.jpg",
-            #     "file" : banner
-            #     }
+#             files = {
+#                  "name" : "banner.jpg",
+#                  "file" : banner
+#                  }
             # files = {
             #     "image" : banner
             #     }
-            files = {
-                "image" : (str(banner_name), banner)
-                }
+#             print(open(banner_path, encoding='utf8', errors='ignore').read())
+            files = {"image": (banner_name, open(banner_path, "rb"))}
+#             subs\Mina\Season_1
+#             files = {"image": open(banner_path, "rb")}
             # response = requests.post(secrets['book_url'], json=todo, headers=headers)
-            response = requests.post(secrets['book_url'], json=todo, headers=headers, files=files)
+            response = requests.post(secrets['book_url'], json=todo, files=files, headers=headers)
             print(response)
             print(response.headers)
-            print(response.encoding)
-            # print(response.request.body)
-            print(response.content)
+#             print(response.request.body)
+#             print(response.content)
             print(response.json())
             BOOK_ID = response.json()['id']
             
