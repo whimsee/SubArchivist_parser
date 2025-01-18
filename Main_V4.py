@@ -496,7 +496,6 @@ def upload_api():
             
         if not found:
             # add to log
-            # print(banner)
             log.append("Anime not found. Creating " + anime_title + "\n")
             todo = {
                 "name": anime_title,
@@ -508,13 +507,17 @@ def upload_api():
             #     "name" : "banner.jpg",
             #     "file" : banner
             #     }
+            # files = {
+            #     "image" : banner
+            #     }
             files = {
-                "upload_file" : (banner_name, banner)
+                "image" : (str(banner_name), banner)
                 }
             # response = requests.post(secrets['book_url'], json=todo, headers=headers)
             response = requests.post(secrets['book_url'], json=todo, headers=headers, files=files)
-            # print(response.headers)
-            # print(response.encoding)
+            print(response)
+            print(response.headers)
+            print(response.encoding)
             # print(response.request.body)
             print(response.content)
             print(response.json())
