@@ -3,5 +3,6 @@ __pycache__/
 dumps/
 links.json
 secrets_prod.py
+secrets.py
 subs/
 *Zone.Identifier
