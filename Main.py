@@ -76,6 +76,13 @@ class AbortUpload(Exception):
     pass
 
 ############## Functions #####################
+
+### Convert image bytes to json
+def convert_to_json(to_convert):
+    encode = base64.b64encode(to_convert)
+    to_utf = encode.decode('utf-8')
+    return to_utf
+
 ### Multiple replace
 def replace_all(text, dic):
     for i, j in pre_dictionary.items():
@@ -471,7 +478,6 @@ def upload_api():
         BOOK_ID = 0
         found = False
         
-
         response = requests.get(secrets['book_url']+"?count=300&sort=-created_at", headers=headers)
         list = response.json()
 
@@ -491,7 +497,7 @@ def upload_api():
             log.append("Anime not found. Creating " + anime_title + "\n")
             todo = {
                 "name": anime_title,
-                "description": "If that book isn't here"
+                "description_html": description
             }
             response = requests.post(secrets['book_url'], json=todo, headers=headers)
             BOOK_ID = response.json()['id']
@@ -639,9 +645,10 @@ if multiple:
             sub_file = "subs/" + link_title + "/" + link_season + "/" + file_name + ".ass"
             anime_title = data['title']
             debug_title = anime_title.replace("/","_").replace("?","")
+            description = data['description']
             season = data['season']
             source = "Crunchyroll"
-            source_link = source_links[i]    
+            source_link = source_links[i]
             
             parse_subs(i)
             lines = len(dialogue)
@@ -672,15 +679,12 @@ else:
     sub_file = "subs/" + link_title + "/" + link_season + "/" + file_name + ".ass"
     anime_title = data['title']
     debug_title = anime_title.replace("/","_").replace("?","")
+    description = data['description']
     season = data['season']
     source = "Crunchyroll"
-    source_link = source_links[index]    
+    source_link = source_links[index]
     
     parse_subs(index)
     
     lines = len(dialogue)
     print("DONE " + str(lines) + " lines")
-    
-    
-    
-
