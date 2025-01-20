@@ -483,30 +483,32 @@ def upload_api():
                     found = True
                     log.append("Anime: " + data['name'] + "\n")
                     break
+        
+            
+            if not found:
+                # add to log
+                print("No Title found. Adding.")
+                log.append("Anime not found. Creating " + anime_title + "\n")
+                if banner_name is None:
+                    files = {
+                        "name": (None, anime_title),
+                        "description_html": (None, description),
+                        }
+                    print("No cover image")
+                else:
+                    files = {
+                        "name": (None, anime_title),
+                        "description_html": (None, description),
+                        "image": (open(banner_name, "rb"))
+                        }
+                    print("Uploading cover image")
+                response = requests.post(secrets['book_url'], files=files, headers=headers)
+                BOOK_ID = response.json()['id']
+                print("Title added: " + "ID# " + str(BOOK_ID))
+                
         except (KeyError, JSONDecodeError) as error:
             print(error, ": Stopping upload. Try again.")
             raise AbortUpload
-            
-        if not found:
-            # add to log
-            print("No Title found. Adding.")
-            log.append("Anime not found. Creating " + anime_title + "\n")
-            if banner_name is None:
-                files = {
-                    "name": (None, anime_title),
-                    "description_html": (None, description),
-                    }
-                print("No cover image")
-            else:
-                files = {
-                    "name": (None, anime_title),
-                    "description_html": (None, description),
-                    "image": (open(banner_name, "rb"))
-                    }
-                print("Uploading cover image")
-            response = requests.post(secrets['book_url'], files=files, headers=headers)
-            BOOK_ID = response.json()['id']
-            print("Title added: " + "ID# " + str(BOOK_ID))
             
         ## Chapter search and create
         todo = ""
