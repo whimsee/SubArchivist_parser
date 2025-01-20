@@ -78,6 +78,47 @@ class AbortUpload(Exception):
     pass
 
 ############## Functions #####################
+
+### Verify Season length in case upload fails
+def verify_season(season_length):
+
+    BOOK_ID = 0
+    CHAPTER_ID = 0
+    
+    response = requests.get(secrets['book_url']+"?count=300&sort=-created_at", headers=headers)
+    list = response.json()
+
+    try:
+        for data in list['data']:
+            if anime_title in data['name']:
+                BOOK_ID = data['id']
+                break
+            
+        response = requests.get(secrets['chapter_url']+"?count=300&sort=-created_at", headers=headers)
+        list = response.json()
+
+        for data in list['data']:
+            if str(BOOK_ID) in str(data['book_id']):
+                if data['name'] == season:
+                    CHAPTER_ID = data['id']
+                    break
+
+        response = requests.get(secrets['chapter_url'] + str(CHAPTER_ID), headers=headers)
+        length = len(response.json()['pages'])
+        print("Expecting", length, "episodes")
+
+        if season_length == len(response.json()['pages']):
+            print("Chapter verified.")
+        else:
+            miss = int(season_length) - int(length)
+            print("Missing", miss, "episodes")
+            for eps in response.json()['pages']:
+                print(eps['name'])
+
+    except (KeyError, JSONDecodeError) as error:
+        print(error, "Couldn't verify. Check manually")
+
+
 ### Multiple replace
 def replace_all(text, dic):
     for i, j in pre_dictionary.items():
@@ -413,7 +454,9 @@ def parse_subs(index):
                     separator(next_line, type="DEFAULT", extra="messenger")
                 else:
                     separator(next_line)
+
     upload_api()
+
 
 def upload_api():
     unhandled_lines = False
@@ -678,9 +721,11 @@ if multiple:
 
         except AbortUpload:
             print("Unhandled lines or Upload error. start from index " + str(i))
-            lines = len(dialogue)
-            print("DONE " + str(lines) + " lines")
             break
+        
+        if start + 1 >= end:
+            print("Verifying upload")
+            verify_season(season_length)
 
 else:
     ##################
@@ -724,5 +769,3 @@ else:
     print("DONE " + str(lines) + " lines")
     
     
-    
-
