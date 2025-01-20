@@ -509,7 +509,7 @@ def upload_api():
         except (KeyError, JSONDecodeError) as error:
             print(error, ": Stopping upload. Try again.")
             raise AbortUpload
-            
+
         ## Chapter search and create
         todo = ""
         CHAPTER_ID = 0
@@ -674,13 +674,13 @@ if multiple:
             
             parse_subs(i)
             lines = len(dialogue)
-            print("DONE " + str(lines) + " lines")     
+            print("DONE " + str(lines) + " lines")
 
         except AbortUpload:
             print("Unhandled lines or Upload error. start from index " + str(i))
             lines = len(dialogue)
             print("DONE " + str(lines) + " lines")
-            break          
+            break
 
 else:
     ##################
