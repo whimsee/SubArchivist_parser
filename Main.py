@@ -1,4 +1,5 @@
 import json
+from json import JSONDecodeError
 import requests
 import re
 import sys
@@ -482,12 +483,13 @@ def upload_api():
                     found = True
                     log.append("Anime: " + data['name'] + "\n")
                     break
-        except KeyError:
-            print("KeyError. Stopping upload. Try again")
+        except (KeyError, JSONDecodeError) as error:
+            print(error + ": Stopping upload. Try again.")
             raise AbortUpload
             
         if not found:
             # add to log
+            print("No Title found. Adding.")
             log.append("Anime not found. Creating " + anime_title + "\n")
             if banner_name is None:
                 files = {
@@ -504,8 +506,8 @@ def upload_api():
                 print("Uploading cover image")
             response = requests.post(secrets['book_url'], files=files, headers=headers)
             BOOK_ID = response.json()['id']
+            print("Title added: " + "ID# " + str(BOOK_ID))
             
-
         ## Chapter search and create
         todo = ""
         CHAPTER_ID = 0
@@ -513,14 +515,18 @@ def upload_api():
 
         response = requests.get(secrets['chapter_url']+"?count=300&sort=-created_at", headers=headers)
         list = response.json()
-        for data in list['data']:
-            if str(BOOK_ID) in str(data['book_id']):
-                if data['name'] == season:
-                    # add to log
-                    log.append("Season found\n")
-                    CHAPTER_ID = data['id']
-                    found = True
-                    break
+        try:
+            for data in list['data']:
+                if str(BOOK_ID) in str(data['book_id']):
+                    if data['name'] == season:
+                        # add to log
+                        log.append("Season found\n")
+                        CHAPTER_ID = data['id']
+                        found = True
+                        break
+        except (KeyError, JSONDecodeError) as error:
+            print(error + ": Stopping upload. Try again.")
+            raise AbortUpload
 
         if not found:
             # add to log
