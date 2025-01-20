@@ -108,7 +108,7 @@ def verify_season(season_length):
         print("Expecting", length, "episodes")
 
         if season_length == len(response.json()['pages']):
-            print("Chapter verified.")
+            print("Season verified.")
         else:
             miss = int(season_length) - int(length)
             print("Missing", miss, "episodes")
