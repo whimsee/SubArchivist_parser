@@ -118,7 +118,7 @@ def verify_season(season_length):
             print("Missing:")
             for ep in episodes:
                 if ep not in actual_eps:
-                    print(ep)
+                    print(ep, "Index:", episodes.index(ep))
 
     except (KeyError, JSONDecodeError) as error:
         print(error, "Couldn't verify. Check manually")
