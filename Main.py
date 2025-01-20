@@ -728,7 +728,7 @@ if multiple:
             print("Unhandled lines or Upload error. start from index " + str(i))
             break
         
-        if start + 1 >= end:
+        if i + 1 >= end:
             print("Verifying upload")
             verify_season(season_length)
 
