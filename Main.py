@@ -110,10 +110,15 @@ def verify_season(season_length):
         if season_length == len(response.json()['pages']):
             print("Season verified.")
         else:
+            actual_eps = []
             miss = int(season_length) - int(length)
             print("Missing", miss, "episodes")
             for eps in response.json()['pages']:
-                print(eps['name'])
+                actual_eps.append(eps['name'])
+            print("Missing:")
+            for ep in episodes:
+                if ep not in actual_eps:
+                    print(ep)
 
     except (KeyError, JSONDecodeError) as error:
         print(error, "Couldn't verify. Check manually")
