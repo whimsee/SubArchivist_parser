@@ -484,7 +484,7 @@ def upload_api():
                     log.append("Anime: " + data['name'] + "\n")
                     break
         except (KeyError, JSONDecodeError) as error:
-            print(error + ": Stopping upload. Try again.")
+            print(error, ": Stopping upload. Try again.")
             raise AbortUpload
             
         if not found:
@@ -525,7 +525,7 @@ def upload_api():
                         found = True
                         break
         except (KeyError, JSONDecodeError) as error:
-            print(error + ": Stopping upload. Try again.")
+            print(error, ": Stopping upload. Try again.")
             raise AbortUpload
 
         if not found:
