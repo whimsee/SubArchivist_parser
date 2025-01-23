@@ -203,7 +203,8 @@ else:
     # Generate links.json for processing
     with open("subs/" + folder_title + "/" + folder_season + "/" + "links.json", "w", encoding="utf8") as file:
         json.dump(data, file,  ensure_ascii=False, indent="\t", separators=(',', ' : '))
-        
+    
+    print("Downloaded", len(data["episodes"]), "episodes")
     print("DONE")
     
     

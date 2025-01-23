@@ -4,6 +4,9 @@ import re
 import sys
 import os
 
+# filter wordlist
+import filters
+
 development = False
 force_upload = False
 name_replace = False
@@ -387,53 +390,26 @@ def parse_subs(index):
                 separator(next_line, type="LYRICS", extra="ED")
             elif mode == "songs_insert":
                 separator(next_line, type="LYRICS", extra="EXTRA")
-            elif any(s in mode for s in ("default", "main", "top", "bottom", "bd dx",
-                                         "dx", "top dx", "narration", "any",
-                                         "whitesmall", "bluesmall", "bluetext", "whitetext",
-                                         "narrator", "question", "4-koma", "s01", "chiha-overlap",
-                                         "left", "right", "volley-overlap", "doge", "funi1",
-                                         "fus", "funipop", "titan", "human", "pv", "dcmargin",
-                                         "english", "overlap", "secondary", "chinese no subs", "chinese subs",
-                                         "font1outline", "manga", "giant_speak", "basic", "germantranslations",
-                                         "poem"
-                                         )):
-                if any(s in agent for s in (
-                    "board", "desk", "note", "book", "text", "paper",
-                    "tape", "title", "nameplate", "notice", "sheet", "calendar",
-                    "phone screen", "building", "exhibition", "phone", "leaflet",
-                    "wall", "screen", "slate", "next", "alt", "preview", "eyecatch",
-                    "caption", "card", "form"
-                    )):
+            elif any(s in mode for s in filters.DEFAULT):
+                if any(s in agent for s in filters.DEFAULT_SIGNS):
                     separator(next_line, type="SIGNS")
                 elif "italic" in mode:
                     separator(next_line, type="DEFAULT", format="italics")
                 else:
                     separator(next_line, type="DEFAULT")
-            elif any(s in mode for s in ("italic", "internal", "innerthought", "thought", "italique")):
+            elif any(s in mode for s in filters.DEFAULT_ITALICS):
                 separator(next_line, type="DEFAULT", format="italics")
             elif "texting" in mode:
                 separator(next_line, type="DEFAULT", extra="texting")
-            elif any(s in mode for s in ("op", "ed", "song", "song_lyrics", "lyricsromajibd", "lyrics", "op_ed",
-                                         "new lyric style"
-                                         )):
+            elif any(s in mode for s in filters.DEFAULT_SONG):
                 separator(next_line, type="DEFAULT", extra="song")
-            elif any(s in mode for s in ("messenger", "phone", "tweet", "cell", "messages2",
-                                         "messages", "bbs1", "bbs2", "darkchat"
-                                         )):
+            elif any(s in mode for s in filters.DEFAULT_MESSENGER):
                 separator(next_line, type="DEFAULT", extra="messenger")	
             elif "flashback" in mode:
                 separator(next_line, type="DEFAULT", extra="flashback")
             elif "chiha-poem" in mode:
                 separator(next_line, type="DEFAULT", extra="poem")
-            elif any(s in mode for s in (
-                "sign", "sfx", "eyecatch", "next_chapter", "illustration", "next ep",
-                "os", "ep title", "epnum", "generic caption", "preview", "fromhere",
-                "sine", "title", "setting", "disclaimer",
-                "next time", "card", "building", "door", "nextep", "tvlogo",
-                "note", "paper", "script", "green room", "movie",
-                "advert", "cd", "banner", "golden", "text", "tracks", "goal", "radio show",
-                "whiteboard", "tv anime", "next_time", "midlow", "next-time", "game"
-                )):
+            elif any(s in mode for s in filters.MODE_SIGNS):
                 separator(next_line, type="SIGNS")
             
             # Catches unhandled lines
@@ -447,10 +423,7 @@ def parse_subs(index):
                 
                 if sign_found:
                     separator(next_line, type="SIGNS")
-                elif any(s in agent for s in (
-                    "fx", "text", "sign", "shirt", "eyecatch", "label", "title", "banner",
-                    "stamp", "card", "door", "tv", "envelope", "box", "caption"
-                    )):
+                elif any(s in agent for s in filters.AGENT_SIGNS):
                     separator(next_line, type="SIGNS")
                 elif any(s in agent for s in (
                     "phone", "site"
