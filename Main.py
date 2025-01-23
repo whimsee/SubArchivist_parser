@@ -1,5 +1,4 @@
 import json
-from json import JSONDecodeError
 import requests
 import re
 import sys
@@ -120,7 +119,7 @@ def verify_season(season_length):
                 if ep not in actual_eps:
                     print(ep, "Index:", episodes.index(ep))
 
-    except (KeyError, JSONDecodeError) as error:
+    except (KeyError, requests.exceptions.JSONDecodeError) as error:
         print(error, "Couldn't verify. Check manually")
 
 
@@ -554,7 +553,7 @@ def upload_api():
                 BOOK_ID = response.json()['id']
                 print("Title added: " + "ID# " + str(BOOK_ID))
                 
-        except (KeyError, JSONDecodeError) as error:
+        except (KeyError, requests.exceptions.JSONDecodeError) as error:
             print(error, ": Stopping upload. Try again.")
             raise AbortUpload
 
@@ -574,7 +573,7 @@ def upload_api():
                         CHAPTER_ID = data['id']
                         found = True
                         break
-        except (KeyError, JSONDecodeError) as error:
+        except (KeyError, requests.exceptions.JSONDecodeError) as error:
             print(error, ": Stopping upload. Try again.")
             raise AbortUpload
 
