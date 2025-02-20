@@ -686,6 +686,8 @@ if multiple:
                     banner_name = "subs/" + link_title + "/" + link_season + "/" + image_name
                 elif image_name.endswith(".png"):
                     banner_name = "subs/" + link_title + "/" + link_season + "/" + image_name
+                elif image_name.endswith(".webp"):
+                    banner_name = "subs/" + link_title + "/" + link_season + "/" + image_name
                 else:
                     banner_name = None
                 

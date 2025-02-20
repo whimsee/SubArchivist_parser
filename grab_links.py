@@ -171,8 +171,12 @@ else:
         image_split = image.split(".")
         if image_split[len(image_split) - 1] == "png":
             download_image(image, "banner.png")
-        else:
+        elif image_split[len(image_split) - 1] == "jpg":
             download_image(image, "banner.jpg")
+        elif image_split[len(image_split) - 1] == "webp":
+            download_image(image, "banner.webp")
+        else:
+            print("invalid format")
     else:
         print("no banner to download")
 
