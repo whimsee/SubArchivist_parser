@@ -735,13 +735,14 @@ else:
     banner_name = None
 
     for image_name in os.listdir("subs/" + link_title + "/" + link_season + "/"):
-        
-        kind = filetype.guess("subs/" + link_title + "/" + link_season + "/" + image_name)
-        
-        if kind.mime == "image/jpeg" or kind.mime == "image/png" or kind.mime == "image/webp":
-            banner_name = "subs/" + link_title + "/" + link_season + "/" + image_name
-        else:
-            banner_name = None
+                
+        if Path("subs/" + link_title + "/" + link_season + "/" + image_name).stem == "banner":
+            kind = filetype.guess("subs/" + link_title + "/" + link_season + "/" + image_name)
+            
+            if kind.mime == "image/jpeg" or kind.mime == "image/png" or kind.mime == "image/webp":
+                banner_name = "subs/" + link_title + "/" + link_season + "/" + image_name
+            else:
+                banner_name = None
 
         if banner_name is not None:
             break
