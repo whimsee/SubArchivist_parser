@@ -3,6 +3,7 @@ import requests
 import re
 import sys
 import os
+import filetype
 
 # filter wordlist
 import filters
@@ -731,10 +732,43 @@ else:
     source_link = source_links[index]
 
     for image_name in os.listdir("subs/" + link_title + "/" + link_season + "/"):
+    
         if image_name.endswith(".jpg"):
-            banner_name = "subs/" + link_title + "/" + link_season + "/" + image_name
+            kind = filetype.guess("subs/" + link_title + "/" + link_season + "/" + image_name)
+            if kind is None:
+                print('Invalid file type!')
+                banner_name = None
+            
+            if kind.mime == "image/jpeg":
+                banner_name = "subs/" + link_title + "/" + link_season + "/" + image_name
+            else:
+                print('Invalid file type!')
+                banner_name = None
+                
         elif image_name.endswith(".png"):
-            banner_name = "subs/" + link_title + "/" + link_season + "/" + image_name
+            kind = filetype.guess("subs/" + link_title + "/" + link_season + "/" + image_name)
+            if kind is None:
+                print('Invalid file type!')
+                banner_name = None
+                
+            if kind.mime == "image/png":
+                banner_name = "subs/" + link_title + "/" + link_season + "/" + image_name
+            else:
+                print('Invalid file type!')
+                banner_name = None
+                
+        elif image_name.endswith(".webp"):
+            kind = filetype.guess("subs/" + link_title + "/" + link_season + "/" + image_name)
+            if kind is None:
+                print('Invalid file type!')
+                banner_name = None
+            
+            if kind.mime == "image/webp":
+                anner_name = "subs/" + link_title + "/" + link_season + "/" + image_name
+            else:
+                print('Invalid file type!')
+                banner_name = None
+            
         else:
             banner_name = None
 
