@@ -1,4 +1,5 @@
 import json
+import filetype
 from pathlib import Path
 import subprocess
 import shutil
@@ -168,6 +169,7 @@ if FAIL:
 else:
     if image != "none":
         print("downloading banner")
+        
         image_split = image.split(".")
         if image_split[len(image_split) - 1] == "png":
             download_image(image, "banner.png")
