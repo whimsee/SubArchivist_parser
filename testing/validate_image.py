@@ -1,7 +1,8 @@
 import filetype
+import os
 
 def main():
-    kind = filetype.guess('banner.jpg')
+    kind = filetype.guess('banner.temp')
     if kind is None:
         print('Cannot guess file type!')
         return
@@ -10,6 +11,7 @@ def main():
     print('File MIME type: %s' % kind.mime)
     if kind.mime == "image/jpeg":
         print("true")
+        os.rename('banner.temp', 'banner.jpg')
 
 if __name__ == '__main__':
     main()

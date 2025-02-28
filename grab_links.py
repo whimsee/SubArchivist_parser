@@ -4,19 +4,39 @@ from pathlib import Path
 import subprocess
 import shutil
 import re
+import os
 import sys
 from enum import Enum
 
 import pycurl
 from io import BytesIO
 
-def download_image(url, save_as):
-    with open("subs/" + link_title + "/" + folder_season + "/" + save_as, 'wb') as file:
+def download_image(url):
+    with open("subs/" + link_title + "/" + folder_season + "/banner.temp", 'wb') as file:
         curl = pycurl.Curl()
         curl.setopt(curl.URL, url)
         curl.setopt(curl.WRITEDATA, file)
         curl.perform()
         curl.close()
+        
+    kind = filetype.guess('banner.temp')
+    if kind is None:
+        print('Cannot guess file type!')
+        return
+
+    print('File extension: %s' % kind.extension)
+    print('File MIME type: %s' % kind.mime)
+    
+    if kind.mime == "image/jpeg":
+        os.rename('banner.temp', 'banner.jpg')
+    elif kind.mime == "image/png":
+        os.rename('banner.temp', 'banner.png')
+    elif kind.mime == "image/webp":
+        os.rename('banner.temp', 'banner.webp')
+    else:
+        print("Invalid file type")
+        return
+    
 
 def get_description(file):
     temp_desc = []
@@ -169,16 +189,7 @@ if FAIL:
 else:
     if image != "none":
         print("downloading banner")
-        
-        image_split = image.split(".")
-        if image_split[len(image_split) - 1] == "png":
-            download_image(image, "banner.png")
-        elif image_split[len(image_split) - 1] == "jpg":
-            download_image(image, "banner.jpg")
-        elif image_split[len(image_split) - 1] == "webp":
-            download_image(image, "banner.webp")
-        else:
-            print("invalid format")
+        download_image(image)
     else:
         print("no banner to download")
 
