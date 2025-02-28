@@ -12,14 +12,17 @@ import pycurl
 from io import BytesIO
 
 def download_image(url):
-    with open("subs/" + link_title + "/" + folder_season + "/banner.temp", 'wb') as file:
+    temp_image = "subs/" + link_title + "/" + folder_season + "/banner.temp"
+    rename_image = ""
+    
+    with open(temp_image, 'wb') as file:
         curl = pycurl.Curl()
         curl.setopt(curl.URL, url)
         curl.setopt(curl.WRITEDATA, file)
         curl.perform()
         curl.close()
         
-    kind = filetype.guess('banner.temp')
+    kind = filetype.guess("subs/" + link_title + "/" + folder_season + "/banner.temp")
     if kind is None:
         print('Cannot guess file type!')
         return
@@ -28,14 +31,16 @@ def download_image(url):
     print('File MIME type: %s' % kind.mime)
     
     if kind.mime == "image/jpeg":
-        os.rename('banner.temp', 'banner.jpg')
+        rename_image = "subs/" + link_title + "/" + folder_season + "/banner.jpg"
     elif kind.mime == "image/png":
-        os.rename('banner.temp', 'banner.png')
+        rename_image = "subs/" + link_title + "/" + folder_season + "/banner.png"
     elif kind.mime == "image/webp":
-        os.rename('banner.temp', 'banner.webp')
+        rename_image = "subs/" + link_title + "/" + folder_season + "/banner.webp"
     else:
         print("Invalid file type")
         return
+    
+    os.rename(temp_image, rename_image)
     
 
 def get_description(file):

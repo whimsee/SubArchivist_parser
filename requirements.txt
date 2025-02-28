@@ -1,1 +1,2 @@
 filetype >= 1.2.0
+pycurl >= 7.45.4
