@@ -683,15 +683,14 @@ if multiple:
             source_link = source_links[i]
             
             for image_name in os.listdir("subs/" + link_title + "/" + link_season + "/"):
-                if image_name.endswith(".jpg"):
-                    banner_name = "subs/" + link_title + "/" + link_season + "/" + image_name
-                elif image_name.endswith(".png"):
-                    banner_name = "subs/" + link_title + "/" + link_season + "/" + image_name
-                elif image_name.endswith(".webp"):
+                
+                kind = filetype.guess("subs/" + link_title + "/" + link_season + "/" + image_name)
+                
+                if kind.mime == "image/jpeg" or kind.mime == "image/png" or kind.mime == "image/webp":
                     banner_name = "subs/" + link_title + "/" + link_season + "/" + image_name
                 else:
                     banner_name = None
-                
+
                 if banner_name is not None:
                     break
             
@@ -732,49 +731,16 @@ else:
     source_link = source_links[index]
 
     for image_name in os.listdir("subs/" + link_title + "/" + link_season + "/"):
-    
-        if image_name.endswith(".jpg"):
-            kind = filetype.guess("subs/" + link_title + "/" + link_season + "/" + image_name)
-            if kind is None:
-                print('Invalid file type!')
-                banner_name = None
-            
-            if kind.mime == "image/jpeg":
-                banner_name = "subs/" + link_title + "/" + link_season + "/" + image_name
-            else:
-                print('Invalid file type!')
-                banner_name = None
-                
-        elif image_name.endswith(".png"):
-            kind = filetype.guess("subs/" + link_title + "/" + link_season + "/" + image_name)
-            if kind is None:
-                print('Invalid file type!')
-                banner_name = None
-                
-            if kind.mime == "image/png":
-                banner_name = "subs/" + link_title + "/" + link_season + "/" + image_name
-            else:
-                print('Invalid file type!')
-                banner_name = None
-                
-        elif image_name.endswith(".webp"):
-            kind = filetype.guess("subs/" + link_title + "/" + link_season + "/" + image_name)
-            if kind is None:
-                print('Invalid file type!')
-                banner_name = None
-            
-            if kind.mime == "image/webp":
-                anner_name = "subs/" + link_title + "/" + link_season + "/" + image_name
-            else:
-                print('Invalid file type!')
-                banner_name = None
-            
+        
+        kind = filetype.guess("subs/" + link_title + "/" + link_season + "/" + image_name)
+        
+        if kind.mime == "image/jpeg" or kind.mime == "image/png" or kind.mime == "image/webp":
+            banner_name = "subs/" + link_title + "/" + link_season + "/" + image_name
         else:
             banner_name = None
 
         if banner_name is not None:
             break
-
     
     parse_subs(index)
     
