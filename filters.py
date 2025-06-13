@@ -10,7 +10,7 @@ DEFAULT = ["default", "main", "top", "bottom", "bd dx",
         "english", "overlap", "secondary", "chinese no subs", "chinese subs",
         "font1outline", "manga", "giant_speak", "basic", "germantranslations",
         "poem","onscreen_jp", "emperor", "comp small -an9", "comp big-an8",
-        "comp very big-an8"]
+        "comp very big-an8", "font1"]
 
 DEFAULT_SIGNS = ["board", "desk", "note", "book", "text", "paper",
                 "tape", "title", "nameplate", "notice", "sheet", "calendar",
