@@ -33,7 +33,7 @@ MODE_SIGNS = ["sign", "sfx", "eyecatch", "next_chapter", "illustration", "next e
             "note", "paper", "script", "green room", "movie",
             "advert", "cd", "banner", "golden", "text", "tracks", "goal", "radio show",
             "whiteboard", "tv anime", "next_time", "midlow", "next-time", "game", "georgia",
-            "black-standard"]
+            "black-standard","handwritten","dialogue","snes font"]
 
 AGENT_SIGNS = ["fx", "text", "sign", "shirt", "eyecatch", "label", "title", "banner",
             "stamp", "card", "door", "tv", "envelope", "box", "caption"]
