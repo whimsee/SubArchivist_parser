@@ -9,7 +9,8 @@ DEFAULT = ["default", "main", "top", "bottom", "bd dx",
         "fus", "funipop", "titan", "human", "pv", "dcmargin",
         "english", "overlap", "secondary", "chinese no subs", "chinese subs",
         "font1outline", "manga", "giant_speak", "basic", "germantranslations",
-        "poem","onscreen_jp"]
+        "poem","onscreen_jp", "emperor", "comp small -an9", "comp big-an8",
+        "comp very big-an8"]
 
 DEFAULT_SIGNS = ["board", "desk", "note", "book", "text", "paper",
                 "tape", "title", "nameplate", "notice", "sheet", "calendar",
@@ -31,7 +32,8 @@ MODE_SIGNS = ["sign", "sfx", "eyecatch", "next_chapter", "illustration", "next e
             "next time", "card", "building", "door", "nextep", "tvlogo",
             "note", "paper", "script", "green room", "movie",
             "advert", "cd", "banner", "golden", "text", "tracks", "goal", "radio show",
-            "whiteboard", "tv anime", "next_time", "midlow", "next-time", "game"]
+            "whiteboard", "tv anime", "next_time", "midlow", "next-time", "game", "georgia",
+            "black-standard"]
 
 AGENT_SIGNS = ["fx", "text", "sign", "shirt", "eyecatch", "label", "title", "banner",
             "stamp", "card", "door", "tv", "envelope", "box", "caption"]
